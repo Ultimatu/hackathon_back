@@ -20,18 +20,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(AuthController::class)->group(function () {
     Route::prefix('/auth')->group(function () {
-        Route::post('/login', 'login');
-        Route::post('/register', 'register');
-        Route::post('/logout', 'logout');
+        Route::post('/login', 'login')->name('login');
+        Route::post('/register', 'register')->name('register');
+        Route::post('/logout', 'logout')->name('logout');
     });
 });
 
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::prefix('/admin')->group(function () {
-        Route::get('/users', [AdminController::class, 'getAllUsers']);
-        Route::get('/users/{id}', [AdminController::class, 'getUser']);
-        Route::delete('/users/{id}', [AdminController::class, 'deleteUser']);
+        Route::get('/users', [AdminController::class, 'getAllUsers'])->name('users');
+        Route::get('/users/{id}', [AdminController::class, 'getUser'])->name('user');
+        Route::delete('/users/{id}', [AdminController::class, 'deleteUser'])->name('deleteUser');
     });
 });
 
