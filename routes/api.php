@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Api\Admin\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,5 +25,15 @@ Route::controller(AuthController::class)->group(function () {
         Route::post('/logout', 'logout');
     });
 });
+
+
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::prefix('/admin')->group(function () {
+        Route::get('/users', [AdminController::class, 'getAllUsers']);
+        Route::get('/users/{id}', [AdminController::class, 'getUser']);
+        Route::delete('/users/{id}', [AdminController::class, 'deleteUser']);
+    });
+});
+
 
 
