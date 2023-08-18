@@ -29,6 +29,7 @@ class User extends Authenticatable
         'phone',
         'email',
         'password',
+        'photo_url',
     ];
 
     /**
@@ -49,4 +50,52 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
+
+    public function candidat()
+    {
+        return $this->hasOne(Candidat::class, 'user_id');
+    }
+
+    public function admin()
+    {
+        return $this->hasOne(Admin::class, 'id_user');
+    }
+
+    public function vote()
+    {
+        return $this->hasMany(Vote::class, 'voter_id');
+    }
+
+    public function sondage()
+    {
+        return $this->hasMany(Sondage::class, 'id_user');
+    }
+
+    public function scopeSearch($query, $val)
+    {
+        return $query
+            ->where('nom', 'like', '%' . $val . '%')
+            ->orWhere('prenom', 'like', '%' . $val . '%')
+            ->orWhere('numero_cni', 'like', '%' . $val . '%')
+            ->orWhere('elector_card', 'like', '%' . $val . '%')
+            ->orWhere('adresse', 'like', '%' . $val . '%')
+            ->orWhere('commune', 'like', '%' . $val . '%')
+            ->orWhere('phone', 'like', '%' . $val . '%')
+            ->orWhere('email', 'like', '%' . $val . '%');
+    }
+
+    public function scopeFilter($query, $val)
+    {
+        return $query
+            ->where('role_id', $val);
+    }
+
+
+    
 }
