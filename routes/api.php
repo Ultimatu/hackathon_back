@@ -63,7 +63,7 @@ Route::group(['prefix' => 'public'], function () {
     Route::get('post/{id}/likes', [PublicController::class, 'getAllPostLikes']);
 
     // Meets
-    Route::get('meets', [PublicController::class, 'getMeets']);
+    Route::get('meets/{id_user}', [PublicController::class, 'getMeets']);
 
     // Sondages
     Route::get('sondages', [PublicController::class, 'getAllSondages']);
