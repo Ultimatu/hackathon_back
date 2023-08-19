@@ -274,20 +274,30 @@ class PublicController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/public/meets",
+     *     path="/api/public/meets/{id_user}",
      *     operationId="getMeets",
      *     tags={"Public API"},
      *     summary="Get meets",
+     *    @OA\Parameter(
+     *        name="id_user",
+     *       in="path",
+     *      description="User id",
+     *
+     *    required=true,
+     *    @OA\Schema(type="integer")
+     * ),
+     *  
+     *
      *     description="Get a list of meets.",
      *     @OA\Response(response="200", description="Successful response"),
      *     @OA\Response(response="401", description="Unauthorized"),
      * )
      */
-    public function getMeets(Request $request)
+    public function getMeets(int $id_user)
     {
         $meetController = new MeetParticipantController();
 
-        return $meetController->getMeets($request);
+        return $meetController->getMeets($id_user);
     }
 
 

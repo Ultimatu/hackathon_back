@@ -78,12 +78,10 @@ class MeetParticipantController extends Controller
     }
 
 
-    public function getMeets(Request $request){
-        $request->validate([
-            'id_user'=>'required|integer|exists:users,id',
-        ]);
+    public function getMeets(int $id_user){
 
-        $meetParticipant = Meet_Participant::where('id_user',$request->id_user)
+
+        $meetParticipant = Meet_Participant::where('id_user',$id_user)
             ->with('meets')
             ->get();
 
