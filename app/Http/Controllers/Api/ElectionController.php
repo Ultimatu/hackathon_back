@@ -16,8 +16,8 @@ class ElectionController extends Controller
             'description' => 'required|string',
             'nom' => 'required|string',
             'duration' => 'required|string',
-            'image_url'=> 'image|mimes:jpeg,png,jpg,gif,svg|',
-            'banner_url'=> 'image|mimes:jpeg,png,jpg,gif,svg|',
+            'image_url'=> ['image','mimes:jpeg,png,jpg,gif,svg', 'nullable'],
+            'banner_url'=> ['image','mimes:jpeg,png,jpg,gif,svg', 'nullable'],
             'date_debut' => 'required|date',
             'date_fin' => 'required|date',
         ]);
