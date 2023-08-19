@@ -15,7 +15,7 @@ class ElectionController extends Controller
         $request->validate([
             'description' => 'required|string',
             'nom' => 'required|string',
-            'duration' => 'required|integer',
+            'duration' => 'required|string',
             'image_url'=> 'image|mimes:jpeg,png,jpg,gif,svg|',
             'banner_url'=> 'image|mimes:jpeg,png,jpg,gif,svg|',
             'date_debut' => 'required|date',
@@ -65,7 +65,7 @@ class ElectionController extends Controller
         $request->validate([
             'description' => 'required|string',
             'nom' => 'required|string',
-            'duration' => 'required|integer',
+            'duration' => 'required|string',
             'date_debut' => 'required|date',
             'date_fin' => 'required|date',
         ]);
