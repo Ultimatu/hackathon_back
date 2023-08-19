@@ -96,7 +96,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         // Comments
         Route::post('user/add-comment', [UserController::class, 'addComments']);
         Route::delete('user/{id}/delete-comment', [UserController::class, 'deleteComment']);
-        Route::delete('user/{id}/delete-commen', [UserController::class, 'deleteByUserAndPost']);
+        Route::delete('user/{id}/{id_user}', [UserController::class, 'deleteByUserAndId']);
         Route::get('user/my-comments', [UserController::class, 'myComment']);
 
         // Comment Responses

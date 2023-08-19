@@ -326,7 +326,7 @@ class UserController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/private/user/{id}/update-comment",
+     *     path="not-defined-yet",
      *     tags={"User Authenticated actions"},
      *     summary="Modifier un commentaire",
      *     @OA\Parameter(
