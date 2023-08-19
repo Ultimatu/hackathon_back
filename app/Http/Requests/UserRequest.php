@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
             'prenom' => 'required|string',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string',
-            'role_id' => 'required|exists:role,id',
+            'role_id' => 'required|exists:roles,id',
             'phone' => 'required|string|unique:users,phone',
             'commune'=>'required|string',
             'numero_cni'=>'string',

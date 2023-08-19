@@ -84,8 +84,6 @@ class AuthController extends Controller
 
     public function register(UserRequest $request)
     {
-
-
         //verifier si l'utilisateur existe par mail ou phone
         $user = User::where('email', $request->email)->orWhere('phone', $request->phone)->first();
 

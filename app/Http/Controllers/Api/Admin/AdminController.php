@@ -450,7 +450,7 @@ class AdminController extends Controller
      */
 
     public function addCandidat(int $id_user, int $id_parti_politique){
-        $partcipantController = new AuthController();
+        
         $user = User::find($id_user);
         $user->role_id = 2;
         $user->save();
@@ -501,7 +501,7 @@ class AdminController extends Controller
      */
 
     public function updateCandidat(int $id_user, int $id_parti_politique){
-        $partcipantController = new AuthController();
+
         $user = User::find($id_user);
         $user->role_id = 2;
         $user->save();
