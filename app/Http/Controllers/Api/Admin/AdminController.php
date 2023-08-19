@@ -9,7 +9,6 @@ use App\Http\Controllers\Api\ResultatsVotesController;
 use App\Http\Controllers\Api\SondageController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Controller;
-use App\Http\Middleware\Candidat;
 use App\Http\Requests\UserRequest;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
@@ -456,7 +455,7 @@ class AdminController extends Controller
         $user->role_id = 2;
         $user->save();
 
-        $candidat = Candidat::create([
+        $candidat = \App\Models\Candidat::create([
             'user_id' => $user->id,
             'pt_id' => $id_parti_politique
         ]);
@@ -507,7 +506,7 @@ class AdminController extends Controller
         $user->role_id = 2;
         $user->save();
 
-        $candidat = Candidat::where('user_id', $user->id)->update([
+        $candidat = \App\Models\Candidat::where('user_id', $user->id)->update([
             'pt_id' => $id_parti_politique
         ]);
 
@@ -548,7 +547,7 @@ class AdminController extends Controller
         $user->role_id = 1;
         $user->save();
 
-        $candidat = Candidat::where('user_id', $user->id)->delete();
+        $candidat = \App\Models\Candidat::where('user_id', $user->id)->delete();
 
         return response()->json([
             'success' => true,
