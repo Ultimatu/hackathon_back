@@ -15,15 +15,21 @@ class PostController extends Controller
             'id_candidat' => 'required|integer|exists:candidats,id',
             'titre' => 'required|string',
             'description' => 'required|string',
-            'url_media' => 'required|mimes:jpeg,png,gif,mp4,mov,avi',
+            'url_media' => 'nullable|mimes:jpeg,png,gif,mp4,mov,avi',
         ]);
 
-        $file = $request->file('url_media');
-        $fileName = $file->getClientOriginalName();
-        $extension = $file->getClientOriginalExtension();
-        $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
-        $file->move('storage/posts', $fileNameToStore);
-        $nameToFront = 'storage/posts/' . $fileNameToStore;
+        if ($request->hasFile("url_media")){
+            $file = $request->file('url_media');
+            $fileName = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
+            $file->move('storage/posts', $fileNameToStore);
+            $nameToFront = 'storage/posts/' . $fileNameToStore;
+        }
+        else{
+            $nameToFront = 'storage/posts/posts';
+        }
+
 
         $post = new Post();
         $post->id_candidat = $request->input('id_candidat');

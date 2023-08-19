@@ -20,7 +20,7 @@ class SondageController extends Controller
             'description'  => 'required|string',
             'date_debut' => 'required|date',
             'date_fin' => 'required|date',
-            'url_media' => 'image|mimes:jpeg,png,jpg,gif,svg|',
+            'url_media' => ['image','mimes:jpeg,png,jpg,gif,svg', 'nullable'],
             'type' => 'required|string',
             'status' => 'required|string',
             'commune' => 'required|string',
@@ -46,7 +46,7 @@ class SondageController extends Controller
             $sondage->url_media = $nameToFront;
         }
         else{
-            $sondage->url_media = 'storage/sondages/default.png';
+            $sondage->url_media = 'storage/sondages/default.jpg';
         }
 
         $sondage->save();
@@ -65,7 +65,7 @@ class SondageController extends Controller
             'description'  => 'required|string',
             'date_debut' => 'required|date',
             'date_fin' => 'required|date',
-            'url_media' => 'image|mimes:jpeg,png,jpg,gif,svg|',
+            'url_media' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'nullable'],
             'type' => 'required|string',
             'status' => 'required|string',
             'commune' => 'required|string',
