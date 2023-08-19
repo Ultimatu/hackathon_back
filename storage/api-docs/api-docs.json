@@ -330,12 +330,12 @@
             }
         },
         "/api/admin/update-sondage/{id}": {
-            "post": {
+            "put": {
                 "tags": [
                     "Admin Actions"
                 ],
                 "summary": "update sondage",
-                "operationId": "22d52414e1f0f88b7c6f48e3ba759e8b",
+                "operationId": "67a8a912a57114007f81fc7667e1f46c",
                 "parameters": [
                     {
                         "name": "id",
@@ -379,6 +379,17 @@
                 ],
                 "summary": "Delete sondage",
                 "operationId": "5d6bbf5e2b1f9ebe3a823346ccf95e4d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du sondage",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "Sondage deleted successfully"
@@ -394,25 +405,14 @@
                 ]
             }
         },
-        "api/admin/elections/{id}/add-participant": {
+        "api/admin/elections/add-participant": {
             "post": {
                 "tags": [
                     "Admin Actions"
                 ],
                 "summary": "Ajouter un participant à une élection",
                 "description": "Ajouter un participant à une élection",
-                "operationId": "48983b35837b1ac5dffaf0fd51ae41ce",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID de l'élection",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
+                "operationId": "65da1435e3f0ebea30fd582140199b91",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -432,34 +432,14 @@
                 }
             }
         },
-        "/api/admin/elections/{id}/delete-participant/{id_participant}": {
+        "/api/admin/elections/delete-participant": {
             "delete": {
                 "tags": [
                     "Admin Actions"
                 ],
                 "summary": "Supprimer un participant à une élection",
                 "description": "Supprimer un participant à une élection",
-                "operationId": "9093a122f91e926ce3cfcb290818dbec",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID de l'élection",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "id_participant",
-                        "in": "path",
-                        "description": "ID du participant",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
+                "operationId": "5250ffa64766ca276d0fe4e0e67ead06",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -574,13 +554,13 @@
                 }
             }
         },
-        "/api/update-candidat/{id_user}/{id_parti_politique}": {
+        "/api/admin/update-candidat/{id_user}/{id_parti_politique}": {
             "put": {
                 "tags": [
                     "Admin Actions"
                 ],
                 "summary": "Mettre à jour un candidat",
-                "operationId": "8c96318f67e90256c7bd3aa1f76e1b1f",
+                "operationId": "3fd71cdc174fbe3ad2904f4860b18ec3",
                 "parameters": [
                     {
                         "name": "id_user",
@@ -639,13 +619,13 @@
                 }
             }
         },
-        "/api/admin/parti-politique": {
+        "/api/admin/add-parti-politique": {
             "post": {
                 "tags": [
                     "Admin Actions"
                 ],
                 "summary": "Ajouter un nouveau parti politique",
-                "operationId": "5ec72bdd605bcfe8ba5396d82ed35790",
+                "operationId": "ab659e37b43cdc4966fc550c020e2af7",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -712,7 +692,7 @@
             },
             "delete": {
                 "tags": [
-                    "Admin"
+                    "Admin Actions"
                 ],
                 "summary": "Supprimer un parti politique",
                 "operationId": "70b6d2333c74c31c61527fd292715b4d",
@@ -1831,13 +1811,13 @@
                 }
             }
         },
-        "/api/post/{id}/comments": {
+        "/api/public/post/{id}/comments": {
             "get": {
                 "tags": [
                     "Public API"
                 ],
                 "summary": "Get all comments of a post",
-                "operationId": "adcee16e9ef2705820a59513cc22c80e",
+                "operationId": "3a4ce51d45355af69347d75997bbfd22",
                 "parameters": [
                     {
                         "name": "id",
@@ -1859,13 +1839,13 @@
                 }
             }
         },
-        "/api/comment/{id}/replies": {
+        "/api/public/comment/{id}/replies": {
             "get": {
                 "tags": [
                     "Public API"
                 ],
                 "summary": "Get all comments of a post",
-                "operationId": "05793bcd70ac2b42db765c4189643b7f",
+                "operationId": "33225a782ecd70d236c9961d37eb7922",
                 "parameters": [
                     {
                         "name": "id",
@@ -1887,13 +1867,13 @@
                 }
             }
         },
-        "/api/comment/{id}/all-replies": {
+        "/api/public/comment/{id}/all-replies": {
             "get": {
                 "tags": [
                     "Public API"
                 ],
                 "summary": "Get all comments of a post",
-                "operationId": "3e3d454118bc299c6fb8a0f44270893f",
+                "operationId": "2d33bad589ed0d222c0e0a291e17b518",
                 "parameters": [
                     {
                         "name": "id",
@@ -1915,13 +1895,13 @@
                 }
             }
         },
-        "/api/elections": {
+        "/api/public/elections": {
             "get": {
                 "tags": [
                     "Public API"
                 ],
                 "summary": "Get all elections",
-                "operationId": "113d0295c8dceba053c4e09077eb9fc1",
+                "operationId": "a65ad57d7b059d2a71da8d1b36b4e5fa",
                 "responses": {
                     "200": {
                         "description": "Elections retrieved successfully"
@@ -1932,13 +1912,13 @@
                 }
             }
         },
-        "/api/election/{id}": {
+        "/api/public/election/{id}": {
             "get": {
                 "tags": [
                     "Public API"
                 ],
                 "summary": "Get election by id",
-                "operationId": "e16315aa9f1b5b3c860c8d6d33beadb2",
+                "operationId": "ef5fb07cc661e6e3198718d7e2bcf090",
                 "parameters": [
                     {
                         "name": "id",
@@ -1960,13 +1940,13 @@
                 }
             }
         },
-        "/api/election/{id}/participants": {
+        "/api/public/election/{id}/participants": {
             "get": {
                 "tags": [
                     "Public API"
                 ],
                 "summary": "Get all participants of an election",
-                "operationId": "5c5f1551d360ff2ce3e3ef4df72d7ed5",
+                "operationId": "284778748b802a2e6c319f772bcc3a48",
                 "parameters": [
                     {
                         "name": "id",
@@ -1988,13 +1968,13 @@
                 }
             }
         },
-        "/api/post/{id}/likes": {
+        "/api/public/post/{id}/likes": {
             "get": {
                 "tags": [
                     "Public API"
                 ],
                 "summary": "Get all likes of a post",
-                "operationId": "61e606e2f61429d1ea2235283454c9e1",
+                "operationId": "2997f80300d1af7d0a2d8395dfc9c202",
                 "parameters": [
                     {
                         "name": "id",
@@ -2016,7 +1996,7 @@
                 }
             }
         },
-        "/api/public/meets": {
+        "/api/public/meets/{id_user}": {
             "get": {
                 "tags": [
                     "Public API"
@@ -2024,6 +2004,17 @@
                 "summary": "Get meets",
                 "description": "Get a list of meets.",
                 "operationId": "getMeets",
+                "parameters": [
+                    {
+                        "name": "id_user",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful response"
