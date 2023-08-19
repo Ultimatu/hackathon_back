@@ -46,7 +46,7 @@ class SondageController extends Controller
             $sondage->url_media = $nameToFront;
         }
         else{
-            $sondage->url_media = 'storage/sondages/default.jpg';
+            $sondage->url_media = 'sondages/default.jpg';
         }
 
         $sondage->save();

@@ -41,7 +41,7 @@ class ElectionController extends Controller
             $election->image_url = $nameToFront;
         }
         else{
-            $election->image_url = 'storage/elections/default.jpg';
+            $election->image_url = 'elections/default.jpg';
         }
 
         if ($request->hasFile('banner_url')) {
@@ -54,7 +54,7 @@ class ElectionController extends Controller
             $election->banner_url = $nameToFront;
         }
         else{
-            $election->banner_url = 'storage/elections/default.jpg';
+            $election->banner_url = 'elections/default.jpg';
         }
 
         return response()->json(['message' => 'Election ajoutée avec succès'], 200);

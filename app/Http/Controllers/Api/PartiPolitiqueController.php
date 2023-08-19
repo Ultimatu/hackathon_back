@@ -67,7 +67,7 @@ class PartiPolitiqueController extends Controller
             $nameToFront = 'storage/partisPolitiques/' . $fileName;
         }
         else {
-            $nameToFront = 'storage/partisPolitiques/default.jpg';
+            $nameToFront = 'partisPolitiques/default.jpg';
         }
 
         $partiPolitique = new PartiPolitique();
