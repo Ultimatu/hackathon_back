@@ -29,7 +29,7 @@ use OpenApi\Generator;
  *     @OA\Property(property="password", type="string", format="password", description="User password"),
  *     @OA\Property(property="created_at", type="string", format="date-time", description="User creation date and time"),
  *     @OA\Property(property="updated_at", type="string", format="date-time", description="User last update date and time"),
- *    @OA\Property(property="photo_url", type="image", description="photo de l'utilisateur pas obligatoire"),
+ *    @OA\Property(property="photo_url", type="file", description="photo de l'utilisateur pas obligatoire"),
  *
  *
  * )
