@@ -254,7 +254,7 @@ class AdminController extends Controller
 
 
     /**
-     * @OA\Post(
+     * @OA\Put(
      *     path="/api/admin/update-sondage/{id}",
      *     tags={"Admin Actions"},
      *     summary="update sondage",
