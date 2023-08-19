@@ -171,7 +171,7 @@ class ElectionController extends Controller
 
     public function getById(int $id){
         $elections = Elections::find($id);
-        if ($elections->count() > 0) {
+        if ($elections) {
             return response()->json([
                 'data' => $elections
             ], 200);
@@ -180,6 +180,7 @@ class ElectionController extends Controller
                 'message' => 'Pas de elections avec cet  id'
             ], 404);
         }
+        
     }
 
 }
