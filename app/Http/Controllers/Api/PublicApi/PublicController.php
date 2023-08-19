@@ -106,7 +106,7 @@ class PublicController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/post/{id}/comments",
+     *     path="/api/public/post/{id}/comments",
      *     tags={"Public API"},
      *     summary="Get all comments of a post",
      *     @OA\Parameter(
