@@ -626,7 +626,7 @@ class AdminController extends Controller
     /**
      * @OA\Delete(
      *     path="/api/admin/parti-politique/{id}",
-     *     tags={"Admin"},
+     *     tags={"Admin Actions"},
      *     summary="Supprimer un parti politique",
      *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
