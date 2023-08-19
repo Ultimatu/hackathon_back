@@ -769,7 +769,7 @@ class UserController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/private/vote/{id_election}/{id_user}/get-vote",
+     *     path="/api/private/vote/{id_election}/{id_user}/get-my-vote",
      *     tags={"User Authenticated actions"},
      *     summary="Recuperer un vote",
      *     @OA\Parameter(
