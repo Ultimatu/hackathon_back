@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>{{config('l5-swagger.documentations.'.$documentation.'.api.title')}}</title>

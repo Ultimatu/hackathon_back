@@ -2,13 +2,9 @@
     "openapi": "3.0.0",
     "info": {
         "title": "API Documentation",
-        "description": "Documentation des api de l'application ",
-        "contact": {
-            "name": "Ultimatum",
-            "email": "@Ultimatum"
-        },
+        "description": "Documentation des API de l'application Les Innovateurs. Cette documentation fournit des informations détaillées sur les différentes API disponibles pour gérer les utilisateurs, les élections, les candidats, les activités, les sondages et d'autres fonctionnalités de l'application.",
         "license": {
-            "name": "Url accueil",
+            "name": "URL Accueil",
             "url": "https://lesinnovateurs.me"
         },
         "version": "1.0.0"
