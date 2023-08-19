@@ -21,7 +21,7 @@ use OpenApi\Generator;
  *     @OA\Property(property="prenom", type="string", description="User first name"),
  *     @OA\Property(property="elector_card", type="string", description="User elector card"),
  *     @OA\Property(property="adresse", type="string", description="User address"),
- *     @OA\Property(property="numero_cni", type="string", description="User national ID number"),
+ *     @OA\Property(property="numero_cni", type="string", description="User national ID number pas obligatoire"),
  *     @OA\Property(property="commune", type="string", description="User commune"),
  *     @OA\Property(property="role_id", type="integer", description="User role ID (1=admin, 2=candidat, 3=user/electeur,, default=3)"),
  *     @OA\Property(property="phone", type="string", description="User phone number"),
@@ -29,7 +29,7 @@ use OpenApi\Generator;
  *     @OA\Property(property="password", type="string", format="password", description="User password"),
  *     @OA\Property(property="created_at", type="string", format="date-time", description="User creation date and time"),
  *     @OA\Property(property="updated_at", type="string", format="date-time", description="User last update date and time"),
- *    @OA\Property(property="photo_url", type="image", description="photo de l'utilisateur"),
+ *    @OA\Property(property="photo_url", type="image", description="photo de l'utilisateur pas obligatoire"),
  *
  *
  * )

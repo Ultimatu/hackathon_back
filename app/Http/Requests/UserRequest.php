@@ -29,7 +29,7 @@ class UserRequest extends FormRequest
             'role_id' => 'required|exists:role,id',
             'phone' => 'required|string|unique:users,phone',
             'commune'=>'required|string',
-            'numero_cni'=>'required|string',
+            'numero_cni'=>'string',
             'adresse'=>'string',
             'elector_card'=>'string',
 
