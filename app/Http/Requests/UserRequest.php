@@ -32,6 +32,7 @@ class UserRequest extends FormRequest
             'numero_cni'=>'string',
             'adresse'=>'string',
             'elector_card'=>'string',
+            'photo_url'=>'image',
 
         ];
     }
