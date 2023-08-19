@@ -11,6 +11,43 @@
     },
     "paths": {
         "not-defined-yet": {
+            "put": {
+                "tags": [
+                    "User Authenticated actions"
+                ],
+                "summary": "Modifier un commentaire",
+                "operationId": "4659c27c3500950dfec64a6e0529615a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id du commentaire",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Commentaire"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Commentaire modifie avec succes"
+                    },
+                    "404": {
+                        "description": "Commentaire non trouve"
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "Admin Actions"
@@ -35,15 +72,52 @@
                         "description": "Bad request"
                     }
                 }
+            },
+            "delete": {
+                "tags": [
+                    "User Authenticated actions"
+                ],
+                "summary": "Supprimer un vote",
+                "operationId": "401492d0ee002b21130078492f0a9435",
+                "parameters": [
+                    {
+                        "name": "id_election",
+                        "in": "path",
+                        "description": "Id de l'election",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "id_user",
+                        "in": "path",
+                        "description": "Id de l'utilisateur",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Vote supprime avec succes"
+                    },
+                    "404": {
+                        "description": "Vote non trouve"
+                    }
+                }
             }
         },
-        "api/admin/add-election": {
+        "/api/admin/add-election": {
             "post": {
                 "tags": [
                     "Admin Actions"
                 ],
                 "summary": "Add a new election",
-                "operationId": "63ba9a63c635b5f3b526e2a15ce4157f",
+                "operationId": "ee5dd37447a93279bfae7f2ecd609eb4",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -69,13 +143,13 @@
                 ]
             }
         },
-        "api/admin/update-election/{id}": {
+        "/api/admin/update-election/{id}": {
             "put": {
                 "tags": [
                     "Admin Actions"
                 ],
                 "summary": "Update an election",
-                "operationId": "b538606a014180e59e4036f32e8f348d",
+                "operationId": "6cf13e51271ec084c318d0854a74131e",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -101,13 +175,13 @@
                 ]
             }
         },
-        "api/admin/delete-election/{id}": {
+        "/api/admin/delete-election/{id}": {
             "delete": {
                 "tags": [
                     "Admin Actions"
                 ],
                 "summary": "Delete an election",
-                "operationId": "ed456bbc56a7a77eef180df245a03e78",
+                "operationId": "57f9165cbe5fe596b94a8ab6f9fdb3d4",
                 "responses": {
                     "201": {
                         "description": "Election deleted successfully"
@@ -123,13 +197,24 @@
                 ]
             }
         },
-        "api/admin/election/{id}/update-banner": {
+        "/api/admin/election/{id}/update-banner": {
             "put": {
                 "tags": [
                     "Admin Actions"
                 ],
                 "summary": "Update banner",
-                "operationId": "0ee3fe133c48dfa6d17b20089bfb4f9e",
+                "operationId": "abe112c081a0ee600585b3e7f5704ae0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'élection",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -137,6 +222,7 @@
                             "schema": {
                                 "properties": {
                                     "banner": {
+                                        "description": " Image Banniere de l'élection",
                                         "type": "string",
                                         "format": "binary"
                                     }
@@ -161,13 +247,24 @@
                 ]
             }
         },
-        "api/admin/election/{id}/update-logo": {
+        "/api/admin/election/{id}/update-logo": {
             "put": {
                 "tags": [
                     "Admin Actions"
                 ],
                 "summary": "Update banner",
-                "operationId": "434b541392acdc9a3411e93a88ddb2c4",
+                "operationId": "f69cab1a7f450688be90d79a420007f6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'élection",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -175,6 +272,7 @@
                             "schema": {
                                 "properties": {
                                     "logo": {
+                                        "description": " Image Logo de l'élection",
                                         "type": "string",
                                         "format": "binary"
                                     }
@@ -199,13 +297,13 @@
                 ]
             }
         },
-        "api/admin/add-sondage": {
+        "/api/admin/add-sondage": {
             "post": {
                 "tags": [
                     "Admin Actions"
                 ],
                 "summary": "Add a new sondage",
-                "operationId": "ae2d96f03555f0ba8869a13708082dbd",
+                "operationId": "ff582b501bfdb3996d60336cc17126b0",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -231,13 +329,13 @@
                 ]
             }
         },
-        "api/admin/update-sondage/{id}": {
+        "/api/admin/update-sondage/{id}": {
             "post": {
                 "tags": [
                     "Admin Actions"
                 ],
                 "summary": "update sondage",
-                "operationId": "df55e4451af8af98c2ef4e0445c7f98e",
+                "operationId": "22d52414e1f0f88b7c6f48e3ba759e8b",
                 "parameters": [
                     {
                         "name": "id",
@@ -274,13 +372,13 @@
                 ]
             }
         },
-        "api/admin/delete-sondage/{id}": {
+        "/api/admin/delete-sondage/{id}": {
             "delete": {
                 "tags": [
                     "Admin Actions"
                 ],
                 "summary": "Delete sondage",
-                "operationId": "c35671d2885e6ee158800b8dfc20a327",
+                "operationId": "5d6bbf5e2b1f9ebe3a823346ccf95e4d",
                 "responses": {
                     "201": {
                         "description": "Sondage deleted successfully"
@@ -296,14 +394,14 @@
                 ]
             }
         },
-        "/admin/elections/{id}/add-participant": {
+        "api/admin/elections/{id}/add-participant": {
             "post": {
                 "tags": [
                     "Admin Actions"
                 ],
                 "summary": "Ajouter un participant à une élection",
                 "description": "Ajouter un participant à une élection",
-                "operationId": "e544d5a82897671e2ee9f418ace2bacb",
+                "operationId": "48983b35837b1ac5dffaf0fd51ae41ce",
                 "parameters": [
                     {
                         "name": "id",
@@ -334,14 +432,14 @@
                 }
             }
         },
-        "api/admin/elections/{id}/delete-participant/{id_participant}": {
+        "/api/admin/elections/{id}/delete-participant/{id_participant}": {
             "delete": {
                 "tags": [
                     "Admin Actions"
                 ],
                 "summary": "Supprimer un participant à une élection",
                 "description": "Supprimer un participant à une élection",
-                "operationId": "ee14258c581fe4b053b78e51da73a886",
+                "operationId": "9093a122f91e926ce3cfcb290818dbec",
                 "parameters": [
                     {
                         "name": "id",
@@ -381,13 +479,13 @@
                 }
             }
         },
-        "api/admin/elections/{id}/calculate-result": {
+        "/api/admin/elections/{id}/calculate-result": {
             "get": {
                 "tags": [
                     "Admin Actions"
                 ],
                 "summary": "Calculer les résultats d'une élection",
-                "operationId": "4d012d9b7042129b0369d73a10be2992",
+                "operationId": "c85ed57b40703c9698305c824bb068c9",
                 "parameters": [
                     {
                         "name": "id",
@@ -410,13 +508,13 @@
                 }
             }
         },
-        "api/admin/elections/{id}/get-result": {
+        "/api/admin/elections/{id}/get-result": {
             "get": {
                 "tags": [
                     "Admin Actions"
                 ],
                 "summary": "Obtenir les résultats d'une élection",
-                "operationId": "cb12bf58aeeb87d6404cc863a107f8c2",
+                "operationId": "0d46ecce80feec4f7ec3337220567296",
                 "parameters": [
                     {
                         "name": "id",
@@ -1136,13 +1234,13 @@
                 }
             }
         },
-        "/api/private/comment/add-comment": {
+        "/api/private/user/add-comment": {
             "post": {
                 "tags": [
                     "User Authenticated actions"
                 ],
                 "summary": "Add a new comment",
-                "operationId": "86b37bdfa32490a0f7fcd81eba7bb280",
+                "operationId": "1949cdd8e85b8e452873440095f13604",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1205,45 +1303,6 @@
                     },
                     "404": {
                         "description": "Commentaires non trouves"
-                    }
-                }
-            }
-        },
-        "/api/private/user/{id}/update-comment": {
-            "put": {
-                "tags": [
-                    "User Authenticated actions"
-                ],
-                "summary": "Modifier un commentaire",
-                "operationId": "3711940570c55f90a4020a14609530ee",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Id du commentaire",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Commentaire"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Commentaire modifie avec succes"
-                    },
-                    "404": {
-                        "description": "Commentaire non trouve"
                     }
                 }
             }
@@ -1677,13 +1736,13 @@
                 }
             }
         },
-        "/api/private/vote/{id_election}/{id_user}/get-vote": {
+        "/api/private/user/{id_election}/{id_user}/get-my-vote": {
             "get": {
                 "tags": [
                     "User Authenticated actions"
                 ],
                 "summary": "Recuperer un vote",
-                "operationId": "c6058a29c532ce4c0c25a7274f6f482b",
+                "operationId": "12d2e0db63fb9b65b76743a790989fe2",
                 "parameters": [
                     {
                         "name": "id_election",
@@ -1709,45 +1768,6 @@
                 "responses": {
                     "200": {
                         "description": "Vote recupere avec succes"
-                    },
-                    "404": {
-                        "description": "Vote non trouve"
-                    }
-                }
-            }
-        },
-        "/api/private/vote/{id_election}/{id_user}/delete-vote": {
-            "delete": {
-                "tags": [
-                    "User Authenticated actions"
-                ],
-                "summary": "Supprimer un vote",
-                "operationId": "0d9fb756f1bbf2b2b0dd9e1b87af04ca",
-                "parameters": [
-                    {
-                        "name": "id_election",
-                        "in": "path",
-                        "description": "Id de l'election",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    },
-                    {
-                        "name": "id_user",
-                        "in": "path",
-                        "description": "Id de l'utilisateur",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Vote supprime avec succes"
                     },
                     "404": {
                         "description": "Vote non trouve"
@@ -2059,13 +2079,13 @@
                 }
             }
         },
-        "api/public/parti-politiques": {
+        "/api/public/parti-politiques": {
             "get": {
                 "tags": [
                     "Public API"
                 ],
                 "summary": "Récupérer la liste de tous les partis politiques",
-                "operationId": "5d0b249b3f1686a9ba6e8d02b34a8dc1",
+                "operationId": "411358d97b7766b617d77ec49ecf9d76",
                 "responses": {
                     "200": {
                         "description": "Liste des partis politiques récupérée avec succès"

@@ -176,7 +176,7 @@ class AdminController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             @OA\Property(property="banner", type="string", format="binary")
+     *             @OA\Property(property="banner", type="string", format="binary" , description=" Image Banniere de l'élection"),
      *         )
      *     ),
      *     @OA\Response(response="201", description="Banner updated successfully"),
@@ -211,7 +211,7 @@ class AdminController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             @OA\Property(property="logo", type="string", format="binary")
+     *             @OA\Property(property="logo", type="string", format="binary", description=" Image Logo de l'élection")
      *         )
      *     ),
      *     @OA\Response(response="201", description="logo updated successfully"),
