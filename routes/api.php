@@ -45,7 +45,7 @@ Route::group(['prefix' => 'public'], function () {
     // Activities
     Route::get('activities', [PublicController::class, 'getAllActvities']);
     Route::get('activity/{id}', [PublicController::class, 'getActivityDatas']);
-    Route::get('candidat/{id}/get-activities', [PublicController::class, 'getActivities']);
+    Route::get('candidat/{id}/get-activities', [PublicController::class, 'getCandidatsActivities']);
 
 
 
