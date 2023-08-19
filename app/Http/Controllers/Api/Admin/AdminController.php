@@ -293,6 +293,15 @@ class AdminController extends Controller
      *   tags={"Admin Actions"},
      *  summary="Delete sondage",
      *  security={{"bearerAuth":{}}},
+     * @OA\Parameter(
+     *        name="id",
+     *          description="ID du sondage",
+     *          required=true,
+     *          in="path",
+     *           @OA\Schema(
+     *              type="integer",
+     *          )
+     *          ),
      * @OA\Response(response="201", description="Sondage deleted successfully"),
      * @OA\Response(response="400", description="Bad request")
      * )
