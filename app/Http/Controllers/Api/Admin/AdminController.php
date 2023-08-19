@@ -92,7 +92,7 @@ class AdminController extends Controller
 
     /**
      * @OA\Post(
-     *     path="api/admin/add-election",
+     *     path="/api/admin/add-election",
      *     tags={"Admin Actions"},
      *     summary="Add a new election",
      *    security={{"bearerAuth":{}}},
@@ -116,7 +116,7 @@ class AdminController extends Controller
 
     /**
      * @OA\Put(
-     *     path="api/admin/update-election/{id}",
+     *     path="/api/admin/update-election/{id}",
      *     tags={"Admin Actions"},
      *     summary="Update an election",
      *    security={{"bearerAuth":{}}},
@@ -139,7 +139,7 @@ class AdminController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="api/admin/delete-election/{id}",
+     *     path="/api/admin/delete-election/{id}",
      *     tags={"Admin Actions"},
      *     summary="Delete an election",
      *    security={{"bearerAuth":{}}},
@@ -159,7 +159,7 @@ class AdminController extends Controller
 
     /**
      * @OA\Put(
-     *     path="api/admin/election/{id}/update-banner",
+     *     path="/api/admin/election/{id}/update-banner",
      *     tags={"Admin Actions"},
      *     summary="Update banner",
      *     security={{"bearerAuth":{}}},
@@ -185,7 +185,7 @@ class AdminController extends Controller
 
     /**
      * @OA\Put(
-     *     path="api/admin/election/{id}/update-logo",
+     *     path="/api/admin/election/{id}/update-logo",
      *     tags={"Admin Actions"},
      *     summary="Update banner",
      *     security={{"bearerAuth":{}}},
@@ -212,7 +212,7 @@ class AdminController extends Controller
 
     /**
      * @OA\Post(
-     *     path="api/admin/add-sondage",
+     *     path="/api/admin/add-sondage",
      *     tags={"Admin Actions"},
      *     summary="Add a new sondage",
      *    security={{"bearerAuth":{}}},
@@ -236,7 +236,7 @@ class AdminController extends Controller
 
     /**
      * @OA\Post(
-     *     path="api/admin/update-sondage/{id}",
+     *     path="/api/admin/update-sondage/{id}",
      *     tags={"Admin Actions"},
      *     summary="update sondage",
      *    security={{"bearerAuth":{}}},
@@ -270,7 +270,7 @@ class AdminController extends Controller
 
     /**
      * @OA\Delete(
-     *    path="api/admin/delete-sondage/{id}",
+     *    path="/api/admin/delete-sondage/{id}",
      *   tags={"Admin Actions"},
      *  summary="Delete sondage",
      *  security={{"bearerAuth":{}}},
@@ -293,7 +293,7 @@ class AdminController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/admin/elections/{id}/add-participant",
+     *     path="api/admin/elections/{id}/add-participant",
      *     tags={"Admin Actions"},
      *    description="Ajouter un participant à une élection",
      *    @OA\Parameter(
@@ -329,7 +329,7 @@ class AdminController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="api/admin/elections/{id}/delete-participant/{id_participant}",
+     *     path="/api/admin/elections/{id}/delete-participant/{id_participant}",
      *     tags={"Admin Actions"},
      *    description="Supprimer un participant à une élection",
      *    @OA\Parameter(
@@ -373,7 +373,7 @@ class AdminController extends Controller
 
     /**
      * @OA\Get(
-     *     path="api/admin/elections/{id}/calculate-result",
+     *     path="/api/admin/elections/{id}/calculate-result",
      *     tags={"Admin Actions"},
      *     summary="Calculer les résultats d'une élection",
      *     @OA\Parameter(
@@ -397,7 +397,7 @@ class AdminController extends Controller
     //get resultats
     /**
      * @OA\Get(
-     *     path="api/admin/elections/{id}/get-result",
+     *     path="/api/admin/elections/{id}/get-result",
      *     tags={"Admin Actions"},
      *     summary="Obtenir les résultats d'une élection",
      *     @OA\Parameter(

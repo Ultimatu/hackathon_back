@@ -195,7 +195,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         //sondage
 
         //add
-        Route::post('/add-sondage/{id}', [AdminController::class, 'addSondage'])->name('addSondage');
+        Route::post('/add-sondage', [AdminController::class, 'addSondage'])->name('addSondage');
 
         //update
         Route::put('/update-sondage/{id}', [AdminController::class, 'updateSondage'])->name('updateSondage');
