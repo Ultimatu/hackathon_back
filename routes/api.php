@@ -189,7 +189,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::put('/election/{id}/update-banner', [AdminController::class, 'updateBanner'])->name('updateElectionBanner');
 
         //updateLogo
-        Route::post('/election/{id}/update-logo', [AdminController::class, 'updateLogo'])->name('updateLogo');
+        Route::put('/election/{id}/update-logo', [AdminController::class, 'updateLogo'])->name('updateLogo');
 
 
         //sondage

@@ -163,6 +163,16 @@ class AdminController extends Controller
      *     tags={"Admin Actions"},
      *     summary="Update banner",
      *     security={{"bearerAuth":{}}},
+     *    @OA\Parameter(
+     *       name="id",
+     *         description="ID de l'élection",
+     *        required=true,
+     *       in="path",
+     *        @OA\Schema(
+     *          type="integer",
+     *     ),
+     *   ),
+     *
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -189,6 +199,15 @@ class AdminController extends Controller
      *     tags={"Admin Actions"},
      *     summary="Update banner",
      *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *        name="id",
+     *        description="ID de l'élection",
+     *       required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *        type="integer",
+     *    ),
+     *  ),
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
