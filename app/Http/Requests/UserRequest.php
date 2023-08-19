@@ -29,9 +29,9 @@ class UserRequest extends FormRequest
             'role_id' => 'required|exists:roles,id',
             'phone' => 'required|string|unique:users,phone',
             'commune'=>'required|string',
-            'numero_cni'=>'string',
+            'numero_cni'=>'string|unique:users,numero_cni',
             'adresse'=>'string',
-            'elector_card'=>'string',
+            'elector_card'=>'string|unique:users,elector_card',
             'photo_url'=>'image',
 
         ];
