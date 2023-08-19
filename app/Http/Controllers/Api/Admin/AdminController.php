@@ -569,7 +569,7 @@ class AdminController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/admin/parti-politique",
+     *     path="/api/admin/add-parti-politique",
      *     tags={"Admin Actions"},
      *     summary="Ajouter un nouveau parti politique",
      *     security={{"bearerAuth":{}}},
