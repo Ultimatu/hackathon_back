@@ -207,11 +207,11 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         //election participants
 
         //add
-        Route::post('/elections/{id}/add-participant', [AdminController::class, 'addElectionParticipant'])->name('addElectionParticipant');
+        Route::post('/elections/add-participant', [AdminController::class, 'addElectionParticipant'])->name('addElectionParticipant');
 
         //delete
 
-        Route::delete('/elections/{id}/delete-participant/{id_participant}', [AdminController::class, 'deleteElectionParticipant'])->name('deleteElectionParticipant');
+        Route::delete('/elections/delete-participant', [AdminController::class, 'deleteElectionParticipant'])->name('deleteElectionParticipant');
 
         //calculate result
         Route::get('/elections/{id}/calculate-result', [AdminController::class, 'calculateResult'])->name('calculateResult');

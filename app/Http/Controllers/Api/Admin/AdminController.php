@@ -321,18 +321,11 @@ class AdminController extends Controller
 
     /**
      * @OA\Post(
-     *     path="api/admin/elections/{id}/add-participant",
+     *     path="api/admin/elections/add-participant",
      *     tags={"Admin Actions"},
      *    description="Ajouter un participant à une élection",
-     *    @OA\Parameter(
-     *        name="id",
-     *       description="ID de l'élection",
-     *      required=true,
-     *    in="path",
-     *   @OA\Schema(
-     *     type="integer",
-     *  )
-     * ),
+     *
+     *
      *     summary="Ajouter un participant à une élection",
      *     @OA\RequestBody(
      *         @OA\MediaType(
@@ -357,27 +350,10 @@ class AdminController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/admin/elections/{id}/delete-participant/{id_participant}",
+     *     path="/api/admin/elections/delete-participant",
      *     tags={"Admin Actions"},
      *    description="Supprimer un participant à une élection",
-     *    @OA\Parameter(
-     *        name="id",
-     *       description="ID de l'élection",
-     *      required=true,
-     *    in="path",
-     *   @OA\Schema(
-     *     type="integer",
-     *  )
-     * ),
-     * @OA\Parameter(
-     *       name="id_participant",
-     *     description="ID du participant",
-     *   required=true,
-     * in="path",
-     * @OA\Schema(
-     *  type="integer",
-     * )
-     * ),
+     *
      *     summary="Supprimer un participant à une élection",
      *     @OA\RequestBody(
      *         @OA\MediaType(
