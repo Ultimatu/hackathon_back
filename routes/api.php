@@ -174,7 +174,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 
         //election
         //add
-        Route::post('/elections', [AdminController::class, 'addElection'])->name('addElection');
+        Route::post('/add-election', [AdminController::class, 'addElection'])->name('addElection');
 
         //update
         Route::put('/update-election/{id}', [AdminController::class, 'updateElection'])->name('updateElection');
