@@ -186,7 +186,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::delete('/delete-election/{id}', [AdminController::class, 'deleteElection'])->name('deleteElection');
 
         //updateBanner
-        Route::post('/election/{id}/update-banner', [AdminController::class, 'updateBanner'])->name('updateElectionBanner');
+        Route::put('/election/{id}/update-banner', [AdminController::class, 'updateBanner'])->name('updateElectionBanner');
 
         //updateLogo
         Route::post('/election/{id}/update-logo', [AdminController::class, 'updateLogo'])->name('updateLogo');
