@@ -252,7 +252,7 @@ class UserController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/private/comment/add-comment",
+     *     path="/api/private/user/add-comment",
      *     tags={"User Authenticated actions"},
      *     summary="Add a new comment",
      *     @OA\RequestBody(

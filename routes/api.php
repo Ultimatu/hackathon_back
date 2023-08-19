@@ -100,7 +100,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('user/my-comments', [UserController::class, 'myComment']);
 
         // Comment Responses
-        Route::post('user/add-comment-response', [UserController::class, 'addCommentResponse']);
+        Route::post('user/add-comment-responses', [UserController::class, 'addCommentResponse']);
         Route::delete('user/{id}/delete-comment-response', [UserController::class, 'deleteCommentResponse']);
         Route::get('user/my-comment-responses', [UserController::class, 'myCommentResponse']);
 
