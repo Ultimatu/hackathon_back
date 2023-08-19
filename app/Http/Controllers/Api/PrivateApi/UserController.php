@@ -813,7 +813,7 @@ class UserController extends Controller
 
    /**
     * @OA\Delete(
-    *     path="/api/private/vote/{id_election}/{id_user}/delete-vote",
+    *     path="not-defined-yet",
     *     tags={"User Authenticated actions"},
     *     summary="Supprimer un vote",
     *     @OA\Parameter(
