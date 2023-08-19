@@ -478,7 +478,7 @@ class AdminController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/update-candidat/{id_user}/{id_parti_politique}",
+     *     path="/api/admin/update-candidat/{id_user}/{id_parti_politique}",
      *     tags={"Admin Actions"},
      *     summary="Mettre à jour un candidat",
      *     @OA\Parameter(
