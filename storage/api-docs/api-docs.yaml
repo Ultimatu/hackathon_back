@@ -356,6 +356,75 @@ paths:
           description: 'Candidat supprimé avec succès'
         404:
           description: 'Utilisateur non trouvé'
+  /api/admin/parti-politique:
+    post:
+      tags:
+        - 'Admin Actions'
+      summary: 'Ajouter un nouveau parti politique'
+      operationId: 5ec72bdd605bcfe8ba5396d82ed35790
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: []
+      responses:
+        201:
+          description: 'Parti politique ajouté avec succès'
+        422:
+          description: 'Validation error'
+      security:
+        -
+          bearerAuth: []
+  '/api/admin/parti-politique/{id}':
+    put:
+      tags:
+        - 'Admin Actions'
+      summary: 'Mettre à jour un parti politique'
+      operationId: 95aa689ab3dbe85f66a32b23f296f9d2
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID du parti politique'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: []
+      responses:
+        200:
+          description: 'Parti politique mis à jour avec succès'
+        404:
+          description: 'Parti politique non trouvé'
+      security:
+        -
+          bearerAuth: []
+    delete:
+      tags:
+        - Admin
+      summary: 'Supprimer un parti politique'
+      operationId: 70b6d2333c74c31c61527fd292715b4d
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID du parti politique'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'Parti politique supprimé avec succès'
+        404:
+          description: 'Parti politique non trouvé'
+      security:
+        -
+          bearerAuth: []
   /api/private/candidat/add-post:
     post:
       tags:
@@ -1304,6 +1373,35 @@ paths:
           description: 'Sondages retrieved successfully'
         404:
           description: 'Commune not found'
+  api/public/parti-politiques:
+    get:
+      tags:
+        - 'Public API'
+      summary: 'Récupérer la liste de tous les partis politiques'
+      operationId: 5d0b249b3f1686a9ba6e8d02b34a8dc1
+      responses:
+        200:
+          description: 'Liste des partis politiques récupérée avec succès'
+  '/api/public/parti-politique/{id}':
+    get:
+      tags:
+        - 'Public API'
+      summary: "Récupérer les détails d'un parti politique"
+      operationId: 0c86421e9e9109d1017d3d50b29721e8
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID du parti politique'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'Détails du parti politique récupérés avec succès'
+        404:
+          description: 'Parti politique non trouvé'
   /api/auth/login:
     post:
       tags:

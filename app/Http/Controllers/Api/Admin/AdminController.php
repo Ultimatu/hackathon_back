@@ -573,13 +573,14 @@ class AdminController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             ref="#/components/schemas/PartiPolitique
+     *             @OA\Schema(ref="#/components/schemas/PartiPolitique")
      *         )
      *     ),
      *     @OA\Response(response="201", description="Parti politique ajouté avec succès"),
      *     @OA\Response(response="422", description="Validation error"),
      * )
      */
+
 
     public function addPartiPolitique(Request $request){
         $partiPolitiqueController = new PartiPolitiqueController();
@@ -607,7 +608,7 @@ class AdminController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             ref="#/components/schemas/PartiPolitique
+     *             @OA\Schema(ref="#/components/schemas/PartiPolitique")
      *         )
      *     ),
      *     @OA\Response(response="200", description="Parti politique mis à jour avec succès"),
