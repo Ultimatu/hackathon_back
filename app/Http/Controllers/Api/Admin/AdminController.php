@@ -6,7 +6,10 @@ use App\Http\Controllers\Api\ElectionController;
 use App\Http\Controllers\Api\ElectionParticipantController;
 use App\Http\Controllers\Api\ResultatsVotesController;
 use App\Http\Controllers\Api\SondageController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\Candidat;
+use App\Http\Requests\UserRequest;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
@@ -413,6 +416,146 @@ class AdminController extends Controller
         $partcipantController = new ResultatsVotesController();
 
         return $partcipantController->getResultats($id);
+    }
+
+
+    //add candidat
+
+    /**
+     * @OA\Post(
+     *     path="/api/admin/add-candidat/{id_user}/{id_parti_politique}",
+     *     tags={"Admin Actions"},
+     *     summary="Ajouter un candidat",
+     *     @OA\Parameter(
+     *         name="id_user",
+     *         in="path",
+     *         description="ID de l'utilisateur à enregistrer comme candidat",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="id_parti_politique",
+     *         in="path",
+     *         description="ID du parti politique auquel le candidat appartient",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Candidat ajouté avec succès"),
+     *     @OA\Response(response="404", description="Utilisateur non trouvé")
+     * )
+     */
+
+    public function addCandidat(int $id_user, int $id_parti_politique){
+        $partcipantController = new AuthController();
+        $user = User::find($id_user);
+        $user->role_id = 2;
+        $user->save();
+
+        $candidat = Candidat::create([
+            'user_id' => $user->id,
+            'pt_id' => $id_parti_politique
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Candidat ajouté avec succès',
+            'candidat' => $candidat,
+            'user' => $user
+        ]);
+
+    }
+
+
+    //update candidat
+
+    /**
+     * @OA\Put(
+     *     path="/api/update-candidat/{id_user}/{id_parti_politique}",
+     *     tags={"Admin Actions"},
+     *     summary="Mettre à jour un candidat",
+     *     @OA\Parameter(
+     *         name="id_user",
+     *         in="path",
+     *         description="ID de l'utilisateur à mettre à jour comme candidat",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="id_parti_politique",
+     *         in="path",
+     *         description="ID du nouveau parti politique auquel le candidat appartient",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Candidat modifié avec succès"),
+     *     @OA\Response(response="404", description="Utilisateur non trouvé")
+     * )
+     */
+
+    public function updateCandidat(int $id_user, int $id_parti_politique){
+        $partcipantController = new AuthController();
+        $user = User::find($id_user);
+        $user->role_id = 2;
+        $user->save();
+
+        $candidat = Candidat::where('user_id', $user->id)->update([
+            'pt_id' => $id_parti_politique
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Candidat modifié avec succès',
+            'candidat' => $candidat,
+            'user' => $user
+        ]);
+
+    }
+
+
+    //delete candidat
+
+
+    /**
+     * @OA\Delete(
+     *     path="/api/admin/delete-candidat/{id_user}",
+     *     tags={"Admin Actions"},
+     *     summary="Supprimer un candidat",
+     *     @OA\Parameter(
+     *         name="id_user",
+     *         in="path",
+     *         description="ID de l'utilisateur à supprimer comme candidat",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Candidat supprimé avec succès"),
+     *     @OA\Response(response="404", description="Utilisateur non trouvé")
+     * )
+     */
+
+    public function deleteCandidat(int $id_user){
+        $user = User::find($id_user);
+        $user->role_id = 1;
+        $user->save();
+
+        $candidat = Candidat::where('user_id', $user->id)->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Candidat supprimé avec succès',
+            'candidat' => $candidat,
+            'user' => $user
+        ]);
+
     }
 
 }

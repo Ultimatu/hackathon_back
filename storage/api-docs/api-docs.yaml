@@ -285,6 +285,77 @@ paths:
           description: "Succès - Résultats de l'élection renvoyés"
         401:
           description: "Non autorisé - L'utilisateur n'est pas authentifié"
+  '/api/admin/add-candidat/{id_user}/{id_parti_politique}':
+    post:
+      tags:
+        - 'Admin Actions'
+      summary: 'Ajouter un candidat'
+      operationId: 06c376e29748c549d23bb5fd71161d02
+      parameters:
+        -
+          name: id_user
+          in: path
+          description: "ID de l'utilisateur à enregistrer comme candidat"
+          required: true
+          schema:
+            type: integer
+        -
+          name: id_parti_politique
+          in: path
+          description: 'ID du parti politique auquel le candidat appartient'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 'Candidat ajouté avec succès'
+        404:
+          description: 'Utilisateur non trouvé'
+  '/api/update-candidat/{id_user}/{id_parti_politique}':
+    put:
+      tags:
+        - 'Admin Actions'
+      summary: 'Mettre à jour un candidat'
+      operationId: 8c96318f67e90256c7bd3aa1f76e1b1f
+      parameters:
+        -
+          name: id_user
+          in: path
+          description: "ID de l'utilisateur à mettre à jour comme candidat"
+          required: true
+          schema:
+            type: integer
+        -
+          name: id_parti_politique
+          in: path
+          description: 'ID du nouveau parti politique auquel le candidat appartient'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 'Candidat modifié avec succès'
+        404:
+          description: 'Utilisateur non trouvé'
+  '/api/admin/delete-candidat/{id_user}':
+    delete:
+      tags:
+        - 'Admin Actions'
+      summary: 'Supprimer un candidat'
+      operationId: 7783b9d5e5b057b43a0f99b50b60b196
+      parameters:
+        -
+          name: id_user
+          in: path
+          description: "ID de l'utilisateur à supprimer comme candidat"
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 'Candidat supprimé avec succès'
+        404:
+          description: 'Utilisateur non trouvé'
   /api/private/candidat/add-post:
     post:
       tags:
@@ -1443,7 +1514,7 @@ components:
           type: string
         duration:
           description: "Durée de l'élection en jours"
-          type: integer
+          type: string
         image_url:
           description: "URL de l'image de l'élection"
           type: string
@@ -1734,7 +1805,7 @@ components:
           description: 'User address'
           type: string
         numero_cni:
-          description: 'User national ID number'
+          description: 'User national ID number pas obligatoire'
           type: string
         commune:
           description: 'User commune'
@@ -1762,8 +1833,8 @@ components:
           type: string
           format: date-time
         photo_url:
-          description: "photo de l'utilisateur"
-          type: image
+          description: "photo de l'utilisateur pas obligatoire"
+          type: file
       type: object
     Vote:
       title: Vote

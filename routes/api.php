@@ -217,6 +217,21 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::get('/elections/{id}/get-result', [AdminController::class, 'getResultats'])->name('getResult');
 
 
+
+        //candidats
+
+        //add
+
+        Route::post('/add-candidat/{id_user}/{id_parti_politique}', [AdminController::class, 'addCandidat'])->name('addCandidat');
+
+        //update
+
+        Route::put('/update-candidat/{id_user}/{id_parti_politique}', [AdminController::class, 'updateCandidat'])->name('updateCandidat');
+
+
+        //delete
+
+        Route::delete('/delete-candidat/{id_user}', [AdminController::class, 'deleteCandidat'])->name('deleteCandidat');
     });
 
 
