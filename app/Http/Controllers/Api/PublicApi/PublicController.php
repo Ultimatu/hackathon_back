@@ -132,7 +132,7 @@ class PublicController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/comment/{id}/replies",
+     *     path="/api/public/comment/{id}/replies",
      *     tags={"Public API"},
      *     summary="Get all comments of a post",
      *     @OA\Parameter(
@@ -154,7 +154,7 @@ class PublicController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/comment/{id}/all-replies",
+     *     path="/api/public/comment/{id}/all-replies",
      *     tags={"Public API"},
      *     summary="Get all comments of a post",
      *     @OA\Parameter(
@@ -180,7 +180,7 @@ class PublicController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/elections",
+     *     path="/api/public/elections",
      *     tags={"Public API"},
      *     summary="Get all elections",
      *     @OA\Response(response="200", description="Elections retrieved successfully"),
@@ -196,7 +196,7 @@ class PublicController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/election/{id}",
+     *     path="/api/public/election/{id}",
      *     tags={"Public API"},
      *     summary="Get election by id",
      *     @OA\Parameter(
@@ -222,7 +222,7 @@ class PublicController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/election/{id}/participants",
+     *     path="/api/public/election/{id}/participants",
      *     tags={"Public API"},
      *     summary="Get all participants of an election",
      *     @OA\Parameter(
@@ -248,7 +248,7 @@ class PublicController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/post/{id}/likes",
+     *     path="/api/public/post/{id}/likes",
      *     tags={"Public API"},
      *     summary="Get all likes of a post",
      *     @OA\Parameter(
