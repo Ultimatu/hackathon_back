@@ -580,8 +580,6 @@ class AdminController extends Controller
      *     @OA\Response(response="422", description="Validation error"),
      * )
      */
-
-
     public function addPartiPolitique(Request $request){
         $partiPolitiqueController = new PartiPolitiqueController();
 

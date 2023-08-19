@@ -58,13 +58,18 @@ class PartiPolitiqueController extends Controller
             ], 409);
         }
 
-        $file = $request->file('logo');
-        $fileName = $file->getClientOriginalName();
-        $extension = $file->getClientOriginalExtension();
-        $fileName = $fileName . '_' . time() . '.' . $extension;
-        $file->move('storage/partisPolitiques', $fileName);
-        $nameToFront = 'storage/partisPolitiques/' . $fileName;
-
+        if ($request->hasFile('logo')){
+            $file = $request->file('logo');
+            $fileName = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $fileName = $fileName . '_' . time() . '.' . $extension;
+            $file->move('storage/partisPolitiques', $fileName);
+            $nameToFront = 'storage/partisPolitiques/' . $fileName;
+        }
+        else {
+            $nameToFront = 'storage/partisPolitiques/default.png';
+        }
+        
         $partiPolitique = new PartiPolitique();
         $partiPolitique->nom = $request->input('nom');
         $partiPolitique->description = $request->input('description');
