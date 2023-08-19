@@ -1,0 +1,1796 @@
+openapi: 3.0.0
+info:
+  title: 'API Documentation'
+  description: "Documentation des api de l'application "
+  contact:
+    name: Ultimatum
+    email: '@Ultimatum'
+  license:
+    name: 'Url accueil'
+    url: 'https://lesinnovateurs.me'
+  version: 1.0.0
+paths:
+  not-defined-yet:
+    post:
+      tags:
+        - 'Admin Actions'
+      summary: 'Add a new admin'
+      operationId: 47e8ba5e07df7c220e55ec1dd2614b7d
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Admin'
+      responses:
+        201:
+          description: 'Admin added successfully'
+        400:
+          description: 'Bad request'
+  api/admin/add-election:
+    post:
+      tags:
+        - 'Admin Actions'
+      summary: 'Add a new election'
+      operationId: 63ba9a63c635b5f3b526e2a15ce4157f
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Election'
+      responses:
+        201:
+          description: 'Election added successfully'
+        400:
+          description: 'Bad request'
+      security:
+        -
+          bearerAuth: []
+  'api/admin/update-election/{id}':
+    put:
+      tags:
+        - 'Admin Actions'
+      summary: 'Update an election'
+      operationId: b538606a014180e59e4036f32e8f348d
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Election'
+      responses:
+        201:
+          description: 'Election updated successfully'
+        400:
+          description: 'Bad request'
+      security:
+        -
+          bearerAuth: []
+  'api/admin/delete-election/{id}':
+    delete:
+      tags:
+        - 'Admin Actions'
+      summary: 'Delete an election'
+      operationId: ed456bbc56a7a77eef180df245a03e78
+      responses:
+        201:
+          description: 'Election deleted successfully'
+        400:
+          description: 'Bad request'
+      security:
+        -
+          bearerAuth: []
+  'api/admin/election/{id}/update-banner':
+    put:
+      tags:
+        - 'Admin Actions'
+      summary: 'Update banner'
+      operationId: 0ee3fe133c48dfa6d17b20089bfb4f9e
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                banner:
+                  type: string
+                  format: binary
+              type: object
+      responses:
+        201:
+          description: 'Banner updated successfully'
+        400:
+          description: 'Bad request'
+      security:
+        -
+          bearerAuth: []
+  'api/admin/election/{id}/update-logo':
+    put:
+      tags:
+        - 'Admin Actions'
+      summary: 'Update banner'
+      operationId: 434b541392acdc9a3411e93a88ddb2c4
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                logo:
+                  type: string
+                  format: binary
+              type: object
+      responses:
+        201:
+          description: 'logo updated successfully'
+        400:
+          description: 'Bad request'
+      security:
+        -
+          bearerAuth: []
+  api/admin/add-sondage:
+    post:
+      tags:
+        - 'Admin Actions'
+      summary: 'Add a new sondage'
+      operationId: ae2d96f03555f0ba8869a13708082dbd
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sondage'
+      responses:
+        201:
+          description: 'Sondage added successfully'
+        400:
+          description: 'Bad request'
+      security:
+        -
+          bearerAuth: []
+  'api/admin/update-sondage/{id}':
+    post:
+      tags:
+        - 'Admin Actions'
+      summary: 'update sondage'
+      operationId: df55e4451af8af98c2ef4e0445c7f98e
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID du sondage'
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sondage'
+      responses:
+        201:
+          description: 'Sondage added successfully'
+        400:
+          description: 'Bad request'
+      security:
+        -
+          bearerAuth: []
+  'api/admin/delete-sondage/{id}':
+    delete:
+      tags:
+        - 'Admin Actions'
+      summary: 'Delete sondage'
+      operationId: c35671d2885e6ee158800b8dfc20a327
+      responses:
+        201:
+          description: 'Sondage deleted successfully'
+        400:
+          description: 'Bad request'
+      security:
+        -
+          bearerAuth: []
+  '/admin/elections/{id}/add-participant':
+    post:
+      tags:
+        - 'Admin Actions'
+      summary: 'Ajouter un participant à une élection'
+      description: 'Ajouter un participant à une élection'
+      operationId: e544d5a82897671e2ee9f418ace2bacb
+      parameters:
+        -
+          name: id
+          in: path
+          description: "ID de l'élection"
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ElectionParticipant'
+      responses:
+        200:
+          description: 'Succès - Participant ajouté avec succès'
+        401:
+          description: "Non autorisé - L'utilisateur n'est pas authentifié"
+  'api/admin/elections/{id}/delete-participant/{id_participant}':
+    delete:
+      tags:
+        - 'Admin Actions'
+      summary: 'Supprimer un participant à une élection'
+      description: 'Supprimer un participant à une élection'
+      operationId: ee14258c581fe4b053b78e51da73a886
+      parameters:
+        -
+          name: id
+          in: path
+          description: "ID de l'élection"
+          required: true
+          schema:
+            type: integer
+        -
+          name: id_participant
+          in: path
+          description: 'ID du participant'
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ElectionParticipant'
+      responses:
+        200:
+          description: 'Succès - Participant supprimé avec succès'
+        401:
+          description: "Non autorisé - L'utilisateur n'est pas authentifié"
+  'api/admin/elections/{id}/calculate-result':
+    get:
+      tags:
+        - 'Admin Actions'
+      summary: "Calculer les résultats d'une élection"
+      operationId: 4d012d9b7042129b0369d73a10be2992
+      parameters:
+        -
+          name: id
+          in: path
+          description: "ID de l'élection"
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        200:
+          description: 'Succès - Résultats calculés et renvoyés'
+        401:
+          description: "Non autorisé - L'utilisateur n'est pas authentifié"
+  'api/admin/elections/{id}/get-result':
+    get:
+      tags:
+        - 'Admin Actions'
+      summary: "Obtenir les résultats d'une élection"
+      operationId: cb12bf58aeeb87d6404cc863a107f8c2
+      parameters:
+        -
+          name: id
+          in: path
+          description: "ID de l'élection"
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        200:
+          description: "Succès - Résultats de l'élection renvoyés"
+        401:
+          description: "Non autorisé - L'utilisateur n'est pas authentifié"
+  /api/private/candidat/add-post:
+    post:
+      tags:
+        - 'Candidat Authenticated actions'
+      summary: 'Ajouter un post'
+      operationId: 81e8f10b3eea41b21243636ccc3d7a96
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        200:
+          description: 'Post ajouté avec succès'
+        401:
+          description: 'Non autorisé'
+  '/api/private/candidat/{id}/get-posts':
+    get:
+      tags:
+        - 'Candidat Authenticated actions'
+      summary: "Récupérer tous les posts d'un candidat"
+      operationId: 773309a3666dae22a3cd852a0e358c91
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Id du candidat'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'Liste des posts récupérée avec succès'
+        401:
+          description: 'Non autorisé'
+  '/api/private/candidat/{id}/delete-post':
+    delete:
+      tags:
+        - 'Candidat Authenticated actions'
+      summary: 'Supprimer un post'
+      operationId: bc4b504ecbb5d11b2d14b6940003775b
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Id du post à supprimer'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'Post supprimé avec succès'
+        401:
+          description: 'Non autorisé'
+  /api/private/candidat/add-meet:
+    post:
+      tags:
+        - 'Candidat Authenticated actions'
+      summary: 'Ajouter une rencontre'
+      operationId: dd0d1e9620fce930eeb8d44bdae0ba7a
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Meet'
+      responses:
+        200:
+          description: 'Rencontre ajoutée avec succès'
+        401:
+          description: 'Non autorisé'
+  '/api/private/candidat/{id}/get-meets':
+    get:
+      tags:
+        - 'Candidat Authenticated actions'
+      summary: "Récupérer toutes les rencontres d'un candidat"
+      operationId: 0c2b0bfea2090815ff7d34b17b3e9645
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Id du candidat'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'Liste des rencontres récupérée avec succès'
+        401:
+          description: 'Non autorisé'
+  '/api/private/candidat/search-meets/{val}':
+    get:
+      tags:
+        - 'Candidat Authenticated actions'
+      summary: 'Rechercher des rencontres par valeur'
+      operationId: 51f1e5075c7094b9440f3cea8459f126
+      parameters:
+        -
+          name: val
+          in: path
+          description: 'Valeur de recherche'
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Liste des rencontres trouvées récupérée avec succès'
+        401:
+          description: 'Non autorisé'
+  '/api/private/candidat/{id}/delete-meet':
+    delete:
+      tags:
+        - 'Candidat Authenticated actions'
+      summary: 'Supprimer une rencontre'
+      operationId: 730b7b465314b46fb982d6062a17eda7
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Id de la rencontre à supprimer'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'Rencontre supprimée avec succès'
+        401:
+          description: 'Non autorisé'
+  '/api/private/candidat/{id}/get-activities':
+    get:
+      tags:
+        - 'Candidat Authenticated actions'
+      summary: "Récupérer toutes les activités d'un candidat"
+      operationId: 7f19cba271b959dd3c32d864916fe70f
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Id du candidat'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'Liste des activités récupérée avec succès'
+        401:
+          description: 'Non autorisé'
+  /api/private/candidat/add-activity:
+    post:
+      tags:
+        - 'Candidat Authenticated actions'
+      summary: 'Ajouter une activité'
+      operationId: 49f5f3aac2eb1eaa2cfcefee724e8e59
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Activity'
+      responses:
+        200:
+          description: 'Activité ajoutée avec succès'
+        401:
+          description: 'Non autorisé'
+  '/api/private/candidat/update-activity/{id}':
+    put:
+      tags:
+        - 'Candidat Authenticated actions'
+      summary: 'Mettre à jour une activité'
+      operationId: 2825780f9a375686c52e9b581ebfd6d1
+      parameters:
+        -
+          name: id
+          in: path
+          description: "Id de l'activité à mettre à jour"
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Activity'
+      responses:
+        200:
+          description: 'Activité mise à jour avec succès'
+        401:
+          description: 'Non autorisé'
+  '/api/private/candidat/{id}/delete-activity':
+    delete:
+      tags:
+        - 'Candidat Authenticated actions'
+      summary: 'Supprimer une activité'
+      operationId: f7ae672b9c5cd91c06ad4e973dcc0ddf
+      parameters:
+        -
+          name: id
+          in: path
+          description: "Id de l'activité à supprimer"
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'Activité supprimée avec succès'
+        401:
+          description: 'Non autorisé'
+  '/api/private/user/{id}/add-photo':
+    post:
+      tags:
+        - 'User Authenticated actions'
+      summary: 'Ajouter une photo de profil'
+      operationId: 18c3cd497b0a6bdf2a91e09d27def546
+      parameters:
+        -
+          name: id
+          in: path
+          description: "Id de l'utilisateur"
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                photo:
+                  type: string
+                  format: binary
+              type: object
+      responses:
+        200:
+          description: 'Photo ajoutee avec succes'
+        404:
+          description: 'Utilisateur non trouve'
+  '/api/private/user/{id}/update-datas':
+    put:
+      tags:
+        - 'User Authenticated actions'
+      summary: "Modifier les donnees d'un utilisateur"
+      operationId: ace3dbcff3974b85b0f787c978281bd3
+      parameters:
+        -
+          name: id
+          in: path
+          description: "Id de l'utilisateur"
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        200:
+          description: 'Donnees modifiees avec succes'
+        404:
+          description: 'Utilisateur non trouve'
+  '/api/private/user/{id}/update-password':
+    put:
+      tags:
+        - 'User Authenticated actions'
+      summary: "Modifier le mot de passe d'un utilisateur"
+      operationId: 82b6e54aff68a09d6439942517cd1405
+      parameters:
+        -
+          name: id
+          in: path
+          description: "Id de l'utilisateur"
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                password:
+                  type: string
+              type: object
+      responses:
+        200:
+          description: 'Mot de passe modifié avec succès'
+        404:
+          description: 'Utilisateur non trouvé'
+  /api/private/user/reset-password:
+    post:
+      tags:
+        - 'User Authenticated actions'
+      summary: "Reinitialiser le mot de passe d'un utilisateur"
+      operationId: 2ba52face92276523a99317f8cf18294
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                phone:
+                  type: string
+                nom:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              type: object
+      responses:
+        200:
+          description: 'Mot de passe reinitialise avec succes'
+        404:
+          description: 'Utilisateur non trouve'
+  /api/private/comment/add-comment:
+    post:
+      tags:
+        - 'User Authenticated actions'
+      summary: 'Add a new comment'
+      operationId: 86b37bdfa32490a0f7fcd81eba7bb280
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Commentaire'
+      responses:
+        201:
+          description: 'Comment added successfully'
+        400:
+          description: 'Bad request'
+  '/api/private/user/{id}/delete-comment':
+    delete:
+      tags:
+        - 'User Authenticated actions'
+      summary: 'Supprimer un commentaire'
+      operationId: 27697c7251d71535a050047f59ecb10b
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Id du commentaire'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'Commentaire supprime avec succes'
+        404:
+          description: 'Commentaire non trouve'
+  /api/private/user/my-comments:
+    get:
+      tags:
+        - 'User Authenticated actions'
+      summary: "Recuperer les commentaires d'un utilisateur"
+      operationId: 2b51d86edd9aa56cd93f36addee3b07a
+      responses:
+        200:
+          description: 'Commentaires recuperes avec succes'
+        404:
+          description: 'Commentaires non trouves'
+  '/api/private/user/{id}/update-comment':
+    put:
+      tags:
+        - 'User Authenticated actions'
+      summary: 'Modifier un commentaire'
+      operationId: 3711940570c55f90a4020a14609530ee
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Id du commentaire'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Commentaire'
+      responses:
+        200:
+          description: 'Commentaire modifie avec succes'
+        404:
+          description: 'Commentaire non trouve'
+  '/api/private/user/{id}/{id_user}/delete-comment':
+    delete:
+      tags:
+        - 'User Authenticated actions'
+      summary: 'Supprimer un commentaire'
+      operationId: 0e2c90db40451fd18d85e851456b0d65
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Id du commentaire'
+          required: true
+          schema:
+            type: integer
+            format: int64
+        -
+          name: id_user
+          in: path
+          description: "Id de l'utilisateur"
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'Commentaire supprime avec succes'
+        404:
+          description: 'Commentaire non trouve'
+  /api/private/user/add-comment-response:
+    post:
+      tags:
+        - 'User Authenticated actions'
+      summary: 'Add a new comment response'
+      operationId: 9926cfbe9e46aceb6ab6698a732424c9
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentaireReplique'
+      responses:
+        201:
+          description: 'Comment response added successfully'
+        400:
+          description: 'Bad request'
+  '/api/private/user/{id}/delete-comment-response':
+    delete:
+      tags:
+        - 'User Authenticated actions'
+      summary: 'Supprimer un commentaire'
+      operationId: 4b728e19c6687904d2e5f430b3530e5e
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Id du commentaire response'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'Commentaire supprime avec succes'
+        404:
+          description: 'Commentaire non trouve'
+  /api/private/user/my-comment-responses:
+    get:
+      tags:
+        - 'User Authenticated actions'
+      summary: "Recuperer les commentaires d'un utilisateur"
+      operationId: 8f0e77052dbfe3d6efbd8e36a53e1318
+      responses:
+        200:
+          description: 'Commentaires recuperes avec succes'
+        404:
+          description: 'Commentaires non trouves'
+  /api/private/user/add-like:
+    post:
+      tags:
+        - 'User Authenticated actions'
+      summary: 'Add a new like'
+      operationId: 8fea0b01676a452d2f2d901b0f406efc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Like'
+      responses:
+        201:
+          description: 'Like added successfully'
+        400:
+          description: 'Bad request'
+  '/api/private/user/{id}/delete-like':
+    delete:
+      tags:
+        - 'User Authenticated actions'
+      summary: 'Supprimer un like'
+      operationId: c6d53612a53fd4be353464309b060dcb
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Id du like'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'Like supprime avec succes'
+        404:
+          description: 'Like non trouve'
+  /api/private/user/my-likes:
+    get:
+      tags:
+        - 'User Authenticated actions'
+      summary: "Recuperer les likes d'un utilisateur"
+      operationId: f040d6ac000c0740c3d6e3b708418839
+      responses:
+        200:
+          description: 'Likes recuperes avec succes'
+        404:
+          description: 'Likes non trouves'
+  '/api/private/user/{id}/{id_user}/delete-like':
+    delete:
+      tags:
+        - 'User Authenticated actions'
+      summary: 'Supprimer un like'
+      operationId: 717e326f1997376ca4208740a597d666
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Id du like'
+          required: true
+          schema:
+            type: integer
+            format: int64
+        -
+          name: id_user
+          in: path
+          description: "Id de l'utilisateur"
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'Like supprime avec succes'
+        404:
+          description: 'Like non trouve'
+  /api/private/user/join-meet:
+    post:
+      tags:
+        - 'User Authenticated actions'
+      summary: 'Rejoindre une reunion'
+      operationId: dbc2ffcd90cc01c9832227ca2ffe182e
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeetParticipant'
+      responses:
+        201:
+          description: 'Reunion rejointe avec succes'
+        400:
+          description: 'Bad request'
+  /api/private/user/quit-meet:
+    post:
+      tags:
+        - 'User Authenticated actions'
+      summary: 'Quitter une reunion'
+      operationId: 2da795f27c18b38bb5a779293d506023
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeetParticipant'
+      responses:
+        201:
+          description: 'Reunion quittee avec succes'
+        400:
+          description: 'Bad request'
+  /api/private/user/add-vote:
+    post:
+      tags:
+        - 'User Authenticated actions'
+      summary: 'Ajouter un vote'
+      operationId: cf7673647996aa7a7588717d7a38061e
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vote'
+      responses:
+        201:
+          description: 'Vote ajoute avec succes'
+        400:
+          description: 'Bad request'
+  '/api/private/user/{id_sondage}/get-my-vote':
+    get:
+      tags:
+        - 'User Authenticated actions'
+      summary: 'Recuperer mon vote'
+      operationId: cce735ff5e52971805985efbe5d93a33
+      parameters:
+        -
+          name: id_sondage
+          in: path
+          description: 'Id du sondage'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'Vote recupere avec succes'
+        404:
+          description: 'Vote non trouve'
+  '/api/private/user/{id_sondage}/update-my-vote':
+    put:
+      tags:
+        - 'User Authenticated actions'
+      summary: 'Modifier mon vote'
+      operationId: 3c2f36f2e5f3d9bafe64af4e6a62834b
+      parameters:
+        -
+          name: id_sondage
+          in: path
+          description: 'Id du sondage'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vote'
+      responses:
+        200:
+          description: 'Vote modifie avec succes'
+        404:
+          description: 'Vote non trouve'
+  '/api/private/user/{id_sondage}/delete-my-vote':
+    delete:
+      tags:
+        - 'User Authenticated actions'
+      summary: 'Supprimer mon vote'
+      operationId: eef54926d04b32c1503897564de84af0
+      parameters:
+        -
+          name: id_sondage
+          in: path
+          description: 'Id du sondage'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'Vote supprime avec succes'
+        404:
+          description: 'Vote non trouve'
+  /api/private/vote/add-election-vote:
+    post:
+      tags:
+        - 'User Authenticated actions'
+      summary: 'Ajouter un vote'
+      operationId: 97b11ecfe272189ccc11c7d33daf8253
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vote'
+      responses:
+        201:
+          description: 'Vote ajoute avec succes'
+        400:
+          description: 'Bad request'
+  '/api/private/vote/{id_election}/{id_user}/get-vote':
+    get:
+      tags:
+        - 'User Authenticated actions'
+      summary: 'Recuperer un vote'
+      operationId: c6058a29c532ce4c0c25a7274f6f482b
+      parameters:
+        -
+          name: id_election
+          in: path
+          description: "Id de l'election"
+          required: true
+          schema:
+            type: integer
+            format: int64
+        -
+          name: id_user
+          in: path
+          description: "Id de l'utilisateur"
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'Vote recupere avec succes'
+        404:
+          description: 'Vote non trouve'
+  '/api/private/vote/{id_election}/{id_user}/delete-vote':
+    delete:
+      tags:
+        - 'User Authenticated actions'
+      summary: 'Supprimer un vote'
+      operationId: 0d9fb756f1bbf2b2b0dd9e1b87af04ca
+      parameters:
+        -
+          name: id_election
+          in: path
+          description: "Id de l'election"
+          required: true
+          schema:
+            type: integer
+            format: int64
+        -
+          name: id_user
+          in: path
+          description: "Id de l'utilisateur"
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'Vote supprime avec succes'
+        404:
+          description: 'Vote non trouve'
+  '/api/public/activity/{id}':
+    get:
+      tags:
+        - 'Public API'
+      summary: 'Get activity by id'
+      operationId: 3a309b741228038e18561263f88614b0
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Activity id'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 'Activity retrieved successfully'
+        404:
+          description: 'Activity not found'
+  '/api/public/candidat/{id}/get-activities':
+    get:
+      tags:
+        - 'Public API'
+      summary: "Avoir les activités d'un candidat"
+      operationId: a47eee700874d2002c20ab55d74efd75
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Candidat id'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 'Activities retrieved successfully'
+        404:
+          description: 'Candidat not found'
+  '/api/post/{id}/comments':
+    get:
+      tags:
+        - 'Public API'
+      summary: 'Get all comments of a post'
+      operationId: adcee16e9ef2705820a59513cc22c80e
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Post id'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 'Comments retrieved successfully'
+        404:
+          description: 'Post not found'
+  '/api/comment/{id}/replies':
+    get:
+      tags:
+        - 'Public API'
+      summary: 'Get all comments of a post'
+      operationId: 05793bcd70ac2b42db765c4189643b7f
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Post id'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 'Comments retrieved successfully'
+        404:
+          description: 'Post not found'
+  '/api/comment/{id}/all-replies':
+    get:
+      tags:
+        - 'Public API'
+      summary: 'Get all comments of a post'
+      operationId: 3e3d454118bc299c6fb8a0f44270893f
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Post id'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 'Comments retrieved successfully'
+        404:
+          description: 'Post not found'
+  /api/elections:
+    get:
+      tags:
+        - 'Public API'
+      summary: 'Get all elections'
+      operationId: 113d0295c8dceba053c4e09077eb9fc1
+      responses:
+        200:
+          description: 'Elections retrieved successfully'
+        404:
+          description: 'Elections not found'
+  '/api/election/{id}':
+    get:
+      tags:
+        - 'Public API'
+      summary: 'Get election by id'
+      operationId: e16315aa9f1b5b3c860c8d6d33beadb2
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Election id'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 'Election retrieved successfully'
+        404:
+          description: 'Election not found'
+  '/api/election/{id}/participants':
+    get:
+      tags:
+        - 'Public API'
+      summary: 'Get all participants of an election'
+      operationId: 5c5f1551d360ff2ce3e3ef4df72d7ed5
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Election id'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 'Participants retrieved successfully'
+        404:
+          description: 'Election not found'
+  '/api/post/{id}/likes':
+    get:
+      tags:
+        - 'Public API'
+      summary: 'Get all likes of a post'
+      operationId: 61e606e2f61429d1ea2235283454c9e1
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Post id'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 'Likes retrieved successfully'
+        404:
+          description: 'Post not found'
+  /api/public/meets:
+    get:
+      tags:
+        - 'Public API'
+      summary: 'Get meets'
+      description: 'Get a list of meets.'
+      operationId: getMeets
+      responses:
+        200:
+          description: 'Successful response'
+        401:
+          description: Unauthorized
+  /api/public/sondages:
+    get:
+      tags:
+        - 'Public API'
+      summary: 'Avoir tous les sondages'
+      operationId: 496d34e7018d9a675ebea81d6fe530ff
+      responses:
+        200:
+          description: 'Sondages retrieved successfully'
+        404:
+          description: 'Sondages not found'
+  '/api/public/sondages/{commune}':
+    get:
+      tags:
+        - 'Public API'
+      summary: "Avoir les sondages d'une commune"
+      operationId: 2bb2ca0dccb40e006473c1d98d0721af
+      parameters:
+        -
+          name: commune
+          in: path
+          description: 'Commune name'
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Sondages retrieved successfully'
+        404:
+          description: 'Commune not found'
+  /api/auth/login:
+    post:
+      tags:
+        - Authentication
+      summary: 'User login'
+      operationId: 535ffeda4b78916efd658b2844ea897a
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: user@example.com
+                password:
+                  type: string
+                  example: password123
+              type: object
+      responses:
+        200:
+          description: 'Successful login, returns user and token'
+        401:
+          description: Unauthorized
+  /api/auth/register:
+    post:
+      tags:
+        - Authentication
+      summary: 'User registration'
+      operationId: da8643013c2941f5ed7f8a9c9b4a7f7a
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        201:
+          description: 'Successful registration'
+        400:
+          description: 'Bad request'
+  /api/auth/logout:
+    post:
+      tags:
+        - Authentication
+      summary: 'User logout'
+      operationId: 46f8a14c8083abb69eed72768aa08629
+      responses:
+        200:
+          description: 'Successfully logged out'
+        401:
+          description: Unauthorized
+      security:
+        -
+          bearerAuth: []
+  /api/auth/refresh:
+    post:
+      tags:
+        - Authentication
+      summary: 'Refresh authentication token'
+      operationId: f3538b6e9c46bcf601a9d194288b03d4
+      responses:
+        200:
+          description: 'Token refreshed'
+        401:
+          description: Unauthorized
+components:
+  schemas:
+    Activity:
+      title: "Activité d'un candidat"
+      description: 'Model for a Activity'
+      properties:
+        id_candidat:
+          type: integer
+        description:
+          type: string
+        nom:
+          type: string
+        date_debut:
+          type: string
+          format: date
+        date_fin:
+          type: string
+          format: date
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      type: object
+    Admin:
+      title: Admin
+      description: 'Admin model'
+      properties:
+        id_user:
+          description: 'User ID associated with the admin'
+          type: integer
+        created_at:
+          description: 'Admin creation date and time'
+          type: string
+          format: date-time
+          readOnly: 'true'
+        updated_at:
+          description: 'Admin last update date and time'
+          type: string
+          format: date-time
+          readOnly: 'true'
+      type: object
+    Candidat:
+      title: Candidat
+      description: 'Model for a Candidat'
+      properties:
+        user_id:
+          type: integer
+        pt_id:
+          type: integer
+        bio:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      type: object
+    Commentaire:
+      title: Commentaire
+      description: 'Commentaire model'
+      properties:
+        id_user:
+          description: 'User ID associated with the comment'
+          type: integer
+        id_post:
+          description: 'ID of the post associated with the comment'
+          type: integer
+        commentaire:
+          description: 'Content of the comment'
+          type: string
+        created_at:
+          description: 'Comment creation date and time'
+          type: string
+          format: date-time
+          readOnly: 'true'
+        updated_at:
+          description: 'Comment last update date and time'
+          type: string
+          format: date-time
+          readOnly: 'true'
+      type: object
+    CommentaireReplique:
+      title: CommentaireReplique
+      description: 'CommentaireReplique model'
+      properties:
+        id_commentaire:
+          description: 'ID of the original comment'
+          type: integer
+        id_user:
+          description: 'User ID associated with the reply'
+          type: integer
+        reponse:
+          description: 'Content of the reply'
+          type: string
+        created_at:
+          description: 'Reply creation date and time'
+          type: string
+          format: date-time
+          readOnly: 'true'
+        updated_at:
+          description: 'Reply last update date and time'
+          type: string
+          format: date-time
+          readOnly: 'true'
+      type: object
+    ElectionParticipant:
+      title: "Participant d'Élection"
+      description: 'Modèle de participant à une élection'
+      properties:
+        id_election:
+          description: "ID de l'élection"
+          type: integer
+        id_candidat:
+          description: 'ID du candidat participant'
+          type: integer
+        created_at:
+          description: 'Date et heure de création'
+          type: string
+          format: date-time
+          readOnly: 'true'
+          nullable: true
+        updated_at:
+          description: 'Date et heure de mise à jour'
+          type: string
+          format: date-time
+          readOnly: 'true'
+          nullable: true
+      type: object
+    Election:
+      title: Élection
+      description: "Modèle d'élection"
+      properties:
+        description:
+          description: "Description de l'élection"
+          type: string
+        nom:
+          description: "Nom de l'élection"
+          type: string
+        duration:
+          description: "Durée de l'élection en jours"
+          type: integer
+        image_url:
+          description: "URL de l'image de l'élection"
+          type: string
+        banner_url:
+          description: "URL de la bannière de l'élection"
+          type: string
+        date_debut:
+          description: "Date de début de l'élection"
+          type: string
+          format: date
+        date_fin:
+          description: "Date de fin de l'élection"
+          type: string
+          format: date
+        created_at:
+          description: 'Date et heure de création'
+          type: string
+          format: date-time
+          readOnly: 'true'
+          nullable: true
+        updated_at:
+          description: 'Date et heure de mise à jour'
+          type: string
+          format: date-time
+          readOnly: 'true'
+          nullable: true
+      type: object
+    Like:
+      title: 'Like des posts'
+      description: 'Modèle de like'
+      properties:
+        id_user:
+          description: "ID de l'utilisateur"
+          type: integer
+        id_post:
+          description: 'ID du post liké'
+          type: integer
+        created_at:
+          description: 'Date et heure de création'
+          type: string
+          format: date-time
+          readOnly: 'true'
+          nullable: true
+        updated_at:
+          description: 'Date et heure de mise à jour'
+          type: string
+          format: date-time
+          readOnly: 'true'
+          nullable: true
+      type: object
+    Meet:
+      title: Meet
+      description: 'Modèle de réunion'
+      properties:
+        id_candidat:
+          description: 'ID du candidat'
+          type: integer
+        titre:
+          description: 'Titre de la réunion'
+          type: string
+        description:
+          description: 'Description de la réunion'
+          type: string
+        url_media:
+          description: 'URL du média associé à la réunion'
+          type: string
+        created_at:
+          description: 'Date et heure de création'
+          type: string
+          format: date-time
+          readOnly: 'true'
+          nullable: true
+        updated_at:
+          description: 'Date et heure de mise à jour'
+          type: string
+          format: date-time
+          readOnly: 'true'
+          nullable: true
+      type: object
+    MeetParticipant:
+      title: MeetParticipant
+      description: 'Modèle de participant à une réunion'
+      properties:
+        id_user:
+          description: "ID de l'utilisateur"
+          type: integer
+        id_meet:
+          description: 'ID de la réunion'
+          type: integer
+        created_at:
+          description: 'Date et heure de création'
+          type: string
+          format: date-time
+          readOnly: 'true'
+          nullable: true
+        updated_at:
+          description: 'Date et heure de mise à jour'
+          type: string
+          format: date-time
+          readOnly: 'true'
+          nullable: true
+      type: object
+    PartiPolitique:
+      title: PartiPolitique
+      description: 'Modèle de parti politique'
+      properties:
+        nom:
+          description: 'Nom du parti politique'
+          type: string
+        logo:
+          description: 'Logo du parti politique (type photo)'
+          type: string
+          format: binary
+        description:
+          description: 'Description du parti politique'
+          type: string
+        created_at:
+          description: 'Date et heure de création'
+          type: string
+          format: date-time
+          readOnly: 'true'
+          nullable: true
+        updated_at:
+          description: 'Date et heure de mise à jour'
+          type: string
+          format: date-time
+          readOnly: 'true'
+          nullable: true
+      type: object
+    Post:
+      title: Post
+      description: 'Modèle de publication (post)'
+      properties:
+        id_candidat:
+          description: 'ID du candidat lié au post'
+          type: integer
+        titre:
+          description: 'Titre de la publication'
+          type: string
+        description:
+          description: 'Description de la publication'
+          type: string
+        url_media:
+          description: 'URL du média associé à la publication'
+          type: string
+        created_at:
+          description: 'Date et heure de création'
+          type: string
+          format: date-time
+          readOnly: 'true'
+          nullable: true
+        updated_at:
+          description: 'Date et heure de mise à jour'
+          type: string
+          format: date-time
+          readOnly: 'true'
+          nullable: true
+      type: object
+    ResultatSondage:
+      title: ResultatSondage
+      description: 'Modèle de résultat de sondage'
+      properties:
+        id_sondage:
+          description: 'ID du sondage associé au résultat'
+          type: integer
+        id_user:
+          description: "ID de l'utilisateur ayant participé au sondage"
+          type: integer
+        choix:
+          description: "Choix de l'utilisateur dans le sondage"
+          type: string
+        created_at:
+          description: 'Date et heure de création'
+          type: string
+          format: date-time
+          readOnly: 'true'
+          nullable: true
+        updated_at:
+          description: 'Date et heure de mise à jour'
+          type: string
+          format: date-time
+          readOnly: 'true'
+          nullable: true
+      type: object
+    'Resultat Election':
+      title: Resultat
+      description: "Modèle de résultat d'élection"
+      properties:
+        id_election:
+          description: "ID de l'élection associée au résultat"
+          type: integer
+        id_candidat:
+          description: 'ID du candidat lié au résultat'
+          type: integer
+        nb_votes:
+          description: 'Nombre de votes obtenus par le candidat'
+          type: integer
+        rang:
+          description: 'Rang du candidat dans les résultats'
+          type: integer
+        created_at:
+          description: 'Date et heure de création'
+          type: string
+          format: date-time
+          readOnly: 'true'
+          nullable: true
+        updated_at:
+          description: 'Date et heure de mise à jour'
+          type: string
+          format: date-time
+          readOnly: 'true'
+          nullable: true
+      type: object
+    Role:
+      title: Role
+      description: "Modèle de rôle d'utilisateur"
+      properties:
+        name:
+          description: 'Nom du rôle'
+          type: string
+        description:
+          description: 'Description du rôle'
+          type: string
+      type: object
+    Sondage:
+      title: Sondage
+      description: 'Model for representing a survey.'
+      properties:
+        id:
+          description: 'Sondage ID'
+          type: integer
+          format: int64
+        id_user:
+          description: 'User ID who created the survey'
+          type: integer
+        titre:
+          description: 'Title of the survey'
+          type: string
+        description:
+          description: 'Description of the survey'
+          type: string
+        date_debut:
+          description: 'Start date of the survey'
+          type: string
+          format: date
+        date_fin:
+          description: 'End date of the survey'
+          type: string
+          format: date
+        url_media:
+          description: 'URL of the media associated with the survey'
+          type: string
+        type:
+          description: 'Type of the survey'
+          type: string
+        status:
+          description: 'Status of the survey'
+          type: string
+        commune:
+          description: 'Commune associated with the survey'
+          type: string
+        created_at:
+          description: 'Creation date'
+          type: string
+          format: date-time
+        updated_at:
+          description: 'Last update date'
+          type: string
+          format: date-time
+      type: object
+    User:
+      title: User
+      description: 'User model'
+      properties:
+        id:
+          description: 'User ID auto incremented'
+          type: integer
+        nom:
+          description: 'User last name'
+          type: string
+        prenom:
+          description: 'User first name'
+          type: string
+        elector_card:
+          description: 'User elector card'
+          type: string
+        adresse:
+          description: 'User address'
+          type: string
+        numero_cni:
+          description: 'User national ID number'
+          type: string
+        commune:
+          description: 'User commune'
+          type: string
+        role_id:
+          description: 'User role ID (1=admin, 2=candidat, 3=user/electeur,, default=3)'
+          type: integer
+        phone:
+          description: 'User phone number'
+          type: string
+        email:
+          description: 'User email'
+          type: string
+          format: email
+        password:
+          description: 'User password'
+          type: string
+          format: password
+        created_at:
+          description: 'User creation date and time'
+          type: string
+          format: date-time
+        updated_at:
+          description: 'User last update date and time'
+          type: string
+          format: date-time
+        photo_url:
+          description: "photo de l'utilisateur"
+          type: image
+      type: object
+    Vote:
+      title: Vote
+      description: 'Model for representing a vote.'
+      properties:
+        id:
+          description: 'Vote ID'
+          type: integer
+          format: int64
+        election_id:
+          description: 'Election ID that the vote belongs to'
+          type: integer
+        voter_id:
+          description: 'ID of the user who cast the vote'
+          type: integer
+        candidat_id:
+          description: 'ID of the candidate the vote is cast for'
+          type: integer
+        created_at:
+          description: 'Creation date'
+          type: string
+          format: date-time
+        updated_at:
+          description: 'Last update date'
+          type: string
+          format: date-time
+      type: object

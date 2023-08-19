@@ -5,6 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+ * @OA\Schema(
+ *     schema="Activity",
+ *     title="Activité d'un candidat",
+ *     description="Model for a Activity",
+ *     @OA\Property(property="id_candidat", type="integer"),
+ *     @OA\Property(property="description", type="string"),
+ *     @OA\Property(property="nom", type="string"),
+ *     @OA\Property(property="date_debut", type="string", format="date"),
+ *     @OA\Property(property="date_fin", type="string", format="date"),
+ *     @OA\Property(property="created_at", type="string", format="date-time"),
+ *     @OA\Property(property="updated_at", type="string", format="date-time"),
+ * )
+ */
+
 class Activities extends Model
 {
     use HasFactory;

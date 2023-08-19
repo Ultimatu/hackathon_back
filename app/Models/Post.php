@@ -5,6 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+ * @OA\Schema(
+ *     schema="Post",
+ *     title="Post",
+ *     description="Modèle de publication (post)",
+ *     @OA\Property(property="id_candidat", type="integer", description="ID du candidat lié au post"),
+ *     @OA\Property(property="titre", type="string", description="Titre de la publication"),
+ *     @OA\Property(property="description", type="string", description="Description de la publication"),
+ *     @OA\Property(property="url_media", type="string", description="URL du média associé à la publication"),
+ *     @OA\Property(property="created_at", type="string", format="date-time", description="Date et heure de création", readOnly="true", nullable=true),
+ *     @OA\Property(property="updated_at", type="string", format="date-time", description="Date et heure de mise à jour", readOnly="true", nullable=true)
+ * )
+ */
 class Post extends Model
 {
     use HasFactory;
@@ -33,7 +47,7 @@ class Post extends Model
     public function scopeSearch($query, $val)
     {
         return $query
-            ->where('titre', 'like', '%' . $val . '%');
+            ->where('titre', 'like', '%' . $val . '%')->orWhere('description', 'like', '%' . $val . '%');
     }
 
     public function scopeFilter($query, $val)

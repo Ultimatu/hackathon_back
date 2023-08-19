@@ -5,6 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+ * @OA\Schema(
+ *     schema="Like",
+ *     title="Like des posts",
+ *     description="Modèle de like",
+ *     @OA\Property(property="id_user", type="integer", description="ID de l'utilisateur"),
+ *     @OA\Property(property="id_post", type="integer", description="ID du post liké"),
+ *     @OA\Property(property="created_at", type="string", format="date-time", description="Date et heure de création", readOnly="true", nullable=true),
+ *     @OA\Property(property="updated_at", type="string", format="date-time", description="Date et heure de mise à jour", readOnly="true", nullable=true)
+ * )
+ */
 class Likes extends Model
 {
     use HasFactory;
@@ -40,5 +52,5 @@ class Likes extends Model
             ->where('id_user', $val);
     }
 
-    
+
 }

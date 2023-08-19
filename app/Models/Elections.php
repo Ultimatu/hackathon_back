@@ -5,6 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+ * @OA\Schema(
+ *     schema="Election",
+ *     title="Élection",
+ *     description="Modèle d'élection",
+ *     @OA\Property(property="description", type="string", description="Description de l'élection"),
+ *     @OA\Property(property="nom", type="string", description="Nom de l'élection"),
+ *     @OA\Property(property="duration", type="integer", description="Durée de l'élection en jours"),
+ *     @OA\Property(property="image_url", type="string", description="URL de l'image de l'élection"),
+ *     @OA\Property(property="banner_url", type="string", description="URL de la bannière de l'élection"),
+ *     @OA\Property(property="date_debut", type="string", format="date", description="Date de début de l'élection"),
+ *     @OA\Property(property="date_fin", type="string", format="date", description="Date de fin de l'élection"),
+ *     @OA\Property(property="created_at", type="string", format="date-time", description="Date et heure de création", readOnly="true", nullable=true),
+ *     @OA\Property(property="updated_at", type="string", format="date-time", description="Date et heure de mise à jour", readOnly="true", nullable=true)
+ * )
+ */
 class Elections extends Model
 {
     use HasFactory;
