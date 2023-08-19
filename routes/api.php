@@ -70,7 +70,10 @@ Route::group(['prefix' => 'public'], function () {
     Route::get('sondages/{commune}', [PublicController::class, 'getAllSondageByCommune']);
 
 
+    //parti politique
+    Route::get('parti-politiques', [PublicController::class, 'getAllPartiPolitiques']);
 
+    Route::get('/parti-politique/{id}', [PublicController::class, 'getPartiPolitique']);
 
 });
 
@@ -232,6 +235,19 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         //delete
 
         Route::delete('/delete-candidat/{id_user}', [AdminController::class, 'deleteCandidat'])->name('deleteCandidat');
+
+
+        //parti politique
+
+        //add
+
+        Route::post('/add-parti-politique', [AdminController::class, 'addPartiPolitique'])->name('addPartiPolitique');
+
+        Route::put('/parti-politique/{id}', [AdminController::class, 'updatePartiPolitique'])->name('updatePartiPolitique');
+
+        Route::delete('/parti-politique/{id}', [AdminController::class, 'deletePartiPolitique'])->name('deletePartiPolitique');
+
+
     });
 
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\ElectionController;
 use App\Http\Controllers\Api\ElectionParticipantController;
 use App\Http\Controllers\Api\LikeController;
 use App\Http\Controllers\Api\MeetParticipantController;
+use App\Http\Controllers\Api\PartiPolitiqueController;
 use App\Http\Controllers\Api\PrivateApi\CandidatController;
 use App\Http\Controllers\Api\SondageController;
 use App\Http\Controllers\Controller;
@@ -332,6 +333,51 @@ class PublicController extends Controller
         return $sondages->getAllSondageByCommune($commune);
     }
 
+
+    /**
+     * @OA\Get(
+     *     path="api/public/parti-politiques",
+     *     tags={"Public API"},
+     *     summary="Récupérer la liste de tous les partis politiques",
+     *     @OA\Response(response="200", description="Liste des partis politiques récupérée avec succès"),
+     * )
+     */
+
+    public function getAllPartiPolitiques()
+    {
+        $partiPolitiqueController = new PartiPolitiqueController();
+
+        return $partiPolitiqueController->getAllPartisPolitiques();
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/public/parti-politique/{id}",
+     *     tags={"Public API"},
+     *     summary="Récupérer les détails d'un parti politique",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID du parti politique",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Détails du parti politique récupérés avec succès"),
+     *     @OA\Response(response="404", description="Parti politique non trouvé"),
+     * )
+     */
+
+    public function getPartiPolitique($id)
+    {
+        $partiPolitiqueController = new PartiPolitiqueController();
+
+        return $partiPolitiqueController->getPartiPolitique($id);
+    }
+
+
 }
 
-//tilde = ~
+

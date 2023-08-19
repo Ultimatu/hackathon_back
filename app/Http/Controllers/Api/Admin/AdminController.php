@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Api\ElectionController;
 use App\Http\Controllers\Api\ElectionParticipantController;
+use App\Http\Controllers\Api\PartiPolitiqueController;
 use App\Http\Controllers\Api\ResultatsVotesController;
 use App\Http\Controllers\Api\SondageController;
 use App\Http\Controllers\Auth\AuthController;
@@ -450,7 +451,7 @@ class AdminController extends Controller
      */
 
     public function addCandidat(int $id_user, int $id_parti_politique){
-        
+
         $user = User::find($id_user);
         $user->role_id = 2;
         $user->save();
@@ -557,5 +558,100 @@ class AdminController extends Controller
         ]);
 
     }
+
+
+
+
+    //parti politique
+
+    /**
+     * @OA\Post(
+     *     path="/api/admin/parti-politique",
+     *     tags={"Admin Actions"},
+     *     summary="Ajouter un nouveau parti politique",
+     *     security={{"bearerAuth":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             ref="#/components/schemas/PartiPolitique
+     *         )
+     *     ),
+     *     @OA\Response(response="201", description="Parti politique ajouté avec succès"),
+     *     @OA\Response(response="422", description="Validation error"),
+     * )
+     */
+
+    public function addPartiPolitique(Request $request){
+        $partiPolitiqueController = new PartiPolitiqueController();
+
+        return $partiPolitiqueController->addPartiPolitique($request);
+    }
+
+
+    /**
+     * @OA\Put(
+     *     path="/api/admin/parti-politique/{id}",
+     *     tags={"Admin Actions"},
+     *     summary="Mettre à jour un parti politique",
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID du parti politique",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             ref="#/components/schemas/PartiPolitique
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Parti politique mis à jour avec succès"),
+     *     @OA\Response(response="404", description="Parti politique non trouvé"),
+     * )
+     */
+    public function updatePartiPolitique(Request $request, $id){
+        $partiPolitiqueController = new PartiPolitiqueController();
+
+        return $partiPolitiqueController->updatePartiPolitique($request, $id);
+    }
+
+
+    /**
+     * @OA\Delete(
+     *     path="/api/admin/parti-politique/{id}",
+     *     tags={"Admin"},
+     *     summary="Supprimer un parti politique",
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID du parti politique",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Parti politique supprimé avec succès"),
+     *     @OA\Response(response="404", description="Parti politique non trouvé"),
+     * )
+     */
+
+    public function deletePartiPolitique($id){
+        $partiPolitiqueController = new PartiPolitiqueController();
+
+        return $partiPolitiqueController->deletePartiPolitique($id);
+    }
+
+
+
+
+
+
 
 }

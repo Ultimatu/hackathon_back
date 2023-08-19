@@ -47,7 +47,7 @@ class PartiPolitiqueController extends Controller
         $request->validate([
             'nom' => 'required|string',
             'description' => 'required|string',
-            'logo' => 'required|mimes:jpeg,png,gif,mp4,mov,avi',
+            'logo' => ['nullable', 'mimes:jpeg,png,gif,mp4,mov,avi']
         ]);
 
         //verifier si le parti politique existe deja
