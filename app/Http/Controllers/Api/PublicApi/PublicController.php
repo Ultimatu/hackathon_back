@@ -336,7 +336,7 @@ class PublicController extends Controller
 
     /**
      * @OA\Get(
-     *     path="api/public/parti-politiques",
+     *     path="/api/public/parti-politiques",
      *     tags={"Public API"},
      *     summary="Récupérer la liste de tous les partis politiques",
      *     @OA\Response(response="200", description="Liste des partis politiques récupérée avec succès"),

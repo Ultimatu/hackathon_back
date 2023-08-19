@@ -69,7 +69,7 @@ class PartiPolitiqueController extends Controller
         else {
             $nameToFront = 'storage/partisPolitiques/default.png';
         }
-        
+
         $partiPolitique = new PartiPolitique();
         $partiPolitique->nom = $request->input('nom');
         $partiPolitique->description = $request->input('description');
