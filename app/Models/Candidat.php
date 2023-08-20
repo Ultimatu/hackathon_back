@@ -51,8 +51,13 @@ class Candidat extends Model
 
     public function scopeSearch($query, $val)
     {
+        //bio et user datas
         return $query
-            ->where('bio', 'like', '%' . $val . '%');
+            ->where('bio', 'like', '%' . $val . '%')
+            ->orWhereHas('user', function ($q) use ($val) {
+                $q->where('nom', 'like', '%' . $val . '%')
+                    ->orWhere('prenom', 'like', '%' . $val . '%');
+            });
     }
 
     public function scopeFilter($query, $val)

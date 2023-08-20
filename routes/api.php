@@ -77,6 +77,15 @@ Route::group(['prefix' => 'public'], function () {
 
     Route::post('user/reset-password', [UserController::class, 'resetPassword']);
 
+    //candidats
+    Route::get('candidats', [PublicController::class, 'getAllCandidats']);
+
+    //get candidat by id
+    Route::get('candidat/{id}', [PublicController::class, 'getCandidatById']);
+
+    //get by nom
+    Route::get('candidats/search/{val}', [PublicController::class, 'searchCandidats']);
+
 });
 
 /*

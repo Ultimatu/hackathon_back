@@ -19,35 +19,19 @@ use OpenApi\Generator;
 class PublicController extends Controller
 {
 
+    
+
+
 
     /**
-     * @OA\Info(
-     *      version="1.0.0",
-     *      title="API Documentation",
-     *      description="Documentation des API de l'application Les Innovateurs. Cette documentation fournit des informations détaillées sur les différentes API disponibles pour gérer les utilisateurs, les élections, les candidats, les activités, les sondages et d'autres fonctionnalités de l'application.",
-     *
-     *      @OA\License(
-     *          name="URL Accueil",
-     *          url="https://lesinnovateurs.me"
-     *      ),
-     *     @OA\Server(
-     *         description="Environnement local",
-     *         url="http://localhost:8000/api/documentation"
-     *     ),
-     *     @OA\Server(
-     *         description="Environnement de production",
-     *         url="https://lesinnovateurs.me/api/documentation"
-     *     ),
-     * @OA\SecurityScheme(
-     *    type="http",
-     *   description="Authentification par token",
-     *   scheme="bearer",
-     *
-     * )
+     * @OA\Get(
+     *     path="/api/public/activities",
+     *     tags={"Public API"},
+     *     summary="Get all activities",
+     *     @OA\Response(response="200", description="Activities retrieved successfully"),
+     *     @OA\Response(response="404", description="Activities not found")
      * )
      */
-
-
 
     public function getAllActvities(){
 
@@ -78,6 +62,71 @@ class PublicController extends Controller
         $activity = new ActivityController();
 
         return $activity->getActivity($id);
+    }
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/public/candidats",
+     *     tags={"Public API"},
+     *     summary="Get all candidats",
+     *     @OA\Response(response="200", description="Candidats retrieved successfully"),
+     *     @OA\Response(response="404", description="Candidats not found")
+     * )
+     */
+    public function getAllcandidats(){
+        $candidats = new CandidatController();
+
+        return $candidats->getAllCandidats();
+    }
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/public/candidat/{id}",
+     *     tags={"Public API"},
+     *     summary="Get  candidat datas",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Id candidat",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(response="200", description="Candidats retrieved successfully"),
+     *     @OA\Response(response="404", description="Candidats not found")
+     * )
+     */
+
+    public function getCandidatById(int $id){
+        $candidats = new CandidatController();
+
+        return $candidats->getCandidat($id);
+    }
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/public/candidats/search/{val}",
+     *     tags={"Public API"},
+     *     summary="Get all candidats by value",
+     *     @OA\Parameter(
+     *         name="search",
+     *         in="path",
+     *         description="valeur de recherche de  candidat",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(response="200", description="Candidats retrieved successfully"),
+     *     @OA\Response(response="404", description="Candidats not found")
+     * )
+     */
+
+
+    public function searchCandidats(string $val){
+        $candidats = new CandidatController();
+
+        return $candidats->searchCandidats($val);
     }
 
 
@@ -286,7 +335,7 @@ class PublicController extends Controller
      *    required=true,
      *    @OA\Schema(type="integer")
      * ),
-     *  
+     *
      *
      *     description="Get a list of meets.",
      *     @OA\Response(response="200", description="Successful response"),

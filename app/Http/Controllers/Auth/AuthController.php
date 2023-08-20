@@ -12,6 +12,33 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class AuthController extends Controller
 {
 
+    /**
+     * @OA\Info(
+     *      version="1.0.0",
+     *      title="API Documentation",
+     *      description="Documentation des API de l'application Les Innovateurs. Cette documentation fournit des informations détaillées sur les différentes API disponibles pour gérer les utilisateurs, les élections, les candidats, les activités, les sondages et d'autres fonctionnalités de l'application.",
+     *
+     *      @OA\License(
+     *          name="URL Accueil",
+     *          url="https://lesinnovateurs.me"
+     *      ),
+     *     @OA\Server(
+     *         description="Environnement local",
+     *         url="http://localhost:8000/api/documentation"
+     *     ),
+     *     @OA\Server(
+     *         description="Environnement de production",
+     *         url="https://lesinnovateurs.me/api/documentation"
+     *     ),
+     * @OA\SecurityScheme(
+     *    type="http",
+     *   description="Authentification par token",
+     *   scheme="bearer",
+     *
+     * )
+     * )
+     */
+
     public function __construct()
     {
         $this->middleware('auth:sanctum')->except(['login', 'register']);

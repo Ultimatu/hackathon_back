@@ -1045,25 +1045,13 @@
                 }
             }
         },
-        "/api/private/user/{id}/add-photo": {
+        "/api/private/user/add-photo": {
             "post": {
                 "tags": [
                     "User Authenticated actions"
                 ],
                 "summary": "Ajouter une photo de profil",
-                "operationId": "18c3cd497b0a6bdf2a91e09d27def546",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Id de l'utilisateur",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
+                "operationId": "8fe56ec8909add27fd187e116d41daf3",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1090,25 +1078,13 @@
                 }
             }
         },
-        "/api/private/user/{id}/update-datas": {
+        "/api/private/user/update-datas": {
             "put": {
                 "tags": [
                     "User Authenticated actions"
                 ],
                 "summary": "Modifier les donnees d'un utilisateur",
-                "operationId": "ace3dbcff3974b85b0f787c978281bd3",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Id de l'utilisateur",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
+                "operationId": "cf431de0bd090008f6c0b307e3d64ee2",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1129,25 +1105,13 @@
                 }
             }
         },
-        "/api/private/user/{id}/update-password": {
+        "/api/private/user/update-password": {
             "put": {
                 "tags": [
                     "User Authenticated actions"
                 ],
                 "summary": "Modifier le mot de passe d'un utilisateur",
-                "operationId": "82b6e54aff68a09d6439942517cd1405",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Id de l'utilisateur",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
+                "operationId": "3d97441b5c5407b10f47d95f85e26f3d",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1173,13 +1137,13 @@
                 }
             }
         },
-        "/api/private/user/reset-password": {
+        "/api/public/user/reset-password": {
             "post": {
                 "tags": [
-                    "User Authenticated actions"
+                    "Public API"
                 ],
                 "summary": "Reinitialiser le mot de passe d'un utilisateur",
-                "operationId": "2ba52face92276523a99317f8cf18294",
+                "operationId": "8e8cfb5356c5764423ed4c21a1aeeb0d",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1755,6 +1719,23 @@
                 }
             }
         },
+        "/api/public/activities": {
+            "get": {
+                "tags": [
+                    "Public API"
+                ],
+                "summary": "Get all activities",
+                "operationId": "66a6c146603a527eaa733bbfb934ab97",
+                "responses": {
+                    "200": {
+                        "description": "Activities retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Activities not found"
+                    }
+                }
+            }
+        },
         "/api/public/activity/{id}": {
             "get": {
                 "tags": [
@@ -1779,6 +1760,79 @@
                     },
                     "404": {
                         "description": "Activity not found"
+                    }
+                }
+            }
+        },
+        "/api/public/candidats": {
+            "get": {
+                "tags": [
+                    "Public API"
+                ],
+                "summary": "Get all candidats",
+                "operationId": "4afc8d442e7d6b062112f38a7306dea0",
+                "responses": {
+                    "200": {
+                        "description": "Candidats retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Candidats not found"
+                    }
+                }
+            }
+        },
+        "/api/public/candidat/{id}": {
+            "get": {
+                "tags": [
+                    "Public API"
+                ],
+                "summary": "Get  candidat datas",
+                "operationId": "6842914ab09fdfbf3dff33c989518811",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id candidat",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Candidats retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Candidats not found"
+                    }
+                }
+            }
+        },
+        "/api/public/candidats/search/{val}": {
+            "get": {
+                "tags": [
+                    "Public API"
+                ],
+                "summary": "Get all candidats by value",
+                "operationId": "179e8029e968b48bf3f035ab0e7c374e",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "path",
+                        "description": "valeur de recherche de  candidat",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Candidats retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Candidats not found"
                     }
                 }
             }

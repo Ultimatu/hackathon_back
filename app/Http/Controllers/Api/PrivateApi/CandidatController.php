@@ -6,11 +6,13 @@ use App\Http\Controllers\Api\ActivityController;
 use App\Http\Controllers\Api\MeetController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Controller;
+use App\Models\Candidat;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CandidatController extends Controller
 {
+    
 
     //POSTS
 
@@ -311,6 +313,55 @@ class CandidatController extends Controller
         $activityController = new ActivityController();
 
         return $activityController->destroy($id);
+    }
+
+
+
+    //candidats
+
+
+
+    public function getAllCandidats()
+    {
+        $candidats = Candidat::with('user', 'partiPolitique')->get();
+        if ($candidats->count() > 0) {
+            return response()->json([
+                'data' => $candidats,
+                'message' => 'Liste des candidats récupérée avec succès'
+            ], 200);
+        } else {
+            return response()->json(['message' => 'Pas de candidats'], 404);
+        }
+
+    }
+
+
+    public function getCandidat(int $id)
+    {
+        $candidat = Candidat::with('user', 'partiPolitique')->find($id);
+        if ($candidat) {
+            return response()->json([
+                'data' => $candidat,
+                'message' => 'Candidat récupéré avec succès'
+            ], 200);
+        } else {
+            return response()->json(['message' => 'Candidat non trouvé'], 404);
+        }
+    }
+
+
+    //getby nom
+    public function searchCandidats(string $val)
+    {
+        $candidats = Candidat::with('user', 'partiPolitique')->search($val)->get();
+        if ($candidats->count() > 0) {
+            return response()->json([
+                'data' => $candidats,
+                'message' => 'Liste des candidats récupérée avec succès'
+            ], 200);
+        } else {
+            return response()->json(['message' => 'Pas de candidats'], 404);
+        }
     }
 
 
