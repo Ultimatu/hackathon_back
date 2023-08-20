@@ -75,6 +75,8 @@ Route::group(['prefix' => 'public'], function () {
 
     Route::get('/parti-politique/{id}', [PublicController::class, 'getPartiPolitique']);
 
+    Route::post('user/reset-password', [UserController::class, 'resetPassword']);
+
 });
 
 /*
@@ -84,14 +86,14 @@ Route::group(['prefix' => 'public'], function () {
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::group(['prefix' => 'private'], function () {
         // Photos
-        Route::post('user/{id}/add-photo', [UserController::class, 'addPhoto']);
+        Route::post('user/add-photo', [UserController::class, 'addPhoto']);
 
         // Data
-        Route::put('user/{id}/update-datas', [UserController::class, 'updateDatas']);
+        Route::put('user/update-datas', [UserController::class, 'updateDatas']);
 
         // Password
-        Route::put('user/{id}/update-password', [UserController::class, 'updatePassword']);
-        Route::post('user/reset-password', [UserController::class, 'resetPassword']);
+        Route::put('user/update-password', [UserController::class, 'updatePassword']);
+
 
         // Comments
         Route::post('user/add-comment', [UserController::class, 'addComments']);

@@ -19,19 +19,10 @@ class UserController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/private/user/{id}/add-photo",
+     *     path="/api/private/user/add-photo",
      *     tags={"User Authenticated actions"},
      *     summary="Ajouter une photo de profil",
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="Id de l'utilisateur",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="integer",
-     *             format="int64"
-     *         )
-     *     ),
+     *
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -42,8 +33,9 @@ class UserController extends Controller
      * )
      */
 
-    public function addPhoto(int $id, Request $request)
+    public function addPhoto(Request $request)
     {
+        $id = auth()->user()->id;
         $user = User::find($id);
         if (!$user) {
             return response()->json([
@@ -87,19 +79,10 @@ class UserController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/private/user/{id}/update-datas",
+     *     path="/api/private/user/update-datas",
      *     tags={"User Authenticated actions"},
      *     summary="Modifier les donnees d'un utilisateur",
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="Id de l'utilisateur",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="integer",
-     *             format="int64"
-     *         )
-     *     ),
+     *
      *
      *     @OA\RequestBody(
      *         required=true,
@@ -110,8 +93,9 @@ class UserController extends Controller
      * )
      */
 
-    public function updateDatas(int $id, Request $request)
+    public function updateDatas(Request $request)
     {
+        $id = auth()->user()->id;
         $user = User::find($id);
         if (!$user) {
             return response()->json([
@@ -151,19 +135,10 @@ class UserController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/private/user/{id}/update-password",
+     *     path="/api/private/user/update-password",
      *     tags={"User Authenticated actions"},
      *     summary="Modifier le mot de passe d'un utilisateur",
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="Id de l'utilisateur",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="integer",
-     *             format="int64"
-     *         )
-     *     ),
+     *
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -176,8 +151,9 @@ class UserController extends Controller
      */
 
 
-    public function updatePassword(int $id, Request $request)
+    public function updatePassword(Request $request)
     {
+        $id = auth()->user()->id;
         $user = User::find($id);
         if (!$user) {
             return response()->json([
@@ -202,8 +178,8 @@ class UserController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/private/user/reset-password",
-     *     tags={"User Authenticated actions"},
+     *     path="/api/public/user/reset-password",
+     *     tags={"Public API"},
      *     summary="Reinitialiser le mot de passe d'un utilisateur",
      *     @OA\RequestBody(
      *         required=true,
