@@ -12,14 +12,16 @@ use App\Http\Controllers\Api\MeetParticipantController;
 use App\Http\Controllers\Api\PartiPolitiqueController;
 use App\Http\Controllers\Api\PrivateApi\CandidatController;
 use App\Http\Controllers\Api\SondageController;
+use App\Http\Controllers\Api\TypeSondageController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\NewsLetterController;
 use Illuminate\Http\Request;
 use OpenApi\Annotations\OpenApi;
 use OpenApi\Generator;
 class PublicController extends Controller
 {
 
-    
+
 
 
 
@@ -435,6 +437,195 @@ class PublicController extends Controller
 
         return $partiPolitiqueController->getPartiPolitique($id);
     }
+
+
+    //types sondages
+
+    /**
+     * @OA\Get(
+     *     path="/api/public/types-sondages",
+     *     tags={"Public API"},
+     *     summary="Récupérer la liste de tous les types de sondages",
+     *     @OA\Response(response="200", description="Liste des types de sondages récupérée avec succès"),
+     * )
+     */
+
+    public function getAllTypesSondages()
+    {
+        $typeSondageController = new TypeSondageController();
+
+        return $typeSondageController->getAllTypeSondages();
+    }
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/public/type-sondage/{id}",
+     *     tags={"Public API"},
+     *     summary="Récupérer les détails d'un type de sondage",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID du type de sondage",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Détails du type de sondage récupérés avec succès"),
+     *     @OA\Response(response="404", description="Type de sondage non trouvé"),
+     * )
+     */
+
+    public function getTypeSondageById($id)
+    {
+        $typeSondageController = new TypeSondageController();
+
+        return $typeSondageController->getTypeSondage($id);
+    }
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/public/sondage/{id}",
+     *     tags={"Public API"},
+     *     summary="Récupérer les détails d'un sondage",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID du sondage",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Détails du sondage récupérés avec succès"),
+     *     @OA\Response(response="404", description="Sondage non trouvé"),
+     * )
+     */
+
+    public function getSondage($id)
+    {
+        $sondageController = new SondageController();
+
+        return $sondageController->getSondage($id);
+    }
+
+
+
+    //newsletter
+
+    /**
+     * @OA\Post(
+     *     path="/api/public/newsletter",
+     *     tags={"Public API"},
+     *     summary="S'inscrire à la newsletter",
+     *     @OA\RequestBody(
+     *         description="Données à envoyer",
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"email"},
+     *             @OA\Property(property="email", type="string", format="email", example="example@gmail.com"),
+     *        ),
+     *    ),
+     *    @OA\Response(response="200", description="Inscription à la newsletter effectuée avec succès"),
+     *   @OA\Response(response="400", description="Email invalide"),
+     * )
+     */
+
+    public function subscribeToNewsletter(Request $request)
+    {
+        $newsletterController = new \App\Http\Controllers\Api\NewsLetterController();
+
+        return $newsletterController->addEmail($request);
+
+    }
+
+
+    /**
+     * @OA\Delete(
+     *     path="/api/public/newsletter",
+     *     tags={"Public API"},
+     *     summary="Se désinscrire de la newsletter",
+     *     @OA\RequestBody(
+     *         description="Données à envoyer",
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"email"},
+     *             @OA\Property(property="email", type="string", format="email", example="example@example.com"),
+     *       ),
+     *   ),
+     *  @OA\Response(response="200", description="Désinscription de la newsletter effectuée avec succès"),
+     * @OA\Response(response="400", description="Email invalide"),
+     * )
+     */
+
+
+    public function unsubscribeToNewsletter(Request $request)
+    {
+        $newsletterController = new \App\Http\Controllers\Api\NewsLetterController();
+
+        return $newsletterController->deleteEmail($request);
+    }
+
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/public/sondages/type/{id}",
+     *    tags={"Public API"},
+     *    summary="Récupérer les sondages d'un type de sondage",
+     *   @OA\Parameter(
+     *        name="id",
+     *      in="path",
+     *     description="ID du type de sondage",
+     *   required=true,
+     *  @OA\Schema(type="integer")
+     * ),
+     * @OA\Response(response="200", description="Sondages récupérés avec succès"),
+     * @OA\Response(response="404", description="Type de sondage non trouvé"),
+     * )
+     */
+
+    public function getSondagesByTypeSondage($id)
+    {
+        $sondageController = new SondageController();
+
+        return $sondageController->getByTypesSondages($id);
+    }
+
+
+    //by nom
+
+    /**
+     * @OA\Get(
+     *     path="/api/public/sondages/type/nom/{nom}",
+     *    tags={"Public API"},
+     *    summary="Récupérer les sondages d'un type de sondage",
+     *   @OA\Parameter(
+     *        name="nom",
+     *      in="path",
+     *     description="Nom du type de sondage",
+     *   required=true,
+     *  @OA\Schema(type="string")
+     * ),
+     * @OA\Response(response="200", description="Sondages récupérés avec succès"),
+     * @OA\Response(response="404", description="Type de sondage non trouvé"),
+     * )
+     */
+
+    public function getSondagesByTypeSondageNom($nom)
+    {
+        $sondageController = new SondageController();
+
+        return $sondageController->getByTypesSondagesNom($nom);
+    }
+
+
+
+
 
 
 }

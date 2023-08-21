@@ -37,7 +37,7 @@ class Sondage extends Model
         'date_debut',
         'date_fin',
         'url_media',
-        'type',
+        'id_type_sondage',
         'status',
         'commune',
         'created_at',
@@ -48,6 +48,11 @@ class Sondage extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(TypeSondage::class, 'id_type_sondage');
     }
 
     public function scopeSearch($query, $val)

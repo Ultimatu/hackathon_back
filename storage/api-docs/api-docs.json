@@ -405,6 +405,92 @@
                 ]
             }
         },
+        "/api/admin/add-type-sondage": {
+            "put": {
+                "tags": [
+                    "Admin Actions"
+                ],
+                "summary": "Update a type sondage",
+                "operationId": "fc669db849b5108f53c624cc2dbd2de0",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TypeSondage"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Type sondage updated successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/update-type-sondage/{id}": {
+            "put": {
+                "tags": [
+                    "Admin Actions"
+                ],
+                "summary": "Update a type sondage",
+                "operationId": "a724c840b6924732b03bdcc5fcfced0d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TypeSondage"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Type sondage updated successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/delete-type-sondage/{id}": {
+            "delete": {
+                "tags": [
+                    "Admin Actions"
+                ],
+                "summary": "Delete a type sondage",
+                "operationId": "bc4467a8e68110fa858e3767c891744f",
+                "responses": {
+                    "201": {
+                        "description": "Type sondage deleted successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "api/admin/elections/add-participant": {
             "post": {
                 "tags": [
@@ -2167,6 +2253,208 @@
                 }
             }
         },
+        "/api/public/types-sondages": {
+            "get": {
+                "tags": [
+                    "Public API"
+                ],
+                "summary": "Récupérer la liste de tous les types de sondages",
+                "operationId": "45f17c2c1a70d7ff098bd7aa6042ea17",
+                "responses": {
+                    "200": {
+                        "description": "Liste des types de sondages récupérée avec succès"
+                    }
+                }
+            }
+        },
+        "/api/public/type-sondage/{id}": {
+            "get": {
+                "tags": [
+                    "Public API"
+                ],
+                "summary": "Récupérer les détails d'un type de sondage",
+                "operationId": "3140983476e07a390113a0c3170ec9d0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du type de sondage",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Détails du type de sondage récupérés avec succès"
+                    },
+                    "404": {
+                        "description": "Type de sondage non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/public/sondage/{id}": {
+            "get": {
+                "tags": [
+                    "Public API"
+                ],
+                "summary": "Récupérer les détails d'un sondage",
+                "operationId": "597edd54926a48e5b269de7838f4dd85",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du sondage",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Détails du sondage récupérés avec succès"
+                    },
+                    "404": {
+                        "description": "Sondage non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/public/newsletter": {
+            "post": {
+                "tags": [
+                    "Public API"
+                ],
+                "summary": "S'inscrire à la newsletter",
+                "operationId": "27ff836f57dee3f4f0713c835a83ac25",
+                "requestBody": {
+                    "description": "Données à envoyer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "example@gmail.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Inscription à la newsletter effectuée avec succès"
+                    },
+                    "400": {
+                        "description": "Email invalide"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Public API"
+                ],
+                "summary": "Se désinscrire de la newsletter",
+                "operationId": "8782693054732e056ae0f2d0032e15f0",
+                "requestBody": {
+                    "description": "Données à envoyer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "example@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Désinscription de la newsletter effectuée avec succès"
+                    },
+                    "400": {
+                        "description": "Email invalide"
+                    }
+                }
+            }
+        },
+        "/api/public/sondages/type/{id}": {
+            "get": {
+                "tags": [
+                    "Public API"
+                ],
+                "summary": "Récupérer les sondages d'un type de sondage",
+                "operationId": "31e17076b489da95b8ce7b715b07a2e5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du type de sondage",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sondages récupérés avec succès"
+                    },
+                    "404": {
+                        "description": "Type de sondage non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/public/sondages/type/nom/{nom}": {
+            "get": {
+                "tags": [
+                    "Public API"
+                ],
+                "summary": "Récupérer les sondages d'un type de sondage",
+                "operationId": "e4075a8321dfc934a0964c41e0576989",
+                "parameters": [
+                    {
+                        "name": "nom",
+                        "in": "path",
+                        "description": "Nom du type de sondage",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sondages récupérés avec succès"
+                    },
+                    "404": {
+                        "description": "Type de sondage non trouvé"
+                    }
+                }
+            }
+        },
         "/api/auth/login": {
             "post": {
                 "tags": [
@@ -2590,6 +2878,36 @@
                 },
                 "type": "object"
             },
+            "Newsletter": {
+                "title": "Newsletter",
+                "description": "Model for representing a newsletter.",
+                "properties": {
+                    "id": {
+                        "description": "Newsletter ID",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "email": {
+                        "description": "Email of the newsletter",
+                        "type": "string"
+                    },
+                    "is_active": {
+                        "description": "Status of the newsletter",
+                        "type": "boolean"
+                    },
+                    "created_at": {
+                        "description": "Creation date",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Last update date",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
             "PartiPolitique": {
                 "title": "PartiPolitique",
                 "description": "Modèle de parti politique",
@@ -2675,6 +2993,10 @@
                     },
                     "choix": {
                         "description": "Choix de l'utilisateur dans le sondage",
+                        "type": "string"
+                    },
+                    "avis": {
+                        "description": "Avis de l'utilisateur sur le sondage",
                         "type": "string"
                     },
                     "created_at": {
@@ -2791,6 +3113,36 @@
                     },
                     "commune": {
                         "description": "Commune associated with the survey",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Creation date",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Last update date",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "TypeSondage": {
+                "title": "TypeSondage",
+                "description": "Model for representing a survey type.",
+                "properties": {
+                    "id": {
+                        "description": "Survey type ID",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "nom": {
+                        "description": "Name of the survey type",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Description of the survey type",
                         "type": "string"
                     },
                     "created_at": {

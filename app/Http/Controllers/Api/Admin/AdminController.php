@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ElectionParticipantController;
 use App\Http\Controllers\Api\PartiPolitiqueController;
 use App\Http\Controllers\Api\ResultatsVotesController;
 use App\Http\Controllers\Api\SondageController;
+use App\Http\Controllers\Api\TypeSondageController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
@@ -315,9 +316,74 @@ class AdminController extends Controller
     }
 
 
-
-
     //election participant
+
+
+
+    //type sondage
+    /**
+     * @OA\Put(
+     *     path="/api/admin/add-type-sondage",
+     *     tags={"Admin Actions"},
+     *     summary="Update a type sondage",
+     *    security={{"bearerAuth":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/TypeSondage")
+     *     ),
+     *     @OA\Response(response="201", description="Type sondage updated successfully"),
+     *     @OA\Response(response="400", description="Bad request")
+     * )
+     */
+
+    public function addTypeSondage(Request $request)
+    {
+        $typeSondageController = new TypeSondageController();
+
+        return $typeSondageController->addTypeSondage($request);
+    }
+
+
+    /**
+     * @OA\Put(
+     *     path="/api/admin/update-type-sondage/{id}",
+     *     tags={"Admin Actions"},
+     *     summary="Update a type sondage",
+     *    security={{"bearerAuth":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/TypeSondage")
+     *     ),
+     *     @OA\Response(response="201", description="Type sondage updated successfully"),
+     *     @OA\Response(response="400", description="Bad request")
+     * )
+     */
+
+    public function updateTypeSondage(Request $request, $id)
+    {
+        $typeSondageController = new TypeSondageController();
+
+        return $typeSondageController->updateTypeSondage($request, $id);
+    }
+
+
+    /**
+     * @OA\Delete(
+     *     path="/api/admin/delete-type-sondage/{id}",
+     *     tags={"Admin Actions"},
+     *     summary="Delete a type sondage",
+     *    security={{"bearerAuth":{}}},
+     *     @OA\Response(response="201", description="Type sondage deleted successfully"),
+     *     @OA\Response(response="400", description="Bad request")
+     * )
+     */
+
+    public function deleteTypeSondage($id)
+    {
+        $typeSondageController = new TypeSondageController();
+
+        return $typeSondageController->deleteTypeSondage($id);
+    }
 
     /**
      * @OA\Post(

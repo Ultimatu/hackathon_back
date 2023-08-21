@@ -86,6 +86,26 @@ Route::group(['prefix' => 'public'], function () {
     //get by nom
     Route::get('candidats/search/{val}', [PublicController::class, 'searchCandidats']);
 
+
+    //newsletters
+    Route::post('newsletter', [PublicController::class, 'addNewsletter']);
+
+    //get type sondage
+    Route::get('types-sondages', [PublicController::class, 'getAllTypesSondages']);
+
+    //get sondage by id
+    Route::get('type-sondage/{id}', [PublicController::class, 'getTypeSondageById']);
+
+    //get sondage by id
+
+    Route::get('sondage/{id}', [PublicController::class, 'getSondageById']);
+
+    //get sondage by type sondage
+    Route::get('sondages/type/{id}', [PublicController::class, 'getSondagesByTypeSondage']);
+
+    //get sondage by type sondage nom
+    Route::get('sondages/type/nom/{nom}', [PublicController::class, 'getSondagesByTypeSondageNom']);
+
 });
 
 /*
@@ -142,6 +162,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('user/vote/add-election-vote', [UserController::class, 'addVote']);
 
         Route::get('user/{id_election}/{id_user}/get-my-vote', [UserController::class, 'getVoteByUserAndElection']);
+
+
+
 
 
 
@@ -257,6 +280,18 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::put('/parti-politique/{id}', [AdminController::class, 'updatePartiPolitique'])->name('updatePartiPolitique');
 
         Route::delete('/parti-politique/{id}', [AdminController::class, 'deletePartiPolitique'])->name('deletePartiPolitique');
+
+
+        //type sondage
+
+        Route::post('/add-type-sondage', [AdminController::class, 'addTypeSondage'])->name('addTypeSondage');
+
+        Route::put('/update-type-sondage/{id}', [AdminController::class, 'updateTypeSondage'])->name('updateTypeSondage');
+
+
+
+        Route::delete('/delete-type-sondage/{id}', [AdminController::class, 'deleteTypeSondage'])->name('deleteTypeSondage');
+
 
 
     });

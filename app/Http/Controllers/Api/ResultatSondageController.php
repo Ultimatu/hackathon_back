@@ -13,6 +13,7 @@ class ResultatSondageController extends Controller
     public function addMyVote(Request $request){
         $request->validate([
             'id_sondage'=>'required|integer|exists:sondages,id',
+            'avis'=>'string',
             'id_user'=>'required|integer|exists:users,id',
             'choix'=>'required|boolean',
         ]);
@@ -31,6 +32,7 @@ class ResultatSondageController extends Controller
 
         $resultatSondage = ResultatSondage::create([
             'id_sondage'=>$request->id_sondage,
+            'avis'=>$request->avis,
             'id_user'=>$request->id_user,
             'choix'=>$request->choix,
         ]);
@@ -100,6 +102,7 @@ class ResultatSondageController extends Controller
     public function updateMyVote(Request $request){
         $request->validate([
             'id_sondage'=>'required|integer|exists:sondages,id',
+            'avis'=>'string',
             'id_user'=>'required|integer|exists:users,id',
             'choix'=>'required|boolean',
         ]);

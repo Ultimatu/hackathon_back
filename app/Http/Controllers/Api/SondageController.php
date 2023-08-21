@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Sondage;
+use App\Models\TypeSondage;
 use Illuminate\Http\Request;
 
 use function PHPUnit\Framework\isEmpty;
@@ -21,7 +22,7 @@ class SondageController extends Controller
             'date_debut' => 'required|date',
             'date_fin' => 'required|date',
             'url_media' => ['image','mimes:jpeg,png,jpg,gif,svg', 'nullable'],
-            'type' => 'required|string',
+            'id_type_sondages' => ['interger|exists:type_sondages,id', 'nullable'],
             'status' => 'required|string',
             'commune' => 'required|string',
         ]);
@@ -32,7 +33,7 @@ class SondageController extends Controller
         $sondage->description = $request->input('description');
         $sondage->date_debut = $request->input('date_debut');
         $sondage->date_fin = $request->input('date_fin');
-        $sondage->type = $request->input('type');
+        $sondage->id_type_sondage = $request->input('id_type_sondage');
         $sondage->status = $request->input('status');
         $sondage->commune = $request->input('commune');
 
@@ -66,7 +67,7 @@ class SondageController extends Controller
             'date_debut' => 'required|date',
             'date_fin' => 'required|date',
             'url_media' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'nullable'],
-            'type' => 'required|string',
+            'id_type_sondage' => ['interger|exists:type_sondages,id', 'nullable'],
             'status' => 'required|string',
             'commune' => 'required|string',
         ]);
@@ -82,7 +83,7 @@ class SondageController extends Controller
         $sondage->description = $request->input('description');
         $sondage->date_debut = $request->input('date_debut');
         $sondage->date_fin = $request->input('date_fin');
-        $sondage->type = $request->input('type');
+        $sondage->id_type_sondage = $request->input('id_type_sondage');
         $sondage->status = $request->input('status');
         $sondage->commune = $request->input('commune');
 
@@ -173,6 +174,52 @@ class SondageController extends Controller
     }
 
 
+    //getByTypes sondages id
+    public function getByTypesSondages(int $id)
+    {
+        $sondages = Sondage::where('id_type_sondage', $id)->get();
+        //evier attribut count() sur null
+        if ($sondages->count() > 0){
+            return response()->json([
+                'data' => $sondages
+            ], 200);
+        }
+
+        else{
+            return response()->json([
+                'message' => 'Pas de sondages'
+            ], 404);
+        }
+
+    }
+
+
+    //getByTypes sondage nom
+
+    public function getByTypesSondagesNom(string $nom)
+    {
+       //recuperer par nom type sondage de la table  type_sondages
+        $typeSondage = TypeSondage::where('nom', $nom)->first();
+        if (!$typeSondage) {
+            return response()->json([
+                'message' => 'Type de sondage non trouvé'
+            ], 404);
+        }
+
+        $sondages = Sondage::where('id_type_sondage', $typeSondage->id)->get();
+        if ($sondages->count() > 0){
+            return response()->json([
+                'data' => $sondages
+            ], 200);
+        }
+
+        else{
+            return response()->json([
+                'message' => 'Pas de sondages'
+            ], 404);
+        }
+
+    }
 
 
 }
