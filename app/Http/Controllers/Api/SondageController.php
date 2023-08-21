@@ -72,6 +72,7 @@ class SondageController extends Controller
             'status' => 'required|string',
             'commune' => 'required|string',
         ]);
+        dd($request->all());
 
         $sondage = Sondage::find($id);
         if ($sondage.isEmpty()){
