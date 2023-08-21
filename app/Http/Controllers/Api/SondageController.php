@@ -68,7 +68,6 @@ class SondageController extends Controller
             'date_fin' => 'required|date',
             'url_media' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'nullable'],
             'id_type_sondage' => 'integer|exists:type_sondages,id|nullable',
-,
             'status' => 'required|string',
             'commune' => 'required|string',
         ]);
