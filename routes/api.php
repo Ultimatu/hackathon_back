@@ -88,7 +88,9 @@ Route::group(['prefix' => 'public'], function () {
 
 
     //newsletters
-    Route::post('newsletter', [PublicController::class, 'addNewsletter']);
+    Route::post('newsletter', [PublicController::class, 'subscribeToNewsletter']);
+
+    Route::delete('newsletter/{id}', [PublicController::class, 'unsubscribeToNewsletter']);
 
     //get type sondage
     Route::get('types-sondages', [PublicController::class, 'getAllTypesSondages']);
