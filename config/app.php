@@ -195,6 +195,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //customed service providers
+        Spatie\Backup\BackupServiceProvider::class,
+
     ],
 
     /*
