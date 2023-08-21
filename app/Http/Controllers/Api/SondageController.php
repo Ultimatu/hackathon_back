@@ -22,7 +22,7 @@ class SondageController extends Controller
             'date_debut' => 'required|date',
             'date_fin' => 'required|date',
             'url_media' => ['image','mimes:jpeg,png,jpg,gif,svg', 'nullable'],
-            'id_type_sondage' => 'integer|exists:type_sondages,id|nullable',,
+            'id_type_sondage' => 'integer|exists:type_sondages,id|nullable',
             'status' => 'required|string',
             'commune' => 'required|string',
         ]);
@@ -72,7 +72,6 @@ class SondageController extends Controller
             'status' => 'required|string',
             'commune' => 'required|string',
         ]);
-        dd($request->all());
 
         $sondage = Sondage::find($id);
         if ($sondage.isEmpty()){
