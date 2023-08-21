@@ -73,7 +73,7 @@ class SondageController extends Controller
         ]);
 
         $sondage = Sondage::find($id);
-        if ($sondage.isEmpty()){
+        if (!$sondage){
             return response()->json([
                 'message'=>'Sondage non trouvé',
             ], 400);
