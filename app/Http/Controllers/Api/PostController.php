@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\Candidat;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Storage;
@@ -11,9 +12,9 @@ class PostController extends Controller
 {
     public function addPost(Request $request)
     {
-        $id_cnadidat = auth()->user()->id;
+        $id_user = auth()->user()->id;
+        $id_cnadidat = Candidat::where('id_user', $id_user)->first()->id;
         $request['id_candidat'] = $id_cnadidat;
-        dd($request->all());
         $request->validate([
             'id_candidat' => 'required|integer|exists:candidats,id',
             'titre' => 'required|string',
