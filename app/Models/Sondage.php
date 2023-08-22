@@ -55,6 +55,11 @@ class Sondage extends Model
         return $this->belongsTo(TypeSondage::class, 'id_type_sondage');
     }
 
+    public function resultatsSondages()
+    {
+        return $this->hasMany(ResultatSondage::class, 'id_sondage', 'id');
+    }
+
     public function scopeSearch($query, $val)
     {
         return $query

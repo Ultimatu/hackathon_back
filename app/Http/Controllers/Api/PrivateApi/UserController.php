@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CommentaireRepliqueController;
 use App\Http\Controllers\Api\LikeController;
 use App\Http\Controllers\Api\MeetParticipantController;
 use App\Http\Controllers\Api\ResultatSondageController;
+use App\Http\Controllers\Api\SondageController;
 use App\Http\Controllers\Api\VotesController;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -650,6 +651,24 @@ class UserController extends Controller
         return $resultatSondageController->getMyVote($id_sondage, auth()->user()->id);
     }
 
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/private/user/get-sondages",
+     *     tags={"User Authenticated actions"},
+     *     summary="Recuperer les sondages auxquels l'utilisateur n'a pas encore vote",
+     *     @OA\Response(response="200", description="Sondages recuperes avec succes"),
+     *     @OA\Response(response="404", description="Sondages non trouves")
+     * )
+     */
+
+    public function getNotVotedSondages(){
+        $resultatSondageController = new SondageController();
+
+        return $resultatSondageController->getSondagesNotVotedByUser();
+
+    }
 
     public function getVotes(int $id){
         $resultatSondageController = new ResultatSondageController();

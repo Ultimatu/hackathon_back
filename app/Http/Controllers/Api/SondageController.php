@@ -110,7 +110,7 @@ class SondageController extends Controller
     {
 
         $sondages = Sondage::all();
-        
+
         if ($sondages->count() > 0){
 
             return response()->json([
@@ -219,6 +219,31 @@ class SondageController extends Controller
                 'message' => 'Pas de sondages'
             ], 404);
         }
+
+    }
+
+
+
+    public function getSondagesNotVotedByUser()
+    {
+        $userID = auth()->user()->id; // Supposons que l'utilisateur est connecté
+
+        $sondagesNonVotes = Sondage::whereDoesntHave('resultatsSondages', function ($query) use ($userID) {
+            $query->where('id_user', $userID);
+        })->get();
+
+        if ($sondagesNonVotes->count() > 0){
+            return response()->json([
+                'data' => $sondagesNonVotes
+            ], 200);
+        }
+
+        else{
+            return response()->json([
+                'message' => 'Pas de sondages'
+            ], 404);
+        }
+
 
     }
 

@@ -170,6 +170,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         Route::delete('user/{id}/delete-my-vote', [UserController::class, 'deleteMyVote']);
 
+        Route::get('user/get-sondages', [UserController::class, 'getNotVotedSondages']);
+
 
         // Election Votes
 
