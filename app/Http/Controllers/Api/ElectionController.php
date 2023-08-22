@@ -17,6 +17,7 @@ class ElectionController extends Controller
             'nom' => 'required|string',
             'duration' => 'required|string',
             'image_url'=> ['image','mimes:jpeg,png,jpg,gif,svg', 'nullable'],
+            'type' => 'required|string', // 'presidentielle' ou 'legislative
             'banner_url'=> ['image','mimes:jpeg,png,jpg,gif,svg', 'nullable'],
             'date_debut' => 'required|date',
             'date_fin' => 'required|date',
@@ -27,6 +28,7 @@ class ElectionController extends Controller
         $election->description = $request->input('description');
         $election->nom = $request->input('nom');
         $election->duration = $request->input('duration');
+        $election->type = $request->input('type');
         $election->date_debut = $request->input('date_debut');
         $election->date_fin = $request->input('date_fin');
 
@@ -68,6 +70,7 @@ class ElectionController extends Controller
         $request->validate([
             'description' => 'required|string',
             'nom' => 'required|string',
+            'type' => 'required|string', // 'presidentielle' ou 'legislative
             'duration' => 'required|string',
             'date_debut' => 'required|date',
             'date_fin' => 'required|date',
@@ -80,6 +83,7 @@ class ElectionController extends Controller
         }
 
         $election->description = $request->input('description');
+        $election->type = $request->input('type');
         $election->nom = $request->input('nom');
         $election->duration = $request->input('duration');
         $election->date_debut = $request->input('date_debut');

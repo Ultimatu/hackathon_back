@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  *     @OA\Property(property="banner_url", type="string", description="URL de la bannière de l'élection"),
  *     @OA\Property(property="date_debut", type="string", format="date", description="Date de début de l'élection"),
  *     @OA\Property(property="date_fin", type="string", format="date", description="Date de fin de l'élection"),
+ *    @OA\Property(property="type", type="string", description="Type de l'élection"),
  *     @OA\Property(property="created_at", type="string", format="date-time", description="Date et heure de création", readOnly="true", nullable=true),
  *     @OA\Property(property="updated_at", type="string", format="date-time", description="Date et heure de mise à jour", readOnly="true", nullable=true)
  * )
@@ -32,6 +33,7 @@ class Elections extends Model
         'description',
         'nom',
         'duration',
+        'type', // 'municipale' ou 'presidentielle
         'image_url',
         'banner_url',
         'date_debut',
