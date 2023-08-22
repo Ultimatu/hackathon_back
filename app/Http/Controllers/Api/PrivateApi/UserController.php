@@ -65,9 +65,10 @@ class UserController extends Controller
         //deplacer le fichier vers le dossier de stockage
 
         $file->move('storage/photos', $fileNameToStore);
+        $NameToFront = 'storage/photos/' . $fileNameToStore;
 
         //enregistrer le nom du fichier dans la base de donnees
-        $user->photo_url = $fileNameToStore;
+        $user->photo_url = $NameToFront;
         $user->save();
 
 
