@@ -123,6 +123,26 @@ class AuthController extends Controller
         $request = $request->validated();
 
         $request['password'] = bcrypt($request['password']);
+        //enregistrement de la photo si elle existe dans la requete, enregistrement du nom du fichier dans la base de données et enregistrement du fichier dans le dossier storage/app/public/photos
+        if ($request['photo_url']) {
+            $file = $request['photo_url'];
+            //recuperer le nom du fichier
+            $fileName = $file->getClientOriginalName();
+            //recuperer l'extension du fichier
+            $extension = $file->getClientOriginalExtension();
+
+            //generer un nom unique pour le fichier
+            $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
+
+            //deplacer le fichier vers le dossier de stockage
+
+            $file->move('storage/photos', $fileNameToStore);
+
+            //enregistrer le nom du fichier dans la base de donnees
+            $nameToFront = 'storage/photos/' . $fileNameToStore;
+
+            $request['photo_url'] = $nameToFront;
+        }
 
         $user = User::create($request);
 

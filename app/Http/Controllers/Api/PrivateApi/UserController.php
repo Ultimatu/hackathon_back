@@ -45,7 +45,7 @@ class UserController extends Controller
 
 
        //recuperer le fichier
-        $file = $request->file('photo');
+        $file = $request->file('photo_url');
         if (!$file) {
             return response()->json([
                 'message' => 'Photo non trouvee'
