@@ -37,6 +37,7 @@ class Elections extends Model
         'image_url',
         'banner_url',
         'date_debut',
+        'status', // 'en_cours' ou 'terminee ou 'pas_encore_commencee'
         'date_fin',
         'created_at',
         'updated_at',

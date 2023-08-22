@@ -18,6 +18,7 @@ class ElectionController extends Controller
             'duration' => 'required|string',
             'image_url'=> ['image','mimes:jpeg,png,jpg,gif,svg', 'nullable'],
             'type' => 'required|string', // 'presidentielle' ou 'legislative
+            'status' => 'required|string', // 'en cours' ou 'terminée
             'banner_url'=> ['image','mimes:jpeg,png,jpg,gif,svg', 'nullable'],
             'date_debut' => 'required|date',
             'date_fin' => 'required|date',
@@ -28,6 +29,7 @@ class ElectionController extends Controller
         $election->description = $request->input('description');
         $election->nom = $request->input('nom');
         $election->duration = $request->input('duration');
+        $election->status =
         $election->type = $request->input('type');
         $election->date_debut = $request->input('date_debut');
         $election->date_fin = $request->input('date_fin');
@@ -71,6 +73,7 @@ class ElectionController extends Controller
             'description' => 'required|string',
             'nom' => 'required|string',
             'type' => 'required|string', // 'presidentielle' ou 'legislative
+            'status' => 'required|string', // 'en cours' ou 'terminée
             'duration' => 'required|string',
             'date_debut' => 'required|date',
             'date_fin' => 'required|date',
