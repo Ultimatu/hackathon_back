@@ -610,7 +610,7 @@ class UserController extends Controller
      *     summary="Ajouter un vote",
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/Vote")
+     *         @OA\JsonContent(ref="#/components/schemas/ResultatSondage")
      *     ),
      *     @OA\Response(response="201", description="Vote ajoute avec succes"),
      *     @OA\Response(response="400", description="Bad request")
@@ -696,7 +696,7 @@ class UserController extends Controller
      *
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/Vote")
+     *         @OA\JsonContent(ref="#/components/schemas/ResultatSondage")
      *     ),
      *     @OA\Response(response="200", description="Vote modifie avec succes"),
      *     @OA\Response(response="404", description="Vote non trouve")
