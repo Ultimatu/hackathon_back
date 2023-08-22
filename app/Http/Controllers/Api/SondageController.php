@@ -110,10 +110,11 @@ class SondageController extends Controller
     {
 
         $sondages = Sondage::all();
+        
         if ($sondages->count() > 0){
-            $paginatedSondages = Sondage::paginate(10);
+
             return response()->json([
-                'data' => $paginatedSondages
+                'data' => $sondages
             ], 200);
         }
 

@@ -63,9 +63,8 @@ class ActivityController extends Controller
 
         $activities = Activities::all();
         if ($activities->count() > 0) {
-            $paginatedActivities = Activities::paginate(10);
             return response()->json([
-                'data' => $paginatedActivities
+                'data' => $activities
             ], 200);
         } else {
             return response()->json([

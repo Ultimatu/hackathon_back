@@ -53,9 +53,8 @@ class CommentaireRepliqueController extends Controller
 
         $commentaireRepliques = CommentaireReplique::all();
         if ($commentaireRepliques->count() > 0){
-            $paginatedCommentaireRepliques = CommentaireReplique::paginate(10);
             return response()->json([
-                'data' => $paginatedCommentaireRepliques
+                'data' => $commentaireRepliques
             ], 200);
         }
 

@@ -53,9 +53,8 @@ class PostController extends Controller
 
         $posts = Post::all();
         if ($posts->count() > 0 ){
-            $paginatedPosts = Post::paginate(10);
             return response()->json([
-                'data' => $paginatedPosts
+                'data' => $posts
             ], 200);
         }
 
@@ -194,9 +193,9 @@ class PostController extends Controller
     {
         $posts = Post::where('id_candidat', $id)->get();
         if ($posts->count() > 0) {
-            $paginatedPosts = Post::where('id_candidat', $id)->paginate(10);
+
             return response()->json([
-                'posts' => $paginatedPosts
+                'posts' => $posts
             ], 200);
         } else {
             return response()->json([
@@ -250,7 +249,7 @@ class PostController extends Controller
     }
 
 
-    
+
 
 
 

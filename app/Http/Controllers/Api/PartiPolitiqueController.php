@@ -15,9 +15,8 @@ class PartiPolitiqueController extends Controller
     {
         $partisPolitiques = PartiPolitique::all();
         if ($partisPolitiques->count() > 0){
-            $paginatedPartisPolitiques = PartiPolitique::paginate(10);
             return response()->json([
-                'data' => $paginatedPartisPolitiques
+                'data' => $partisPolitiques
             ], 200);
         }
 

@@ -86,7 +86,7 @@ class TypeSondageController extends Controller
             ], 404);
         }
 
-        $paginatedTypeSondages = TypeSondage::paginate(10);
+        $paginatedTypeSondages = TypeSondage::all();
         return response()->json([
             'data' => $paginatedTypeSondages
         ], 200);

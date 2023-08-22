@@ -157,9 +157,8 @@ class ElectionController extends Controller
     public function getAllElections(){
         $elections = Elections::all();
         if ($elections->count() > 0) {
-            $electionspaginates = Elections::paginate(10);
             return response()->json([
-                'data' => $electionspaginates
+                'data' => $elections
             ], 200);
         } else {
             return response()->json([
@@ -180,7 +179,7 @@ class ElectionController extends Controller
                 'message' => 'Pas de elections avec cet  id'
             ], 404);
         }
-        
+
     }
 
 }

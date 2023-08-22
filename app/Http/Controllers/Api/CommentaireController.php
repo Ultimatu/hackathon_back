@@ -34,9 +34,8 @@ class CommentaireController extends Controller
 
         $commentaires = Commentaire::all();
         if ($commentaires->count() > 0){
-            $paginatedCommentaires = Commentaire::paginate(10);
             return response()->json([
-                'data' => $paginatedCommentaires
+                'data' => $commentaires
             ], 200);
         }
 

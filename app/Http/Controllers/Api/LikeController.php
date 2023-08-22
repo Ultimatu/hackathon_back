@@ -32,9 +32,8 @@ class LikeController extends Controller
 
         $likes = Likes::all();
         if ($likes->count() > 0){
-            $paginatedLikes = Likes::paginate(10);
             return response()->json([
-                'data' => $paginatedLikes
+                'data' => $likes
             ], 200);
         }
 
@@ -67,9 +66,8 @@ class LikeController extends Controller
     {
         $likes = Likes::where('id_user', $id)->get();
         if ($likes->count() > 0){
-            $paginatedLikes = Likes::where('id_user', $id)->paginate(10);
             return response()->json([
-                'likes' => $paginatedLikes
+                'likes' => $likes
             ], 200);
         }
 
