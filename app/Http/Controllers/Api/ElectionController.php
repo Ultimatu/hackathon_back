@@ -31,6 +31,7 @@ class ElectionController extends Controller
         $election->date_fin = $request->input('date_fin');
 
 
+
         if ($request->hasFile('image_url')) {
             $file = $request->file('image_url');
             $fileName = $file->getClientOriginalName();
@@ -56,6 +57,8 @@ class ElectionController extends Controller
         else{
             $election->banner_url = 'elections/default.jpg';
         }
+
+        $election->save();
 
         return response()->json(['message' => 'Election ajoutée avec succès'], 200);
     }
