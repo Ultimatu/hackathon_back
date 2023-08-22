@@ -11,6 +11,8 @@ class PostController extends Controller
 {
     public function addPost(Request $request)
     {
+        $id_cnadidat = auth()->user()->id;
+        $request['id_candidat'] = $id_cnadidat;
         $request->validate([
             'id_candidat' => 'required|integer|exists:candidats,id',
             'titre' => 'required|string',
