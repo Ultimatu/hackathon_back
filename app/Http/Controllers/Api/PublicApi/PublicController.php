@@ -296,6 +296,103 @@ class PublicController extends Controller
     }
 
 
+    //getALl post
+
+    /**
+     * @OA\Get(
+     *     path="/api/public/posts",
+     *     tags={"Public API"},
+     *     summary="Get all posts",
+     *     @OA\Response(response="200", description="Posts retrieved successfully"),
+     *     @OA\Response(response="404", description="Posts not found")
+     * )
+     */
+
+    public function getAllPosts()
+    {
+        $postController = new \App\Http\Controllers\Api\PostController();
+
+        return $postController->getAllPosts();
+    }
+
+    //getByid candidat
+
+    /**
+     * @OA\Get(
+     *     path="/api/public/candidat/{id}/posts",
+     *     tags={"Public API"},
+     *     summary="Get all posts of a candidat",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Candidat id",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(response="200", description="Posts retrieved successfully"),
+     *     @OA\Response(response="404", description="Candidat not found")
+     * )
+     */
+
+    public function getCandidatPosts(int $id)
+    {
+        $postController = new \App\Http\Controllers\Api\PostController();
+
+        return $postController->getAllPostByCandidat($id);
+    }
+
+    //getByid post
+
+    /**
+     * @OA\Get(
+     *     path="/api/public/posts/{id}",
+     *     tags={"Public API"},
+     *     summary="Get post by id",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Post id",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(response="200", description="Post retrieved successfully"),
+     *     @OA\Response(response="404", description="Post not found")
+     * )
+     */
+
+    public function getPostById(int $id)
+    {
+        $postController = new \App\Http\Controllers\Api\PostController();
+
+        return $postController->getPost($id);
+    }
+
+    //search post
+
+    /**
+     * @OA\Get(
+     *     path="/api/public/posts/search/{val}",
+     *     tags={"Public API"},
+     *     summary="Get all posts by value",
+     *     @OA\Parameter(
+     *         name="search",
+     *         in="path",
+     *         description="valeur de recherche de  post",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(response="200", description="Posts retrieved successfully"),
+     *     @OA\Response(response="404", description="Posts not found")
+     * )
+     */
+
+    public function searchPosts(Request $val)
+    {
+        $postController = new \App\Http\Controllers\Api\PostController();
+
+        return $postController->searchPost($val);
+    }
+
 
     /**
      * @OA\Get(
