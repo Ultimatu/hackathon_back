@@ -13,7 +13,7 @@ class PostController extends Controller
     public function addPost(Request $request)
     {
         $id_user = auth()->user()->id;
-        $id_candidat = Candidat::where('id_user', $id_user)->first()->id;
+        $id_candidat = Candidat::where('user_id', $id_user)->first()->id;
 
         $request['id_candidat'] = $id_candidat;
         $request->validate([
