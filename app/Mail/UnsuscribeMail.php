@@ -9,8 +9,17 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class SendToUserMail extends Mailable
+class UnsuscribeMail extends Mailable
 {
+    use Queueable, SerializesModels;
+
+    /**
+     * Create a new message instance.
+     */
+    public function __construct()
+    {
+        //
+    }
 
     /**
      * Get the message envelope.
@@ -18,7 +27,7 @@ class SendToUserMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Nouvelle newsletter passionnante !',
+            subject: 'Unsuscribe Mail',
         );
     }
 
@@ -28,9 +37,17 @@ class SendToUserMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.newsletter',
+            view: 'view.name',
         );
     }
 
+    /**
+     * Get the attachments for the message.
+     *
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     */
+    public function attachments(): array
+    {
+        return [];
+    }
 }
-

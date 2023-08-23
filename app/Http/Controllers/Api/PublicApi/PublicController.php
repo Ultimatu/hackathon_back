@@ -462,7 +462,7 @@ class PublicController extends Controller
     public function getAllSondages(){
         $sondages = new SondageController();
 
-        return $sondages->getAllSondages();
+        return $sondages->getAllSondagesForUser();
     }
 
 

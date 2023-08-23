@@ -180,7 +180,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('user/{id_election}/{id_user}/get-my-vote', [UserController::class, 'getVoteByUserAndElection']);
 
 
+        //follow
 
+        Route::post('user/follow-candidat', [UserController::class, 'follow']);
+
+        Route::delete('user/unfollow-candidat', [UserController::class, 'unfollow']);
+
+        Route::get('user/{id}/get-followers', [UserController::class, 'getFollowers']);
+
+        Route::get('user/get-following', [UserController::class, 'getFollowing']);
 
 
 
@@ -214,7 +222,17 @@ Route::middleware(['auth:sanctum', 'candidat'])->group(function () {
         Route::put('candidat/update-activity/{id}', [CandidatController::class, 'updateActivity']);
         Route::delete('candidat/{id}/delete-activity', [CandidatController::class, 'deleteActivity']);
 
+        //followers
+
+        Route::get('/get-my-followers', [CandidatController::class, 'getMyFollowers'])->name('allFollowers');
+
+        //count followers
+
+        Route::get('/count-my-followers', [CandidatController::class, 'countMyFollowers'])->name('countFollowers');
+
     });
+
+
 });
 
 
@@ -253,6 +271,8 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         //delete
         Route::delete('/delete-sondage/{id}', [AdminController::class, 'deleteSondage'])->name('deleteSondage');
 
+        //all
+        Route::get('/sondages', [AdminController::class, 'getAllSondages'])->name('allSondages');
 
         //election participants
 
@@ -307,6 +327,9 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 
 
         Route::delete('/delete-type-sondage/{id}', [AdminController::class, 'deleteTypeSondage'])->name('deleteTypeSondage');
+
+
+
 
 
 

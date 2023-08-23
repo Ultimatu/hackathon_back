@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\PrivateApi;
 
 use App\Http\Controllers\Api\CommentaireController;
 use App\Http\Controllers\Api\CommentaireRepliqueController;
+use App\Http\Controllers\Api\FollowerController;
 use App\Http\Controllers\Api\LikeController;
 use App\Http\Controllers\Api\MeetParticipantController;
 use App\Http\Controllers\Api\ResultatSondageController;
@@ -846,6 +847,135 @@ class UserController extends Controller
 
         return $voteController->deleteVote($request);
     }
+
+
+
+    //follower section
+
+    /**
+     * @OA\Post(
+     *     path="/api/private/user/follow-candidat",
+     *     tags={"User Authenticated actions"},
+     *     summary="Ajouter un follower",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/Follower")
+     *     ),
+     *     @OA\Response(response="201", description="Follower ajoute avec succes"),
+     *     @OA\Response(response="400", description="Bad request")
+     * )
+     */
+
+    public function follow(Request $request){
+        $followerController = new FollowerController();
+
+        return $followerController->follow($request);
+
+    }
+
+
+    //get-following
+
+    /**
+     * @OA\Get(
+     *     path="/api/private/user/get-following",
+     *     tags={"User Authenticated actions"},
+     *     summary="Recuperer les candidats suivis par un utilisateur",
+     *     @OA\Response(response="200", description="Followers recuperes avec succes"),
+     *     @OA\Response(response="404", description="Followers non trouves")
+     * )
+     */
+
+    public function getFollowing(){
+        $followerController = new FollowerController();
+
+        return $followerController->getFollowings(auth()->user()->id);
+
+    }
+
+
+    //is-following
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/private/user/{id}/is-following",
+     *     tags={"User Authenticated actions"},
+     *     summary="Voir si un utilisateur suit un candidat précis",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Id du candidat",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *    ),
+     *    @OA\Response(response="200", description="Followers recuperes avec succes"),
+     *    @OA\Response(response="404", description="Followers non trouves")
+     * )
+     */
+
+    public function isFollowing(int $id){
+        $followerController = new FollowerController();
+
+        return $followerController->isFollowing($id);
+
+    }
+
+    //unfollow
+
+    /**
+     * @OA\Delete(
+     *     path="/api/private/user/unfollow",
+     *    tags={"User Authenticated actions"},
+     *    summary="Supprimer un follower",
+     *   @OA\RequestBody(
+     *        required=true,
+     *      @OA\JsonContent(ref="#/components/schemas/Follower"),
+     *  ),
+     * @OA\Response(response="200", description="Follower supprime avec succes"),
+     * @OA\Response(response="404", description="Follower non trouve")
+     * )
+     *
+     */
+
+     public function unfollow(Request $request){
+         $followerController = new FollowerController();
+
+         return $followerController->unfollow($request);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/private/user/{id}/get-followers",
+     *     tags={"User Authenticated actions"},
+     *     summary="Recuperer les followers d'un candidat",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Id du candidat",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *    ),
+     *    @OA\Response(response="200", description="Followers recuperes avec succes"),
+     *    @OA\Response(response="404", description="Followers non trouves")
+     * )
+     */
+
+    public function getFollowers(int $id){
+        $followerController = new FollowerController();
+
+        return $followerController->showFollowers($id);
+
+    }
+
+
+
 
 
 }

@@ -66,4 +66,9 @@ class Candidat extends Model
             ->where('pt_id', $val);
     }
 
+    public function followers()
+    {
+        return $this->hasMany(Follower::class, 'id_candidat');
+    }
+
 }

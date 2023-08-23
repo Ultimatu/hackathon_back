@@ -717,9 +717,9 @@ class AdminController extends Controller
     }
 
 
+    public function getAllSondages(){
+        $sondageController = new SondageController();
 
-
-
-
-
+        return $sondageController->getAllSondages();
+    }
 }

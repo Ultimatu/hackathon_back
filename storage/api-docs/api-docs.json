@@ -1131,6 +1131,40 @@
                 }
             }
         },
+        "/api/private/candidat/get-my-followers": {
+            "get": {
+                "tags": [
+                    "Candidat Authenticated actions"
+                ],
+                "summary": "Récupérer mes followers",
+                "operationId": "0bf4c381d55d87141808a9dd1782777e",
+                "responses": {
+                    "200": {
+                        "description": "Liste des followers récupérée avec succès"
+                    },
+                    "401": {
+                        "description": "Non autorisé"
+                    }
+                }
+            }
+        },
+        "/api/private/candidat/count-my-followers": {
+            "get": {
+                "tags": [
+                    "Candidat Authenticated actions"
+                ],
+                "summary": "Récupérer le nombre de mes followers",
+                "operationId": "80d1cc5cd23d2cbbade79ccfc8f11b1a",
+                "responses": {
+                    "200": {
+                        "description": "Nombre de followers récupéré avec succès"
+                    },
+                    "401": {
+                        "description": "Non autorisé"
+                    }
+                }
+            }
+        },
         "/api/private/user/add-photo": {
             "post": {
                 "tags": [
@@ -1627,7 +1661,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Vote"
+                                "$ref": "#/components/schemas/ResultatSondage"
                             }
                         }
                     }
@@ -1671,6 +1705,23 @@
                 }
             }
         },
+        "/api/private/user/get-sondages": {
+            "get": {
+                "tags": [
+                    "User Authenticated actions"
+                ],
+                "summary": "Recuperer les sondages auxquels l'utilisateur n'a pas encore vote",
+                "operationId": "983068522e170913f7989aaf714b27a1",
+                "responses": {
+                    "200": {
+                        "description": "Sondages recuperes avec succes"
+                    },
+                    "404": {
+                        "description": "Sondages non trouves"
+                    }
+                }
+            }
+        },
         "/api/private/user/{id_sondage}/update-my-vote": {
             "put": {
                 "tags": [
@@ -1695,7 +1746,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Vote"
+                                "$ref": "#/components/schemas/ResultatSondage"
                             }
                         }
                     }
@@ -1801,6 +1852,135 @@
                     },
                     "404": {
                         "description": "Vote non trouve"
+                    }
+                }
+            }
+        },
+        "/api/private/user/follow-candidat": {
+            "post": {
+                "tags": [
+                    "User Authenticated actions"
+                ],
+                "summary": "Ajouter un follower",
+                "operationId": "fe283a99b54c9382f5c6edca49094cee",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Follower"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Follower ajoute avec succes"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/api/private/user/get-following": {
+            "get": {
+                "tags": [
+                    "User Authenticated actions"
+                ],
+                "summary": "Recuperer les candidats suivis par un utilisateur",
+                "operationId": "8418f8ef521550fb896e440360398273",
+                "responses": {
+                    "200": {
+                        "description": "Followers recuperes avec succes"
+                    },
+                    "404": {
+                        "description": "Followers non trouves"
+                    }
+                }
+            }
+        },
+        "/api/private/user/{id}/is-following": {
+            "get": {
+                "tags": [
+                    "User Authenticated actions"
+                ],
+                "summary": "Voir si un utilisateur suit un candidat précis",
+                "operationId": "abb95851586703885835b0530b79feb5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id du candidat",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Followers recuperes avec succes"
+                    },
+                    "404": {
+                        "description": "Followers non trouves"
+                    }
+                }
+            }
+        },
+        "/api/private/user/unfollow": {
+            "delete": {
+                "tags": [
+                    "User Authenticated actions"
+                ],
+                "summary": "Supprimer un follower",
+                "operationId": "ffcd649698213a6ccc43697f19ae5410",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Follower"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Follower supprime avec succes"
+                    },
+                    "404": {
+                        "description": "Follower non trouve"
+                    }
+                }
+            }
+        },
+        "/api/private/user/{id}/get-followers": {
+            "get": {
+                "tags": [
+                    "User Authenticated actions"
+                ],
+                "summary": "Recuperer les followers d'un candidat",
+                "operationId": "8e15a3ec6d031d5c673981c229adb4ae",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id du candidat",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Followers recuperes avec succes"
+                    },
+                    "404": {
+                        "description": "Followers non trouves"
                     }
                 }
             }
@@ -2104,6 +2284,107 @@
                     },
                     "404": {
                         "description": "Election not found"
+                    }
+                }
+            }
+        },
+        "/api/public/posts": {
+            "get": {
+                "tags": [
+                    "Public API"
+                ],
+                "summary": "Get all posts",
+                "operationId": "f4f217b2fa455d892d9e0c970ae4fe38",
+                "responses": {
+                    "200": {
+                        "description": "Posts retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Posts not found"
+                    }
+                }
+            }
+        },
+        "/api/public/candidat/{id}/posts": {
+            "get": {
+                "tags": [
+                    "Public API"
+                ],
+                "summary": "Get all posts of a candidat",
+                "operationId": "1339c61bcf6b570fcbe0a2c90421fa57",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Candidat id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Posts retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Candidat not found"
+                    }
+                }
+            }
+        },
+        "/api/public/posts/{id}": {
+            "get": {
+                "tags": [
+                    "Public API"
+                ],
+                "summary": "Get post by id",
+                "operationId": "1123df340f779c9d5678bd5f20955503",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Post id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Post retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Post not found"
+                    }
+                }
+            }
+        },
+        "/api/public/posts/search/{val}": {
+            "get": {
+                "tags": [
+                    "Public API"
+                ],
+                "summary": "Get all posts by value",
+                "operationId": "e7f6ece32a7f6500ab0d0a0b0784e0bf",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "path",
+                        "description": "valeur de recherche de  post",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Posts retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Posts not found"
                     }
                 }
             }
@@ -2766,6 +3047,10 @@
                         "type": "string",
                         "format": "date"
                     },
+                    "type": {
+                        "description": "Type de l'élection",
+                        "type": "string"
+                    },
                     "created_at": {
                         "description": "Date et heure de création",
                         "type": "string",
@@ -2779,6 +3064,38 @@
                         "format": "date-time",
                         "readOnly": "true",
                         "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "Follower": {
+                "title": "Follower",
+                "description": "Model pour un follower",
+                "properties": {
+                    "id": {
+                        "description": "Follower ID",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "id_candidat": {
+                        "description": "Candidat ID",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "id_user": {
+                        "description": "User ID",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "created_at": {
+                        "description": "Creation date",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Last update date",
+                        "type": "string",
+                        "format": "date-time"
                     }
                 },
                 "type": "object"

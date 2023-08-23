@@ -131,6 +131,11 @@ class User extends Authenticatable
             ->where('role_id', $val);
     }
 
+    public function followers()
+    {
+        return $this->hasMany(Follower::class, 'id_user'); 
+    }
+
 
 
 }

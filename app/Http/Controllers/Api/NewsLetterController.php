@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Mail\SendToUserMail;
 use App\Models\Newsletter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class NewsLetterController extends Controller
 {
@@ -25,7 +27,8 @@ class NewsLetterController extends Controller
         $subject = "Bienvenue à la newsletter";
         $txt = "Bienvenue à la newsletter";
         try {
-            mail($to,$subject,$txt);
+            Mail::to('destinataire@example.com')->send(new SendToUserMail());
+
             $fake = null;
         } catch (\Throwable $th) {
            $fake = $th;
@@ -46,6 +49,7 @@ class NewsLetterController extends Controller
 
         $newsletter = Newsletter::where('email',$request->email)->first();
         $newsletter->delete();
+        
 
         return response()->json([
             'message'=>'Votre email a été supprimé de la newsletter',

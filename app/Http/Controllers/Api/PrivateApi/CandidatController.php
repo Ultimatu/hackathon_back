@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\PrivateApi;
 
 use App\Http\Controllers\Api\ActivityController;
+use App\Http\Controllers\Api\FollowerController;
 use App\Http\Controllers\Api\MeetController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Controller;
@@ -12,7 +13,7 @@ use Illuminate\Http\Request;
 
 class CandidatController extends Controller
 {
-    
+
 
     //POSTS
 
@@ -323,8 +324,10 @@ class CandidatController extends Controller
 
     public function getAllCandidats()
     {
-        $candidats = Candidat::with('user', 'partiPolitique')->get();
+       //selectionner tout les candidats avec leurs users et partis politiques et leurs followers
+        $candidats = Candidat::with('user', 'partiPolitique', 'followers')->get();
         if ($candidats->count() > 0) {
+
             return response()->json([
                 'data' => $candidats,
                 'message' => 'Liste des candidats récupérée avec succès'
@@ -362,6 +365,47 @@ class CandidatController extends Controller
         } else {
             return response()->json(['message' => 'Pas de candidats'], 404);
         }
+    }
+
+
+    //followers
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/private/candidat/get-my-followers",
+     *     tags={"Candidat Authenticated actions"},
+     *     summary="Récupérer mes followers",
+     *     @OA\Response(response="200", description="Liste des followers récupérée avec succès"),
+     *     @OA\Response(response="401", description="Non autorisé")
+     * )
+     */
+
+    public function getMyFollowers()
+    {
+        $candidat = auth()->user()->candidat;
+        $followercontroller = new FollowerController();
+        return $followercontroller->showFollowers($candidat->id);
+
+
+    }
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/private/candidat/count-my-followers",
+     *     tags={"Candidat Authenticated actions"},
+     *     summary="Récupérer le nombre de mes followers",
+     *     @OA\Response(response="200", description="Nombre de followers récupéré avec succès"),
+     *     @OA\Response(response="401", description="Non autorisé")
+     * )
+     */
+
+    public function countMyFollowers()
+    {
+        $candidat = auth()->user()->candidat;
+        $followercontroller = new FollowerController();
+        return $followercontroller->countFollowers($candidat->id);
     }
 
 

@@ -106,6 +106,48 @@ class SondageController extends Controller
 
 
 
+    public function getAllSondagesForUser()
+    {
+
+        $sondages = Sondage::all();
+
+        
+
+        if (auth()->user()) {
+            $userID = auth()->user()->id; // Supposons que l'utilisateur est connecté
+
+            $sondagesNonVotes = Sondage::whereDoesntHave('resultatsSondages', function ($query) use ($userID) {
+                $query->where('id_user', $userID);
+            })->get();
+
+            if ($sondagesNonVotes->count() > 0){
+                return response()->json([
+                    'data' => $sondagesNonVotes
+                ], 200);
+            }
+
+            else{
+                return response()->json([
+                    'message' => 'Pas de sondages'
+                ], 404);
+            }
+        }
+
+        if ($sondages->count() > 0){
+
+            return response()->json([
+                'data' => $sondages
+            ], 200);
+        }
+
+        else{
+            return response()->json([
+                'message' => 'Pas de sondages'
+            ], 404);
+        }
+
+    }
+
     public function getAllSondages()
     {
 
@@ -129,6 +171,7 @@ class SondageController extends Controller
 
     public function getAllSondageByCommune(string $commune)
     {
+        //recuperer
         $sondages = Sondage::where('commune', $commune)->get();
         if ($sondages->count() > 0){
             return response()->json([
