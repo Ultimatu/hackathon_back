@@ -109,12 +109,12 @@ Route::group(['prefix' => 'public'], function () {
     Route::get('sondages/type/nom/{nom}', [PublicController::class, 'getSondagesByTypeSondageNom']);
 
 
-
+    //posts
     Route::get('posts', [PublicController::class, 'getAllPosts'])->name('all-posts');
 
     Route::get('posts/{id}', [PublicController::class, 'getPostById'])->name('post-by-id');
 
-    Route::get('posts/candidat/{id}/posts', [PublicController::class, 'getCandidatPosts'])->name('posts-by-candidat');
+    Route::get('candidat/{id}/posts', [PublicController::class, 'getCandidatPosts'])->name('posts-by-candidat');
 
     //search posts
     Route::get('posts/search/{val}', [PublicController::class, 'searchPosts'])->name('search-posts');
