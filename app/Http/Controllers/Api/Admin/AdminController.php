@@ -576,9 +576,17 @@ class AdminController extends Controller
      */
 
 
-    public function add(AddCandidatRequest $addCandidatRequest){
-
-        $addCandidatRequest = $addCandidatRequest->validated();
+    public function add(Request $addCandidatRequest){
+        $addCandidatRequest->validate([
+            'pt_id', 'required|integer|exists:parti_politiques,id',
+            'nom', 'required|string',
+            'prenom', 'required|string',
+            'bio', 'string',
+            'photo_url', 'image',
+            'commune', 'required|string',
+            'phone', 'required|string|unique:users,phone',
+            'email', 'required|email|unique:users,email',
+        ]);
         $authController = new AuthController();
 
         $userRequest = new UserRequest();
