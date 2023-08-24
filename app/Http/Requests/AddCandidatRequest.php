@@ -53,32 +53,7 @@ class AddCandidatRequest extends FormRequest
         ];
     }
 
-    /**
-     * Get the error messages for the defined validation rules.
-     */
-    public function messages(): array
-    {
-        return [
-            'pt_id.required' => 'Le parti politique est obligatoire',
-            'pt_id.integer' => 'Le parti politique doit être un entier',
-            'pt_id.exists' => 'Le parti politique n\'existe pas',
-            'nom.required' => 'Le nom est obligatoire',
-            'nom.string' => 'Le nom doit être une chaîne de caractères',
-            'prenom.required' => 'Le prénom est obligatoire',
-            'prenom.string' => 'Le prénom doit être une chaîne de caractères',
-            'bio.string' => 'La bio doit être une chaîne de caractères',
-            'photo_url.image' => 'La photo doit être une image',
-            'photo_url.mimes' => 'La photo doit être une image de type jpeg, png, jpg, gif ou svg',
-            'commune.required' => 'La commune est obligatoire',
-            'commune.string' => 'La commune doit être une chaîne de caractères',
-            'phone.required' => 'Le numéro de téléphone est obligatoire',
-            'phone.string' => 'Le numéro de téléphone doit être une chaîne de caractères',
-            'email.required' => 'L\'email est obligatoire',
-            'email.string' => 'L\'email doit être une chaîne de caractères',
-            'email.email' => 'L\'email doit être une adresse email valide',
-            'email.unique' => 'L\'email doit être unique',
-        ];
-    }
+   
 
 
 
