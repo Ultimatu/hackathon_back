@@ -591,9 +591,10 @@ class AdminController extends Controller
             'password' => bcrypt($password)
         ];
 
-        dd($addCandidatRequest->all());
 
         $user = User::where('email', $userData["email"])->orWhere('phone', $userData["phone"])->first();
+
+        
         if ($user) {
             return response()->json([
                 'message' => "Cet email ou ce numéro de téléphone existe déjà",
