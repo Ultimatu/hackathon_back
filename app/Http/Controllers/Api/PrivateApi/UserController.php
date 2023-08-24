@@ -555,7 +555,7 @@ class UserController extends Controller
     public function deleteByUserAndPostId(int $id, int $id_user){
         $likeController = new LikeController();
 
-        return $likeController->deleteLikeByUserAndPost($id, $id_user);
+        return $likeController->deleteLikeByUserAndPost($id_user, $id);
     }
 
 
