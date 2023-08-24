@@ -644,6 +644,9 @@ class AdminController extends Controller
         $candidat = $this->addCandidat($newuser->id, $addCandidatRequest->pt_id);
 
 
+        Matricule::create([
+            'matricule' => $password,
+        ]);
 
         //envoyer un mail au candidat pour lui donner son mot de passe
 
