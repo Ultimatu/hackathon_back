@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('resultats_sondages', function (Blueprint $table) {
-            $$table->foreignId('id_user')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('id_user')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
         });
+
     }
 
     /**
