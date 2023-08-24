@@ -558,9 +558,10 @@ class AdminController extends Controller
     }
 
 
-    
+
 
     public function add(Request $addCandidatRequest){
+        dd($addCandidatRequest);
         $addCandidatRequest->validate([
             'pt_id', 'required|integer|exists:parti_politiques,id',
             'nom', 'required|string',
