@@ -547,11 +547,11 @@ class AdminController extends Controller
         $matricule = "CA";
         $matricule .= rand(10000000, 99999999);
         $matricule .= strtoupper(substr($commune, 0, 1));
-        dd($matricule);
         //verifier que ca n'existe pas dans password user
         //verifier si le matricule existe deja dans la base de donnée
-        Matricule::where('matricule', $matricule)->first();
-        if ($matricule) {
+        $mat =  Matricule::where('matricule', $matricule)->first();
+        dd($mat);
+        if ($mat) {
             $this->generateMatricule($commune);
         }
 
