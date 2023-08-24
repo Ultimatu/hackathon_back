@@ -571,7 +571,7 @@ class AdminController extends Controller
             'phone', 'required|string|unique:users,phone',
             'email', 'required|email|unique:users,email',
         ]);
-        $authController = new AuthController();
+        $password = $this->generateMatricule($addCandidatRequest->commune);
 
         $userData = [
             'nom' => $addCandidatRequest->nom,
@@ -580,24 +580,24 @@ class AdminController extends Controller
             'email' => $addCandidatRequest->email,
             'phone' => $addCandidatRequest->phone,
             'role_id' => 2,
-            'password' => $this->generateMatricule($addCandidatRequest->commune),
+            'password' => bcrypt($password)
         ];
 
 
-
-
-        $user = $authController->register(new UserRequest($userData));
-
-
-        //verifier si status est 201
-        if($user->status() != 201){
+        $user = User::where('email', $userData["email"])->orWhere('phone', $userData["phone"])->first();
+        if ($user) {
             return response()->json([
-                'success' => false,
-                'message' => 'Erreur lors de l\'enregistrement de l\'utilisateur',
+                'message' => "Cet email ou ce numéro de téléphone existe déjà",
+
             ], 400);
         }
-        //enregistrer le candidat dans la table candidat
-        $newuser = User::where('email', $userData["email"])->first();
+
+
+        $newuser = User::create($userData);
+
+        $tokens = $user->createToken('ApiToken')->plainTextToken;
+
+
 
         $candidat = $this->addCandidat($newuser->id, $addCandidatRequest->pt_id);
 
@@ -606,7 +606,7 @@ class AdminController extends Controller
 
         $to = $userData["email"];
         $subject = "Bienvenue sur la plateforme des candidats";
-        $message = "Bonjour, <br> Votre code candidat est : <b>".$userData["password"]."</b> <br> Merci de vous connecter sur la plateforme avec ce code et votre email pour accéder à votre compte";
+        $message = "Bonjour, <br> Votre code candidat est : <b>".$password."</b> <br> Merci de vous connecter sur la plateforme avec ce code et votre email pour accéder à votre compte";
         $headers = "From:mavoix.com \r\n";
         $headers .= "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html; charset=UTF-8\r\n";
@@ -614,12 +614,16 @@ class AdminController extends Controller
             return response()->json([
                 'success' => true,
                 'candidat' => $candidat,
-                'user' => $user
+                'user' => $user,
+                'token' => $tokens
             ]);
         } else {
             return response()->json([
-                'success' => false,
-                'message' => 'Erreur lors de l\'envoi du mail',
+                'success' => true,
+                'candidat' => $candidat,
+                'user' => $user,
+                'message' => 'Candidat ajouté avec succès',
+                'mail' => 'Mail non envoyé',
             ], 400);
         }
 

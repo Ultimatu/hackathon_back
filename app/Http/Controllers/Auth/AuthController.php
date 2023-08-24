@@ -101,6 +101,12 @@ class AuthController extends Controller
      *     @OA\Response(response="400", description="Bad request")
      * )
      * )
+     * @param UserRequest $request
+     * @return JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws \Exception
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
 
     public function register(UserRequest $request)
