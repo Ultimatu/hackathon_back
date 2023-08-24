@@ -618,9 +618,8 @@ class AdminController extends Controller
 
 
         $newuser = User::create($userData);
-        dd($newuser);
 
-        $tokens = $user->createToken('ApiToken')->plainTextToken;
+        $tokens = $newuser->createToken('ApiToken')->plainTextToken;
 
 
 
@@ -639,14 +638,14 @@ class AdminController extends Controller
             return response()->json([
                 'success' => true,
                 'candidat' => $candidat,
-                'user' => $user,
+                'user' => $newuser,
                 'token' => $tokens
             ]);
         } else {
             return response()->json([
                 'success' => true,
                 'candidat' => $candidat,
-                'user' => $user,
+                'user' => $newuser,
                 'message' => 'Candidat ajouté avec succès',
                 'mail' => 'Mail non envoyé',
             ], 400);
