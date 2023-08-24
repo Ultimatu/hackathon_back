@@ -572,9 +572,9 @@ class AdminController extends Controller
             'email', 'required|email|unique:users,email',
         ]);
         $authController = new AuthController();
-        dd($addCandidatRequest);
 
         $userRequest = new UserRequest();
+        dd($addCandidatRequest);
         $userRequest['nom'] = $addCandidatRequest->nom;
         $userRequest["prenom"] = $addCandidatRequest->prenom;
         $userRequest["adresse"] = $addCandidatRequest->adresse;
