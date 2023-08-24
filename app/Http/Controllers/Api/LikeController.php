@@ -116,7 +116,7 @@ class LikeController extends Controller
                 'message' => 'Like non trouvé'
             ], 404);
         }
-        $like->delete();
+        Likes::where('id_user', $id_user)->where('id_post', $id_post)->delete();
         return response()->json([
             'message' => 'Like deleted successfully'
         ], 200);
