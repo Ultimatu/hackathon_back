@@ -558,23 +558,7 @@ class AdminController extends Controller
     }
 
 
-    /**
-     * @OA\Post(
-     *     path="/api/admin/add-candidat",
-     *    tags={"Admin Actions"},
-     *    summary="Ajouter un candidat",
-     *   security={{"bearerAuth":{}}},
-     *    @OA\RequestBody(
-     *       required=true,
-     *     @OA\JsonContent(ref="#/components/schemas/CandidatRequest")
-     *  ),
-     *    @OA\Response(response="201", description="Candidat ajouté avec succès"),
-     *   @OA\Response(response="400", description="Bad request")
-     * )
-     * )
-     *
-     */
-
+    
 
     public function add(Request $addCandidatRequest){
         $addCandidatRequest->validate([
