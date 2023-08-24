@@ -295,7 +295,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 
         //add
 
-        Route::post('/add-candidat/{id_user}/{id_parti_politique}', [AdminController::class, 'addCandidat'])->name('addCandidat');
+        Route::post('/add-candidat', [AdminController::class, 'add'])->name('addCandidat');
 
         //update
 
