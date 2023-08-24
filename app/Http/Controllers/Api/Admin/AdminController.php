@@ -615,6 +615,26 @@ class AdminController extends Controller
 
             ], 400);
         }
+        if ($addCandidatRequest->hasFile('photo_url')) {
+            $file = $addCandidatRequest['photo_url'];
+            //recuperer le nom du fichier
+            $fileName = $file->getClientOriginalName();
+            //recuperer l'extension du fichier
+            $extension = $file->getClientOriginalExtension();
+
+            //generer un nom unique pour le fichier
+            $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
+
+            //deplacer le fichier vers le dossier de stockage
+
+            $file->move('storage/photos', $fileNameToStore);
+
+            //enregistrer le nom du fichier dans la base de donnees
+            $nameToFront = 'storage/photos/' . $fileNameToStore;
+
+            $addCandidatRequest['photo_url'] = $nameToFront;
+        }
+
 
 
         $newuser = User::create($userData);
@@ -624,6 +644,7 @@ class AdminController extends Controller
 
 
         $candidat = $this->addCandidat($newuser->id, $addCandidatRequest->pt_id);
+
 
 
         //envoyer un mail au candidat pour lui donner son mot de passe
@@ -637,10 +658,14 @@ class AdminController extends Controller
         if (mail($to, $subject, $message, $headers)) {
             return response()->json([
                 'success' => true,
-                'candidat' => $candidat,
-                'user' => $newuser,
-                'token' => $tokens
-            ]);
+                'message' => 'Candidat ajouté avec succès',
+                'data' => [
+                    'user_id' => $newuser["id"],
+                    'candidat_id' => $candidat["id"],
+                    'token' => $tokens
+                ]
+            ], 201);
+
         } else {
             return response()->json([
                 'success' => true,
@@ -648,7 +673,7 @@ class AdminController extends Controller
                 'user' => $newuser,
                 'message' => 'Candidat ajouté avec succès',
                 'mail' => 'Mail non envoyé',
-            ], 400);
+            ], 201);
         }
     }
 
