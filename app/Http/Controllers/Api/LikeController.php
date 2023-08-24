@@ -14,6 +14,9 @@ class LikeController extends Controller
 
     public function addLike(Request $request)
     {
+
+        dd($request->all());
+        
         $request->validate([
             'id_post' => 'required|integer|exists:posts,id',
             'id_user' => 'required|integer|exists:users,id',
