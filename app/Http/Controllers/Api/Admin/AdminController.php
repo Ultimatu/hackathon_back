@@ -618,6 +618,7 @@ class AdminController extends Controller
 
 
         $newuser = User::create($userData);
+        dd($newuser);
 
         $tokens = $user->createToken('ApiToken')->plainTextToken;
 
