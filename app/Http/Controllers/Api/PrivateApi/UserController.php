@@ -526,7 +526,7 @@ class UserController extends Controller
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="Id du like",
+     *         description="Id du post",
      *         required=true,
      *         @OA\Schema(
      *             type="integer",
