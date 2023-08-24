@@ -593,7 +593,6 @@ class AdminController extends Controller
 
 
         $user = User::where('email', $userData["email"])->orWhere('phone', $userData["phone"])->first();
-        dd($user);
 
 
 
