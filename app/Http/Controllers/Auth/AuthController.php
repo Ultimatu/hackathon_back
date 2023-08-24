@@ -106,7 +106,7 @@ class AuthController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      * @throws \Exception
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws 
      */
 
     public function register(UserRequest $request)
