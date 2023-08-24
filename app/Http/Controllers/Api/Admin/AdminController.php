@@ -18,6 +18,11 @@ use App\Models\User;
 
 class AdminController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+    }
     public function getAllUsers()
     {
 
