@@ -2225,32 +2225,21 @@ components:
           type: string
           format: date-time
       type: object
-    PartiPolitique:
-      title: PartiPolitique
-      description: 'Modèle de parti politique'
+    Politique:
+      title: Politique
       properties:
         nom:
-          description: 'Nom du parti politique'
+          description: 'nom du parti politique'
           type: string
+          example: RHDP
         logo:
-          description: 'Logo du parti politique (type photo)'
+          description: 'logo du parti politique'
           type: string
-          format: binary
+          example: logo.png
         description:
-          description: 'Description du parti politique'
+          description: 'description du parti politique'
           type: string
-        created_at:
-          description: 'Date et heure de création'
-          type: string
-          format: date-time
-          readOnly: 'true'
-          nullable: true
-        updated_at:
-          description: 'Date et heure de mise à jour'
-          type: string
-          format: date-time
-          readOnly: 'true'
-          nullable: true
+          example: 'description du parti politique'
       type: object
     Post:
       title: Post
