@@ -558,19 +558,27 @@ class AdminController extends Controller
     }
 
 
+    /**
+     * @OA\Post(
+     *     path="/api/admin/add-candidat",
+     *    tags={"Admin Actions"},
+     *    summary="Ajouter un candidat",
+     *   security={{"bearerAuth":{}}},
+     *    @OA\RequestBody(
+     *       required=true,
+     *     @OA\JsonContent(ref="#/components/schemas/CandidatRequest")
+     *  ),
+     *    @OA\Response(response="201", description="Candidat ajouté avec succès"),
+     *   @OA\Response(response="400", description="Bad request")
+     * )
+     * )
+     *
+     */
 
 
-    public function add(Request $addCandidatRequest){
-        $addCandidatRequest->validate([
-            'pt_id', 'required|integer|exists:parti_politiques,id',
-            'nom', 'required|string',
-            'prenom', 'required|string',
-            'bio', 'string',
-            'photo_url', 'image',
-            'commune', 'required|string',
-            'phone', 'required|string|unique:users,phone',
-            'email', 'required|email|unique:users,email',
-        ]);
+    public function add(AddCandidatRequest $addCandidatRequest)
+    {
+      
         dd($addCandidatRequest->all());
         $password = $this->generateMatricule($addCandidatRequest->commune);
 
@@ -607,7 +615,7 @@ class AdminController extends Controller
 
         $to = $userData["email"];
         $subject = "Bienvenue sur la plateforme des candidats";
-        $message = "Bonjour, <br> Votre code candidat est : <b>".$password."</b> <br> Merci de vous connecter sur la plateforme avec ce code et votre email pour accéder à votre compte";
+        $message = "Bonjour, <br> Votre code candidat est : <b>" . $password . "</b> <br> Merci de vous connecter sur la plateforme avec ce code et votre email pour accéder à votre compte";
         $headers = "From:mavoix.com \r\n";
         $headers .= "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html; charset=UTF-8\r\n";
@@ -627,8 +635,6 @@ class AdminController extends Controller
                 'mail' => 'Mail non envoyé',
             ], 400);
         }
-
-
     }
 
 
