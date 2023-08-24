@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Model;
  *     schema="PartiPolitique",
  *     title="PartiPolitique",
  *     description="Modèle de parti politique",
- *     @OA\Property(property="nom", type="string", description="Nom du parti politique"),
- *     @OA\Property(property="logo", type="string", format="binary", description="Logo du parti politique (type photo)"),
- *     @OA\Property(property="description", type="string", description="Description du parti politique"),
+ *     @OA\Property(property="nom", type="string", description="Nom du parti politique", example="RHDP"),
+ *     @OA\Property(property="logo", type="image", format="binary", description="Logo du parti politique (type photo)" , example="logo.png"),
+ *     @OA\Property(property="description", type="string", description="Description du parti politique", example="Rassemblement des Houphouetistes pour la Démocratie et la Paix"),
  *     @OA\Property(property="created_at", type="string", format="date-time", description="Date et heure de création", readOnly="true", nullable=true),
  *     @OA\Property(property="updated_at", type="string", format="date-time", description="Date et heure de mise à jour", readOnly="true", nullable=true)
  * )
