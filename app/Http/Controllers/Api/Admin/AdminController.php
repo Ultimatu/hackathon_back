@@ -580,7 +580,6 @@ class AdminController extends Controller
     {
 
         $password = $this->generateMatricule($addCandidatRequest->commune);
-        dd($addCandidatRequest->all());
 
         $userData = [
             'nom' => $addCandidatRequest->nom,
@@ -592,6 +591,7 @@ class AdminController extends Controller
             'password' => bcrypt($password)
         ];
 
+        dd($addCandidatRequest->all());
 
         $user = User::where('email', $userData["email"])->orWhere('phone', $userData["phone"])->first();
         if ($user) {
