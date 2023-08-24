@@ -154,6 +154,7 @@ class SondageController extends Controller
         $sondages = Sondage::all();
 
         //si l'utilisateur est connecté , on affiche les sondages non votés
+        dd(auth()->user());
         if (auth()->user()) {
             $userID = auth()->user()->id; // Supposons que l'utilisateur est connecté
 
