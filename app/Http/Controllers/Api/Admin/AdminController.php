@@ -572,13 +572,11 @@ class AdminController extends Controller
      *   @OA\Response(response="400", description="Bad request")
      * )
      * )
-     * @param AddCandidatRequest $addCandidatRequest
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     *
      */
 
 
     public function add(AddCandidatRequest $addCandidatRequest){
-        dd($addCandidatRequest);
 
         $addCandidatRequest = $addCandidatRequest->validated();
         $authController = new AuthController();
