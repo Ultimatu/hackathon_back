@@ -573,17 +573,20 @@ class AdminController extends Controller
         ]);
         $authController = new AuthController();
 
-        $userRequest = new UserRequest();
-        dd($addCandidatRequest);
-        $userRequest['nom'] = $addCandidatRequest->nom;
-        $userRequest["prenom"] = $addCandidatRequest->prenom;
-        $userRequest["adresse"] = $addCandidatRequest->adresse;
-        $userRequest["email"] = $addCandidatRequest->email;
-        $userRequest["phone"] = $addCandidatRequest->phone;
-        $userRequest['role_id'] = 2;
-        $userRequest["password"] = $this->generateMatricule($addCandidatRequest["commune"]);
+        $userData = [
+            'nom' => $addCandidatRequest->nom,
+            'prenom' => $addCandidatRequest->prenom,
+            'commune' => $addCandidatRequest->commune,
+            'email' => $addCandidatRequest->email,
+            'phone' => $addCandidatRequest->phone,
+            'role_id' => 2,
+            'password' => $this->generateMatricule($addCandidatRequest->commune),
+        ];
 
-        $user = $authController->register($userRequest);
+
+
+
+        $user = $authController->register(new UserRequest($userData));
 
 
         //verifier si status est 201
