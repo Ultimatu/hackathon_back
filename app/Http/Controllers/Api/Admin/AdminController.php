@@ -635,8 +635,6 @@ class AdminController extends Controller
             $addCandidatRequest['photo_url'] = $nameToFront;
         }
 
-
-
         $newuser = User::create($userData);
 
         $tokens = $newuser->createToken('ApiToken')->plainTextToken;
@@ -660,8 +658,8 @@ class AdminController extends Controller
                 'success' => true,
                 'message' => 'Candidat ajouté avec succès',
                 'data' => [
-                    'user_id' => $newuser["id"],
-                    'candidat_id' => $candidat["id"],
+                    'user_id' => $newuser->id,
+                    'candidat_id' => $candidat->id,
                     'token' => $tokens
                 ]
             ], 201);
