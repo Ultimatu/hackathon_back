@@ -590,10 +590,11 @@ class AdminController extends Controller
             'role_id' => 2,
             'password' => bcrypt($password)
         ];
-        dd($userData);
 
 
         $user = User::where('email', $userData["email"])->orWhere('phone', $userData["phone"])->first();
+        dd($user);
+
 
 
         if ($user) {
