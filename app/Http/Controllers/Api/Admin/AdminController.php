@@ -561,7 +561,6 @@ class AdminController extends Controller
 
 
     public function add(Request $addCandidatRequest){
-        dd($addCandidatRequest);
         $addCandidatRequest->validate([
             'pt_id', 'required|integer|exists:parti_politiques,id',
             'nom', 'required|string',
@@ -573,6 +572,7 @@ class AdminController extends Controller
             'email', 'required|email|unique:users,email',
         ]);
         $authController = new AuthController();
+        dd($addCandidatRequest);
 
         $userRequest = new UserRequest();
         $userRequest['nom'] = $addCandidatRequest->nom;
