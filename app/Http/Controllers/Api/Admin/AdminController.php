@@ -860,6 +860,9 @@ class AdminController extends Controller
     }
 
 
+    //get all sondages
+    
+
     public function getAllSondages(){
         $sondageController = new SondageController();
 

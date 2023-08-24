@@ -111,8 +111,6 @@ class SondageController extends Controller
 
         $sondages = Sondage::all();
 
-        dd(auth()->user());
-
         if (auth()->user()) {
             $userID = auth()->user()->id; // Supposons que l'utilisateur est connecté
 
@@ -271,7 +269,7 @@ class SondageController extends Controller
 
     public function getSondagesNotVotedByUser()
     {
-        $userID = auth()->user()->id; // Supposons que l'utilisateur est connecté
+        $userID = auth()->user()->id; 
 
         $sondagesNonVotes = Sondage::whereDoesntHave('resultatsSondages', function ($query) use ($userID) {
             $query->where('id_user', $userID);
