@@ -578,9 +578,10 @@ class AdminController extends Controller
 
 
     public function add(AddCandidatRequest $addCandidatRequest){
+        dd($addCandidatRequest);
+
         $addCandidatRequest = $addCandidatRequest->validated();
         $authController = new AuthController();
-        dd($addCandidatRequest);
 
         $userRequest = new UserRequest();
         $userRequest['nom'] = $addCandidatRequest->nom;
