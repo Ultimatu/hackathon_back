@@ -220,10 +220,11 @@ class UserController extends Controller
         $user->save();
 
         return response()->json([
-            'message' => 'Mot de passe reinitialise avec succes',
+            'success' => 'Mot de passe reinitialise avec succes',
             'password' => $request->input('password')
         ], 200);
     }
+
 
 
 
