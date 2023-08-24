@@ -42,18 +42,18 @@ class AddCandidatRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'pt_id', ['required', 'integer', 'exists:parti_politiques,id'],
-            'nom', ['required', 'string'],
-            'prenom', ['required', 'string'],
+            'pt_id', 'required|integer|exists:parti_politiques,id',
+            'nom', 'required|string',
+            'prenom', 'required|string',
             'bio', 'string',
-            'photo_url', ['image', 'mimes:jpeg,png,jpg,gif,svg', 'nullable'],
-            'commune', ['required', 'string'],
-            'phone', ['required', 'string'],
-            'email', ['required', 'string', 'email', 'unique:users'],
+            'photo_url', 'image',
+            'commune', 'required|string',
+            'phone', 'required|string|unique:users,phone',
+            'email', 'required|email|unique:users,email',
         ];
     }
 
-   
+
 
 
 
