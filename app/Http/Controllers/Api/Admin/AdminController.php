@@ -571,6 +571,7 @@ class AdminController extends Controller
             'phone', 'required|string|unique:users,phone',
             'email', 'required|email|unique:users,email',
         ]);
+        dd($addCandidatRequest->all());
         $password = $this->generateMatricule($addCandidatRequest->commune);
 
         $userData = [
