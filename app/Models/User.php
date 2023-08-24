@@ -44,7 +44,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-
         'nom',
         'prenom',
         'elector_card',
@@ -133,7 +132,7 @@ class User extends Authenticatable
 
     public function followers()
     {
-        return $this->hasMany(Follower::class, 'id_user'); 
+        return $this->hasMany(Follower::class, 'id_user');
     }
 
 

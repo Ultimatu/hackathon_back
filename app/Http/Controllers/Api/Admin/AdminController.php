@@ -13,8 +13,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AddCandidatRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\Matricule;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class AdminController extends Controller
 {
