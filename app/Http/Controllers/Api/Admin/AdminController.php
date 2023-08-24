@@ -10,7 +10,9 @@ use App\Http\Controllers\Api\SondageController;
 use App\Http\Controllers\Api\TypeSondageController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddCandidatRequest;
 use App\Http\Requests\UserRequest;
+use App\Models\Matricule;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
@@ -489,11 +491,10 @@ class AdminController extends Controller
     }
 
 
-    //add candidat
 
     /**
      * @OA\Post(
-     *     path="/api/admin/add-candidat/{id_user}/{id_parti_politique}",
+     *     path="/not-defined-yet",
      *     tags={"Admin Actions"},
      *     summary="Ajouter un candidat",
      *     @OA\Parameter(
@@ -519,6 +520,7 @@ class AdminController extends Controller
      * )
      */
 
+
     public function addCandidat(int $id_user, int $id_parti_politique){
 
         $user = User::find($id_user);
@@ -538,6 +540,100 @@ class AdminController extends Controller
         ]);
 
     }
+
+
+    public function generateMatricule($commune)
+    {
+        $matricule = "CA";
+        $matricule .= rand(10000000, 99999999);
+        $matricule .= strtoupper(substr($commune, 0, 1));
+        //verifier que ca n'existe pas dans password user
+        //verifier si le matricule existe deja dans la base de donnée
+        Matricule::where('matricule', $matricule)->first();
+        if ($matricule) {
+            $this->generateMatricule($commune);
+        }
+
+        return $matricule;
+    }
+
+
+    /**
+     * @OA\Post(
+     *     path="/api/admin/add-candidat",
+     *    tags={"Admin Actions"},
+     *    summary="Ajouter un candidat",
+     *   security={{"bearerAuth":{}}},
+     *    @OA\RequestBody(
+     *       required=true,
+     *     @OA\JsonContent(ref="#/components/schemas/CandidatRequest")
+     *  ),
+     *    @OA\Response(response="201", description="Candidat ajouté avec succès"),
+     *   @OA\Response(response="400", description="Bad request")
+     * )
+     * )
+     * @param AddCandidatRequest $addCandidatRequest
+     * @return JsonResponse
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+
+
+    public function add(AddCandidatRequest $addCandidatRequest){
+        //inscrire l'utilisateur
+        $authController = new AuthController();
+        $userRequest = new UserRequest();
+        $userRequest['nom'] = $addCandidatRequest->nom;
+        $userRequest["prenom"] = $addCandidatRequest->prenom;
+        $userRequest["adresse"] = $addCandidatRequest->adresse;
+        $userRequest["email"] = $addCandidatRequest->email;
+        $userRequest["phone"] = $addCandidatRequest->phone;
+        //role 2
+        $userRequest['role_id'] = 2;
+        $userRequest["password"] = $this->generateMatricule($addCandidatRequest["commune"]);
+
+        $user = $authController->register($userRequest);
+
+
+        //verifier si status est 201
+        if($user->status() != 201){
+            return response()->json([
+                'success' => false,
+                'message' => 'Erreur lors de l\'enregistrement de l\'utilisateur',
+            ], 400);
+        }
+        //enregistrer le candidat dans la table candidat
+        $newuser = User::where('email', $userRequest["email"])->first();
+
+        $candidat = $this->addCandidat($newuser->id, $addCandidatRequest->pt_id);
+
+
+        //envoyer un mail au candidat pour lui donner son mot de passe
+
+        $to = $userRequest["email"];
+        $subject = "Bienvenue sur la plateforme des candidats";
+        $message = "Bonjour, <br> Votre code candidat est : <b>".$userRequest["password"]."</b> <br> Merci de vous connecter sur la plateforme avec ce code et votre email pour accéder à votre compte";
+        $headers = "From:mavoix.com \r\n";
+        $headers .= "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html; charset=UTF-8\r\n";
+        if (mail($to, $subject, $message, $headers)) {
+            return response()->json([
+                'success' => true,
+                'candidat' => $candidat,
+                'user' => $user
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Erreur lors de l\'envoi du mail',
+            ], 400);
+        }
+
+
+    }
+
+
+
+
 
 
     //update candidat

@@ -394,12 +394,12 @@ paths:
           description: "Succès - Résultats de l'élection renvoyés"
         401:
           description: "Non autorisé - L'utilisateur n'est pas authentifié"
-  '/api/admin/add-candidat/{id_user}/{id_parti_politique}':
+  /not-defined-yet:
     post:
       tags:
         - 'Admin Actions'
       summary: 'Ajouter un candidat'
-      operationId: 06c376e29748c549d23bb5fd71161d02
+      operationId: e23b3611a2b9771d3c63e4de23ed5472
       parameters:
         -
           name: id_user
@@ -420,6 +420,26 @@ paths:
           description: 'Candidat ajouté avec succès'
         404:
           description: 'Utilisateur non trouvé'
+  /api/admin/add-candidat:
+    post:
+      tags:
+        - 'Admin Actions'
+      summary: 'Ajouter un candidat'
+      operationId: 5c25a263b55ba5a967986aec1a3de46f
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CandidatRequest'
+      responses:
+        201:
+          description: 'Candidat ajouté avec succès'
+        400:
+          description: 'Bad request'
+      security:
+        -
+          bearerAuth: []
   '/api/admin/update-candidat/{id_user}/{id_parti_politique}':
     put:
       tags:
@@ -1038,7 +1058,7 @@ paths:
         -
           name: id
           in: path
-          description: 'Id du like'
+          description: 'Id du post'
           required: true
           schema:
             type: integer
@@ -1889,6 +1909,27 @@ paths:
           description: Unauthorized
 components:
   schemas:
+    CandidatRequest:
+      title: Candidat-Add-Request
+      description: 'Model for a Candidat'
+      properties:
+        pt_id:
+          type: integer
+        nom:
+          type: string
+        prenom:
+          type: string
+        bio:
+          type: string
+        photo_url:
+          type: string
+        commune:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+      type: object
     Activity:
       title: "Activité d'un candidat"
       description: 'Model for a Activity'
