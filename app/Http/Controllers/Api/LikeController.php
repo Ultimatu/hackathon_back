@@ -15,11 +15,23 @@ class LikeController extends Controller
     public function addLike(Request $request)
     {
 
-       
+
         $request->validate([
             'id_post' => 'required|integer|exists:posts,id',
             'id_user' => 'required|integer|exists:users,id',
         ]);
+
+        //verifier si le like existe deja
+        $like = Likes::where('id_post', $request->id_post)
+            ->where('id_user', $request->id_user)
+            ->first();
+
+        if ($like) {
+            return response()->json([
+                'message' => 'Like already exists',
+                'data' => $like,
+            ], 409);
+        }
 
         $like = new Likes();
         $like->id_post = $request->input('id_post');
