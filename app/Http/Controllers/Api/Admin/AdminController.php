@@ -550,7 +550,6 @@ class AdminController extends Controller
         //verifier que ca n'existe pas dans password user
         //verifier si le matricule existe deja dans la base de donnée
         $mat =  Matricule::where('matricule', $matricule)->first();
-        dd($mat);
         if ($mat) {
             $this->generateMatricule($commune);
         }
