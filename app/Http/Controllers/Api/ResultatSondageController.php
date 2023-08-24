@@ -37,7 +37,7 @@ class ResultatSondageController extends Controller
             'choix'=>$request->choix,
         ]);
         return response()->json([
-            'message'=>'Vous avez voté',
+            'message'=>'Votre vote a été pris en compte, merci!',
 
         ],201);
     }
