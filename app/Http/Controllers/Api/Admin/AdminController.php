@@ -578,6 +578,7 @@ class AdminController extends Controller
 
 
     public function add(AddCandidatRequest $addCandidatRequest){
+        $addCandidatRequest = $addCandidatRequest->validated();
         //inscrire l'utilisateur
         $authController = new AuthController();
         $userRequest = new UserRequest();
