@@ -585,16 +585,16 @@ class AdminController extends Controller
             'commune' => 'required|string',
             'email' => 'required|email',
             'phone' => 'required|string',
-            'pt_id' => 'required|integer'
+            'pt_id' => 'required|integer|exists:parti_politiques,id'
         ]);
-        $password = $this->generateMatricule($addCandidatRequest->commune);
+        $password = $this->generateMatricule($addCandidatRequest["commune"]);
 
         $userData = [
-            'nom' => $addCandidatRequest->nom,
-            'prenom' => $addCandidatRequest->prenom,
-            'commune' => $addCandidatRequest->commune,
-            'email' => $addCandidatRequest->email,
-            'phone' => $addCandidatRequest->phone,
+            'nom' => $addCandidatRequest["nom"],
+            'prenom' => $addCandidatRequest["prenom"],
+            'commune' => $addCandidatRequest["commune"],
+            'email' => $addCandidatRequest["email"],
+            'phone' => $addCandidatRequest["phone"],
             'role_id' => 2,
             'password' => bcrypt($password)
         ];
