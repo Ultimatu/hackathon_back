@@ -27,7 +27,7 @@ class NewsLetterController extends Controller
         $subject = "Bienvenue à la newsletter";
         $txt = "Bienvenue à la newsletter";
         try {
-            Mail::to('destinataire@example.com')->send(new SendToUserMail());
+           mail($to,$subject,$txt);
 
             $fake = null;
         } catch (\Throwable $th) {
@@ -35,7 +35,7 @@ class NewsLetterController extends Controller
         }
 
         return response()->json([
-            'message'=>'Votre email a été ajouté à la newsletter',
+            'success'=>'Votre email a été ajouté à la newsletter',
             'reponse'=>$fake
 
         ],201);
@@ -49,7 +49,7 @@ class NewsLetterController extends Controller
 
         $newsletter = Newsletter::where('email',$request->email)->first();
         $newsletter->delete();
-        
+
 
         return response()->json([
             'message'=>'Votre email a été supprimé de la newsletter',
