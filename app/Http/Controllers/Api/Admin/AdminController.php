@@ -576,9 +576,17 @@ class AdminController extends Controller
      */
 
 
-    public function add(AddCandidatRequest $addCandidatRequest)
+    public function add(Request $addCandidatRequest)
     {
 
+        $addCandidatRequest->validate([
+            'nom' => 'required|string',
+            'prenom' => 'required|string',
+            'commune' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required|string',
+            'pt_id' => 'required|integer'
+        ]);
         $password = $this->generateMatricule($addCandidatRequest->commune);
 
         $userData = [
