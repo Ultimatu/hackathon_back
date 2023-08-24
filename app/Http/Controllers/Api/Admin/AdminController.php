@@ -597,16 +597,16 @@ class AdminController extends Controller
             ], 400);
         }
         //enregistrer le candidat dans la table candidat
-        $newuser = User::where('email', $userRequest["email"])->first();
+        $newuser = User::where('email', $userData["email"])->first();
 
         $candidat = $this->addCandidat($newuser->id, $addCandidatRequest->pt_id);
 
 
         //envoyer un mail au candidat pour lui donner son mot de passe
 
-        $to = $userRequest["email"];
+        $to = $userData["email"];
         $subject = "Bienvenue sur la plateforme des candidats";
-        $message = "Bonjour, <br> Votre code candidat est : <b>".$userRequest["password"]."</b> <br> Merci de vous connecter sur la plateforme avec ce code et votre email pour accéder à votre compte";
+        $message = "Bonjour, <br> Votre code candidat est : <b>".$userData["password"]."</b> <br> Merci de vous connecter sur la plateforme avec ce code et votre email pour accéder à votre compte";
         $headers = "From:mavoix.com \r\n";
         $headers .= "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html; charset=UTF-8\r\n";
