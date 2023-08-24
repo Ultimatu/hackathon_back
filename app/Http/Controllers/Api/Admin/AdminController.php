@@ -579,15 +579,14 @@ class AdminController extends Controller
 
     public function add(AddCandidatRequest $addCandidatRequest){
         $addCandidatRequest = $addCandidatRequest->validated();
-        //inscrire l'utilisateur
         $authController = new AuthController();
         $userRequest = new UserRequest();
+        dd($addCandidatRequest);
         $userRequest['nom'] = $addCandidatRequest->nom;
         $userRequest["prenom"] = $addCandidatRequest->prenom;
         $userRequest["adresse"] = $addCandidatRequest->adresse;
         $userRequest["email"] = $addCandidatRequest->email;
         $userRequest["phone"] = $addCandidatRequest->phone;
-        //role 2
         $userRequest['role_id'] = 2;
         $userRequest["password"] = $this->generateMatricule($addCandidatRequest["commune"]);
 
