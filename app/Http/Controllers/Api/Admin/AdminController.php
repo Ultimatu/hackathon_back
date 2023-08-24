@@ -573,7 +573,6 @@ class AdminController extends Controller
      * )
      * )
      * @param AddCandidatRequest $addCandidatRequest
-     * @return JsonResponse
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
 
