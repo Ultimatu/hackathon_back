@@ -96,35 +96,21 @@ class ProgrammesController extends Controller
         ], 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(programmes $programmes)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(programmes $programmes)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, programmes $programmes)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(programmes $programmes)
+    public function destroy(int $id)
     {
-        //
+        $programme = Programmes::find($id);
+        if (!$programme) {
+            return response()->json([
+                'message' => 'Programme non trouvé'
+            ], 404);
+        }
+        $programme->delete();
+        return response()->json([
+            'success' => 'Programme supprimé avec succès'
+        ], 200);
     }
 }

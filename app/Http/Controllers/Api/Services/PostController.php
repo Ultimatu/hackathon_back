@@ -168,19 +168,22 @@ class PostController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/private/user/get-commune-posts",
+     *     path="/api/public/get-commune-posts",
      *     tags={"User Authenticated actions"},
      *     summary="Récupérer tous les posts des d'une commune",
+     *     description="Récupérer tous les posts des d'une commune",
+     *     operationId="getAllPostByCommune",
+     *     security={ {"bearer": {} }},
      *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="Id du candidat",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="integer",
-     *             format="int64"
-     *         )
-     *     ),
+     *     name="commune",
+     *     in="query",
+     *     description="Commune",
+     *     required=true,
+     *     @OA\Schema(
+     *     type="string"
+     *    )
+     *  ),
+     *
      *     @OA\Response(response="200", description="Liste des posts récupérée avec succès"),
      *     @OA\Response(response="401", description="Non autorisé")
      * )

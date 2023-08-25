@@ -118,6 +118,10 @@ Route::group(['prefix' => 'public'], function () {
     Route::get('candidats/commune/{commune}', [PublicController::class, 'getCandidatsByCommune'])->name('candidats-by-commune');
 
 
+    Route::get('get-commune-posts/{commune}', [PostController::class, 'getAllPostByCommune']);
+
+
+
 });
 
 /*
@@ -189,8 +193,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('user/get-following', [UserController::class, 'getFollowing']);
 
 
-        //
-        Route::get('user/get-commune-posts/{commune}', [PostController::class, 'getAllPostByCommune']);
+        //posts
 
 
     });
