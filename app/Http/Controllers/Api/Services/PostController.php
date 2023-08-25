@@ -168,12 +168,11 @@ class PostController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/public/commune-posts",
+     *     path="/api/public/commune-posts/{commune}",
      *     tags={"Public API"},
      *     summary="Récupérer tous les posts des d'une commune",
      *     description="Récupérer tous les posts des d'une commune",
      *     operationId="getAllPostByCommune",
-     *     security={ {"bearer": {} }},
      *     @OA\Parameter(
      *     name="commune",
      *     in="query",
@@ -189,7 +188,7 @@ class PostController extends Controller
      * )
      */
 
-    public function getAllPostByCommune(string $commmune)
+    public function getAllPostByCommune(string $commune)
     {
 
 
@@ -197,7 +196,7 @@ class PostController extends Controller
 
         $posts = Post::join('candidats', 'posts.id_candidat', '=', 'candidats.id')
             ->join('users', 'candidats.user_id', '=', 'users.id')
-            ->where('users.commune', $commmune)
+            ->where('users.commune', $commune)
             ->select('posts.*')
             ->get();
 
