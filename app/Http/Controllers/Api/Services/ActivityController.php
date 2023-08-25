@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Services;
 
 use App\Http\Controllers\Controller;
 use App\Models\Activities;
@@ -103,7 +103,7 @@ class ActivityController extends Controller
     }
 
 
-    
+
 
 
 

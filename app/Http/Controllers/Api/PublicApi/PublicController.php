@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers\Api\PublicApi;
 
-use App\Http\Controllers\Api\ActivityController;
-use App\Http\Controllers\Api\CommentaireController;
-use App\Http\Controllers\Api\CommentaireRepliqueController;
-use App\Http\Controllers\Api\ElectionController;
-use App\Http\Controllers\Api\ElectionParticipantController;
-use App\Http\Controllers\Api\LikeController;
-use App\Http\Controllers\Api\MeetParticipantController;
-use App\Http\Controllers\Api\PartiPolitiqueController;
 use App\Http\Controllers\Api\PrivateApi\CandidatController;
-use App\Http\Controllers\Api\SondageController;
-use App\Http\Controllers\Api\TypeSondageController;
+use App\Http\Controllers\Api\Services\ActivityController;
+use App\Http\Controllers\Api\Services\CommentaireController;
+use App\Http\Controllers\Api\Services\CommentaireRepliqueController;
+use App\Http\Controllers\Api\Services\ElectionController;
+use App\Http\Controllers\Api\Services\ElectionParticipantController;
+use App\Http\Controllers\Api\Services\LikeController;
+use App\Http\Controllers\Api\Services\MeetParticipantController;
+use App\Http\Controllers\Api\Services\PartiPolitiqueController;
+use App\Http\Controllers\Api\Services\SondageController;
+use App\Http\Controllers\Api\Services\TypeSondageController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\NewsLetterController;
 use Illuminate\Http\Request;
-use OpenApi\Annotations\OpenApi;
-use OpenApi\Generator;
+
 class PublicController extends Controller
 {
 
@@ -310,7 +309,7 @@ class PublicController extends Controller
 
     public function getAllPosts()
     {
-        $postController = new \App\Http\Controllers\Api\PostController();
+        $postController = new \App\Http\Controllers\Api\Services\PostController();
 
         return $postController->getAllPosts();
     }
@@ -336,7 +335,7 @@ class PublicController extends Controller
 
     public function getCandidatPosts(int $id)
     {
-        $postController = new \App\Http\Controllers\Api\PostController();
+        $postController = new \App\Http\Controllers\Api\Services\PostController();
 
         return $postController->getAllPostByCandidat($id);
     }
@@ -362,7 +361,7 @@ class PublicController extends Controller
 
     public function getPostById(int $id)
     {
-        $postController = new \App\Http\Controllers\Api\PostController();
+        $postController = new \App\Http\Controllers\Api\Services\PostController();
 
         return $postController->getPost($id);
     }
@@ -388,7 +387,7 @@ class PublicController extends Controller
 
     public function searchPosts(Request $val)
     {
-        $postController = new \App\Http\Controllers\Api\PostController();
+        $postController = new \App\Http\Controllers\Api\Services\PostController();
 
         return $postController->searchPost($val);
     }
@@ -634,7 +633,7 @@ class PublicController extends Controller
 
     public function subscribeToNewsletter(Request $request)
     {
-        $newsletterController = new \App\Http\Controllers\Api\NewsLetterController();
+        $newsletterController = new \App\Http\Controllers\Api\Services\NewsLetterController();
 
         return $newsletterController->addEmail($request);
 
@@ -662,7 +661,7 @@ class PublicController extends Controller
 
     public function unsubscribeToNewsletter(Request $request)
     {
-        $newsletterController = new \App\Http\Controllers\Api\NewsLetterController();
+        $newsletterController = new \App\Http\Controllers\Api\Services\NewsLetterController();
 
         return $newsletterController->deleteEmail($request);
     }

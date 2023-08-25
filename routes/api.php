@@ -1,16 +1,11 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Api\Admin\AdminController;
-use App\Http\Controllers\Api\PostController;
-use App\Http\Controllers\Api\PrivateApi\UserController;
 use App\Http\Controllers\Api\PrivateApi\CandidatController;
+use App\Http\Controllers\Api\PrivateApi\UserController;
 use App\Http\Controllers\Api\PublicApi\PublicController;
-use App\Http\Controllers\Api\ResultatSondageController;
-use App\Http\Controllers\Api\ResultatsVotesController;
-use App\Http\Controllers\Api\VotesController;
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Services\PostController;
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*

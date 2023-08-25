@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
-use App\Http\Controllers\Api\ElectionController;
-use App\Http\Controllers\Api\ElectionParticipantController;
-use App\Http\Controllers\Api\PartiPolitiqueController;
-use App\Http\Controllers\Api\ResultatsVotesController;
-use App\Http\Controllers\Api\SondageController;
-use App\Http\Controllers\Api\TypeSondageController;
-use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Api\Services\ElectionController;
+use App\Http\Controllers\Api\Services\ElectionParticipantController;
+use App\Http\Controllers\Api\Services\PartiPolitiqueController;
+use App\Http\Controllers\Api\Services\ResultatsVotesController;
+use App\Http\Controllers\Api\Services\SondageController;
+use App\Http\Controllers\Api\Services\TypeSondageController;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AddCandidatRequest;
-use App\Http\Requests\UserRequest;
 use App\Models\Matricule;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -538,8 +535,6 @@ class AdminController extends Controller
         ]);
 
         return response()->json([
-            'success' => true,
-            'message' => 'Candidat ajouté avec succès',
             'candidat' => $candidat,
             'user' => $user
         ]);
@@ -590,8 +585,11 @@ class AdminController extends Controller
             'commune' => 'required|string',
             'email' => 'required|email',
             'phone' => 'required|string',
-            'pt_id' => 'required|integer|exists:parti_politiques,id'
+            'pt_id' => 'required|integer|exists:parti_politiques,id',
+            'photo_url' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
+
+
         $password = $this->generateMatricule($addCandidatRequest["commune"]);
 
         $userData = [
@@ -606,8 +604,6 @@ class AdminController extends Controller
 
 
         $user = User::where('email', $userData["email"])->orWhere('phone', $userData["phone"])->first();
-
-
 
         if ($user) {
             return response()->json([
@@ -637,9 +633,6 @@ class AdminController extends Controller
 
         $newuser = User::create($userData);
 
-        $tokens = $newuser->createToken('ApiToken')->plainTextToken;
-
-
 
         $candidat = $this->addCandidat($newuser->id, $addCandidatRequest->pt_id);
 
@@ -661,9 +654,8 @@ class AdminController extends Controller
                 'success' => true,
                 'message' => 'Candidat ajouté avec succès',
                 'data' => [
-                    'user_id' => $newuser->id,
-                    'candidat_id' => $candidat->id,
-                    'token' => $tokens
+                    'user_id' => $newuser,
+                    'candidat' => $candidat,
                 ]
             ], 201);
 
@@ -861,7 +853,7 @@ class AdminController extends Controller
 
 
     //get all sondages
-    
+
 
     public function getAllSondages(){
         $sondageController = new SondageController();

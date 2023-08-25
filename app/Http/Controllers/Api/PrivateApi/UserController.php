@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Api\PrivateApi;
 
-use App\Http\Controllers\Api\CommentaireController;
-use App\Http\Controllers\Api\CommentaireRepliqueController;
-use App\Http\Controllers\Api\FollowerController;
-use App\Http\Controllers\Api\LikeController;
-use App\Http\Controllers\Api\MeetParticipantController;
-use App\Http\Controllers\Api\ResultatSondageController;
-use App\Http\Controllers\Api\SondageController;
-use App\Http\Controllers\Api\VotesController;
+use App\Http\Controllers\Api\Services\CommentaireController;
+use App\Http\Controllers\Api\Services\CommentaireRepliqueController;
+use App\Http\Controllers\Api\Services\FollowerController;
+use App\Http\Controllers\Api\Services\LikeController;
+use App\Http\Controllers\Api\Services\MeetParticipantController;
+use App\Http\Controllers\Api\Services\ResultatSondageController;
+use App\Http\Controllers\Api\Services\SondageController;
+use App\Http\Controllers\Api\Services\VotesController;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;

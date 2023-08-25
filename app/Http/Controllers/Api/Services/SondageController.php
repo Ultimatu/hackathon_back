@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Services;
 
 use App\Http\Controllers\Controller;
 use App\Models\Sondage;
 use App\Models\TypeSondage;
 use Illuminate\Http\Request;
-
-use function PHPUnit\Framework\isEmpty;
+use Illuminate\Support\Facades\Storage;
 
 class SondageController extends Controller
 {
@@ -16,25 +15,21 @@ class SondageController extends Controller
     public function addSondage(Request $request)
     {
         $request->validate([
-            'id_user' => 'required|integer|exists:users,id',
             'titre' => 'required|string',
             'description'  => 'required|string',
-            'date_debut' => 'required|date',
-            'date_fin' => 'required|date',
+            'date_debut' => 'nullable|datetime',
+            'date_fin' => 'nullable|datetime',
             'url_media' => ['image','mimes:jpeg,png,jpg,gif,svg', 'nullable'],
             'id_type_sondage' => 'integer|exists:types_sondages,id|nullable',
-            'status' => 'required|string',
-            'commune' => 'required|string',
+            'commune' => 'required|string'
         ]);
 
         $sondage = new Sondage();
-        $sondage->id_user = $request->input('id_user');
         $sondage->titre = $request->input('titre');
         $sondage->description = $request->input('description');
         $sondage->date_debut = $request->input('date_debut');
         $sondage->date_fin = $request->input('date_fin');
         $sondage->id_type_sondage = $request->input('id_type_sondage');
-        $sondage->status = $request->input('status');
         $sondage->commune = $request->input('commune');
 
         if ($request->hasFile('url_media')) {
@@ -61,15 +56,13 @@ class SondageController extends Controller
 
     public function updateSondage(int $id, Request $request){
         $request->validate([
-            'id_user' => 'required|integer|exists:users,id',
             'titre' => 'required|string',
             'description'  => 'required|string',
-            'date_debut' => 'required|date',
-            'date_fin' => 'required|date',
-            'url_media' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'nullable'],
+            'date_debut' => 'nullable|datetime',
+            'date_fin' => 'nullable|datetime',
+            'url_media' => ['image','mimes:jpeg,png,jpg,gif,svg', 'nullable'],
             'id_type_sondage' => 'integer|exists:types_sondages,id|nullable',
-            'status' => 'required|string',
-            'commune' => 'required|string',
+            'commune' => 'required|string'
         ]);
 
         $sondage = Sondage::find($id);
@@ -78,13 +71,11 @@ class SondageController extends Controller
                 'message'=>'Sondage non trouvé',
             ], 400);
         }
-        $sondage->id_user = $request->input('id_user');
         $sondage->titre = $request->input('titre');
         $sondage->description = $request->input('description');
         $sondage->date_debut = $request->input('date_debut');
         $sondage->date_fin = $request->input('date_fin');
         $sondage->id_type_sondage = $request->input('id_type_sondage');
-        $sondage->status = $request->input('status');
         $sondage->commune = $request->input('commune');
 
         if ($request->hasFile('url_media')) {
@@ -94,6 +85,7 @@ class SondageController extends Controller
             $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
             $file->move('storage/sondages', $fileNameToStore);
             $nameToFront = 'storage/sondages/' . $fileNameToStore;
+            Storage::delete($sondage->url_media);
             $sondage->url_media = $nameToFront;
         }
 
@@ -112,7 +104,7 @@ class SondageController extends Controller
         $sondages = Sondage::all();
 
         if (auth()->user()) {
-            $userID = auth()->user()->id; // Supposons que l'utilisateur est connecté
+            $userID = auth()->user()->id;
 
             $sondagesNonVotes = Sondage::whereDoesntHave('resultatsSondages', function ($query) use ($userID) {
                 $query->where('id_user', $userID);
@@ -242,7 +234,7 @@ class SondageController extends Controller
 
     public function getByTypesSondagesNom(string $nom)
     {
-       //recuperer par nom type sondage de la table  type_sondages
+       //recuperer par nom type sondage de la table type_sondages
         $typeSondage = TypeSondage::where('nom', $nom)->first();
         if (!$typeSondage) {
             return response()->json([

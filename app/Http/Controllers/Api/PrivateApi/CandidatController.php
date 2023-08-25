@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Api\PrivateApi;
 
-use App\Http\Controllers\Api\ActivityController;
-use App\Http\Controllers\Api\FollowerController;
-use App\Http\Controllers\Api\MeetController;
-use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\Services\ActivityController;
+use App\Http\Controllers\Api\Services\FollowerController;
+use App\Http\Controllers\Api\Services\MeetController;
+use App\Http\Controllers\Api\Services\PostController;
 use App\Http\Controllers\Controller;
 use App\Models\Candidat;
-use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CandidatController extends Controller

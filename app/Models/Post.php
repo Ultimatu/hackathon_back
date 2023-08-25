@@ -41,7 +41,7 @@ class Post extends Model
 
     public function likes()
     {
-        return $this->hasMany(Likes::class, 'id_post'); 
+        return $this->hasMany(Likes::class, 'id_post');
     }
 
     public function scopeSearch($query, $val)
@@ -67,5 +67,7 @@ class Post extends Model
         } else if ($val == 'name_desc') {
             return $query->orderBy('titre', 'desc');
         }
+
     }
+
 }

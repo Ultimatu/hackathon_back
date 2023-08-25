@@ -111,6 +111,10 @@ class User extends Authenticatable
         return $this->hasMany(CommentaireReplique::class, 'id_user');
     }
 
+    public function  responseProgramme(){
+        return $this->hasMany(ResultatsProgrammes::class, 'id_user');
+    }
+
     public function scopeSearch($query, $val)
     {
         return $query

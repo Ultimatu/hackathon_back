@@ -49,6 +49,16 @@ class Candidat extends Model
         return $this->hasMany(Activities::class, 'id_candidat');
     }
 
+    public function programmes()
+    {
+        return $this->hasMany(Programmes::class, 'id_candidat');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'id_candidat');
+    }
+
     public function scopeSearch($query, $val)
     {
         //bio et user datas
