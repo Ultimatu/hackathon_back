@@ -35,7 +35,7 @@ class TypeSondageController extends Controller
         $typeSondage->save();
 
         return response()->json([
-            'message' => 'Type de sondage ajouté avec succès'
+            'success' => 'Type de sondage ajouté avec succès'
         ], 200);
     }
 
@@ -67,7 +67,7 @@ class TypeSondageController extends Controller
         $typeSondage->save();
 
         return response()->json([
-            'message' => 'Type de sondage modifié avec succès'
+            'success' => 'Type de sondage modifié avec succès'
         ], 200);
     }
 
@@ -122,7 +122,7 @@ class TypeSondageController extends Controller
         $typeSondage->delete();
 
         return response()->json([
-            'message' => 'Type de sondage supprimé avec succès'
+            'success' => 'Type de sondage supprimé avec succès'
         ], 200);
     }
 

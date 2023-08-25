@@ -32,7 +32,7 @@ class FollowerController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'Vous suivez ce candidat',
+            'success' => 'Vous suivez ce candidat',
             'follower' => $follower
         ], 201);
     }
@@ -48,13 +48,13 @@ class FollowerController extends Controller
         if (!$follower) {
             return response()->json([
                 'message' => 'Vous ne suivez pas ce candidat',
-            ], 200);
+            ], 404);
         }
 
         $follower->delete();
 
         return response()->json([
-            'message' => 'Vous ne suivez plus ce candidat',
+            'success' => 'Vous ne suivez plus ce candidat',
         ], 200);
     }
 
@@ -64,7 +64,7 @@ class FollowerController extends Controller
         $followers = Follower::where('id_candidat', $id_candidat)->with('user')->get();
 
         return response()->json([
-            'message' => 'Liste des followers',
+            'success' => 'Liste des followers',
             'followers' => $followers
         ], 200);
     }
@@ -75,7 +75,7 @@ class FollowerController extends Controller
         $followings = Follower::where('id_user', $id_user)->get();
 
         return response()->json([
-            'message' => 'Liste des followings',
+            'success' => 'Liste des followings',
             'followings' => $followings
         ], 200);
     }
@@ -88,7 +88,7 @@ class FollowerController extends Controller
 
         if ($follower) {
             return response()->json([
-                'message' => 'Vous suivez ce candidat',
+                'success' => 'Vous suivez ce candidat',
                 'follower' => $follower
             ], 200);
         } else {
@@ -103,7 +103,7 @@ class FollowerController extends Controller
         $followers = Follower::where('id_candidat', $id_candidat)->count();
 
         return response()->json([
-            'message' => 'Nombre de followers',
+            'success' => 'Nombre de followers',
             'followers' => $followers
         ], 200);
     }
@@ -113,7 +113,7 @@ class FollowerController extends Controller
         $followings = Follower::where('id_user', $id_user)->count();
 
         return response()->json([
-            'message' => 'Nombre de followings',
+            'success' => 'Nombre de followings',
             'followings' => $followings
         ], 200);
     }
@@ -124,7 +124,7 @@ class FollowerController extends Controller
         $followers = Follower::where('id_candidat', $id_candidat)->with('user')->get();
 
         return response()->json([
-            'message' => 'Liste des followers',
+            'success' => 'Liste des followers',
             'followers' => $followers
         ], 200);
     }

@@ -53,7 +53,7 @@ class SondageController extends Controller
         $sondage->save();
 
         return response()->json([
-            'message' => 'Sondage ajouté avec succès'
+            'success' => 'Sondage ajouté avec succès'
         ], 200);
     }
 
@@ -100,7 +100,7 @@ class SondageController extends Controller
         $sondage->save();
 
         return response()->json([
-            'message' => 'Sondage modifié avec succès'
+            'success' => 'Sondage modifié avec succès'
         ], 200);
     }
 
@@ -213,7 +213,7 @@ class SondageController extends Controller
         }
         $sondage->delete();
         return response()->json([
-            'message' => 'Sondage supprimée avec succès'
+            'success' => 'Sondage supprimée avec succès'
         ], 200);
     }
 
@@ -269,7 +269,7 @@ class SondageController extends Controller
 
     public function getSondagesNotVotedByUser()
     {
-        $userID = auth()->user()->id; 
+        $userID = auth()->user()->id;
 
         $sondagesNonVotes = Sondage::whereDoesntHave('resultatsSondages', function ($query) use ($userID) {
             $query->where('id_user', $userID);

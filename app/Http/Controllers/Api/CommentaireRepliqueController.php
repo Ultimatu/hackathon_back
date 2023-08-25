@@ -25,7 +25,7 @@ class CommentaireRepliqueController extends Controller
         $commentaireReplique->save();
 
         return response()->json([
-            'message' => 'Commentaire ajouté avec succès'
+            'success' => 'Commentaire ajouté avec succès'
         ], 200);
     }
 
@@ -35,6 +35,7 @@ class CommentaireRepliqueController extends Controller
         $commentaireRepliques = CommentaireReplique::where('id_commentaire', $id)->get();
         if ($commentaireRepliques->count() > 0){
             return response()->json([
+                'success' => 'Commentaires trouvés',
                 'data' => $commentaireRepliques
             ], 200);
         }
@@ -54,6 +55,7 @@ class CommentaireRepliqueController extends Controller
         $commentaireRepliques = CommentaireReplique::all();
         if ($commentaireRepliques->count() > 0){
             return response()->json([
+                'success' => 'Commentaires trouvés',
                 'data' => $commentaireRepliques
             ], 200);
         }
@@ -77,6 +79,7 @@ class CommentaireRepliqueController extends Controller
         }
 
         return response()->json([
+            'success' => 'Commentaire trouvé',
             'data' => $commentaireReplique
         ], 200);
     }
@@ -92,7 +95,7 @@ class CommentaireRepliqueController extends Controller
         }
         $commentaireReplique->delete();
         return response()->json([
-            'message' => 'Commentaire supprimé avec succès'
+            'success' => 'Commentaire supprimé avec succès'
         ], 200);
     }
 }

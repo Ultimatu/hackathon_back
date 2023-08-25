@@ -76,7 +76,7 @@ class PartiPolitiqueController extends Controller
         $partiPolitique->save();
 
         return response()->json([
-            'message' => 'Parti politique added successfully'
+            'success' => 'Parti politique added successfully'
         ], 200);
     }
 

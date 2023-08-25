@@ -32,7 +32,7 @@ class ContactUsController extends Controller
         }
 
         return response()->json([
-            'message'=>'Votre message a été envoyé',
+            'success'=>'Votre message a été envoyé',
             'reponse'=>$fake
 
         ],201);

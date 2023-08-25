@@ -32,7 +32,7 @@ class MeetParticipantController extends Controller
         ]);
 
         return response()->json([
-            'message'=>'Vous avez join le meet',
+            'success'=>'Vous avez join le meet',
             'data'=>$meetParticipant,
         ],201);
     }
@@ -57,7 +57,7 @@ class MeetParticipantController extends Controller
         $meetParticipant->delete();
 
         return response()->json([
-            'message'=>'Vous avez quitté le meet',
+            'success'=>'Vous avez quitté le meet',
         ],200);
     }
 
@@ -72,7 +72,7 @@ class MeetParticipantController extends Controller
             ->get();
 
         return response()->json([
-            'message'=>'Liste des participants',
+            'success'=>'Liste des participants',
             'data'=>$meetParticipant,
         ],200);
     }
@@ -86,7 +86,7 @@ class MeetParticipantController extends Controller
             ->get();
 
         return response()->json([
-            'message'=>'Liste des meet',
+            'success'=>'Liste des meet',
             'data'=>$meetParticipant,
         ],200);
 

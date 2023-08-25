@@ -25,7 +25,7 @@ class MeetController extends Controller
         ]);
 
         return response()->json([
-            'message'=>'Ajout avec succes',
+            'success'=>'Ajout avec succes',
             'data'=>$meet,
         ],201);
 
@@ -33,13 +33,13 @@ class MeetController extends Controller
 
 
     public function getMeets(int $id_candidat){
-        
+
 
         $meet = Meet::where('id_candidat',$id_candidat)
             ->get();
 
         return response()->json([
-            'message'=>'Liste des meet',
+            'success'=>'Liste des meet',
             'data'=>$meet,
         ],200);
 
@@ -59,7 +59,7 @@ class MeetController extends Controller
         }
 
         return response()->json([
-            'message'=>'Liste des meet',
+            'success'=>'Liste des meet',
             'data'=>$meet,
         ],200);
 
@@ -82,7 +82,7 @@ class MeetController extends Controller
         $meet->delete();
 
         return response()->json([
-            'message'=>'Meet supprimé avec succes',
+            'success'=>'Meet supprimé avec succes',
         ],200);
 
     }
@@ -113,7 +113,7 @@ class MeetController extends Controller
         ]);
 
         return response()->json([
-            'message'=>'Meet modifié avec succes',
+            'success'=>'Meet modifié avec succes',
             'data'=>$meet,
         ],200);
 

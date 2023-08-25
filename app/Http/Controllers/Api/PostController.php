@@ -44,7 +44,7 @@ class PostController extends Controller
         $post->save();
 
         return response()->json([
-            'message' => 'Post added successfully'
+            'success' => 'Post added successfully'
         ], 200);
     }
 
@@ -91,7 +91,7 @@ class PostController extends Controller
         }
         $post->delete();
         return response()->json([
-            'message' => 'Publication supprimée avec succès'
+            'success' => 'Publication supprimée avec succès'
         ], 200);
     }
 
@@ -106,7 +106,7 @@ class PostController extends Controller
         }
         $post->delete();
         return response()->json([
-            'message' => 'Publication supprimée avec succès'
+            'success' => 'Publication supprimée avec succès'
         ], 200);
     }
 
@@ -131,7 +131,7 @@ class PostController extends Controller
         $post->save();
 
         return response()->json([
-            'message' => 'Publication modifiée avec succès'
+            'success' => 'Publication modifiée avec succès'
         ], 200);
     }
 
@@ -162,7 +162,7 @@ class PostController extends Controller
         $post->save();
 
         return response()->json([
-            'message' => 'Photo modifiée avec succès'
+            'success' => 'Photo modifiée avec succès'
         ], 200);
     }
 

@@ -17,7 +17,7 @@ class ResultatsVotesController extends Controller
 
 
         return response()->json([
-            'message'=>'Resultats',
+            'success'=>'Resultats',
             'data'=>$resultats,
         ],200);
     }
@@ -39,7 +39,7 @@ class ResultatsVotesController extends Controller
 
 
         return response()->json([
-            'message'=>'Ajout avec succes',
+            'success'=>'Ajout avec succes',
             'data'=>$resultat,
         ],201);
     }
@@ -51,7 +51,7 @@ class ResultatsVotesController extends Controller
             ->get();
 
         return response()->json([
-            'message'=>'Liste des resultats',
+            'success'=>'Liste des resultats',
             'data'=>$resultat,
         ],200);
 
@@ -74,7 +74,7 @@ class ResultatsVotesController extends Controller
         }
 
         return response()->json([
-            'message'=>'Resultats',
+            'success'=>'Resultats',
             'data'=>$resultat,
         ],200);
 

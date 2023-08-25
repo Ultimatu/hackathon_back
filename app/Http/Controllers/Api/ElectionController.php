@@ -64,7 +64,7 @@ class ElectionController extends Controller
 
         $election->save();
 
-        return response()->json(['message' => 'Election ajoutée avec succès'], 200);
+        return response()->json(['success' => 'Election ajoutée avec succès'], 200);
     }
 
     public function updateData(Request $request, $id)
@@ -94,7 +94,7 @@ class ElectionController extends Controller
 
         $election->save();
 
-        return response()->json(['message' => 'Election modifiée avec succès'], 200);
+        return response()->json(['success' => 'Election modifiée avec succès'], 200);
     }
 
 
@@ -120,7 +120,7 @@ class ElectionController extends Controller
         $election->banner_url = $nameToFront;
         $election->save();
 
-        return response()->json(['message' => 'Election modifiée avec succès'], 200);
+        return response()->json(['success' => 'Election modifiée avec succès'], 200);
 
     }
 
@@ -147,7 +147,7 @@ class ElectionController extends Controller
         $election->image_url = $nameToFront;
         $election->save();
 
-        return response()->json(['message' => 'Election modifiée avec succès'], 200);
+        return response()->json(['success' => 'Election modifiée avec succès'], 200);
     }
 
 
@@ -161,7 +161,7 @@ class ElectionController extends Controller
         Storage::delete($election->banner_url);
         $election->delete();
 
-        return response()->json(['message' => 'Election supprimée avec succès'], 200);
+        return response()->json(['success' => 'Election supprimée avec succès'], 200);
     }
 
     public function getAllElections(){

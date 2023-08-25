@@ -37,7 +37,7 @@ class ResultatSondageController extends Controller
             'choix'=>$request->choix,
         ]);
         return response()->json([
-            'message'=>'Votre vote a été pris en compte, merci!',
+            'success'=>'Votre vote a été pris en compte, merci!',
 
         ],201);
     }
@@ -57,7 +57,7 @@ class ResultatSondageController extends Controller
         }
 
         return response()->json([
-            'message'=>'Votre vote',
+            'success'=>'Votre vote',
             'data'=>$resultatSondage,
         ],200);
     }
@@ -71,7 +71,7 @@ class ResultatSondageController extends Controller
             ->get();
 
         return response()->json([
-            'message'=>'Liste des votes',
+            'success'=>'Liste des votes',
             'data'=>$resultatSondage,
         ],200);
     }
@@ -94,7 +94,7 @@ class ResultatSondageController extends Controller
         $resultatSondage->delete();
 
         return response()->json([
-            'message'=>'Votre vote a été supprimé',
+            'success'=>'Votre vote a été supprimé',
         ],200);
     }
 
@@ -122,7 +122,7 @@ class ResultatSondageController extends Controller
         ]);
 
         return response()->json([
-            'message'=>'Votre vote a été modifié',
+            'success'=>'Votre vote a été modifié',
         ],200);
     }
 

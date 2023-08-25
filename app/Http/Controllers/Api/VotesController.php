@@ -35,7 +35,7 @@ class VotesController extends Controller
         ]);
 
         return response()->json([
-            'message'=>'Vous avez voté',
+            'success'=>'Vous avez voté',
             'data'=>$vote,
         ],201);
 
@@ -59,7 +59,7 @@ class VotesController extends Controller
         }
 
         return response()->json([
-            'message'=>'Vous avez déjà voté',
+            'success'=>'Vous avez déjà voté',
             'data'=>$vote,
         ],200);
 
@@ -75,7 +75,7 @@ class VotesController extends Controller
             ->get();
 
         return response()->json([
-            'message'=>'Liste des votes',
+            'success'=>'Liste des votes',
             'data'=>$vote,
         ],200);
 
@@ -101,13 +101,13 @@ class VotesController extends Controller
         $vote->delete();
 
         return response()->json([
-            'message'=>'Vous avez supprimé votre vote',
+            'success'=>'Vous avez supprimé votre vote',
         ],200);
 
     }
 
 
-    
+
 
 
 

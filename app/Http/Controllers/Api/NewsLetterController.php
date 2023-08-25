@@ -52,7 +52,7 @@ class NewsLetterController extends Controller
 
 
         return response()->json([
-            'message'=>'Votre email a été supprimé de la newsletter',
+            'success'=>'Votre email a été supprimé de la newsletter',
         ],200);
     }
 }

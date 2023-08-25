@@ -104,7 +104,7 @@ class LikeController extends Controller
         }
         $like->delete();
         return response()->json([
-            'message' => 'Like deleted successfully'
+            'success' => 'Like deleted successfully'
         ], 200);
     }
 
@@ -118,7 +118,7 @@ class LikeController extends Controller
         }
         Likes::where('id_user', $id_user)->where('id_post', $id_post)->delete();
         return response()->json([
-            'message' => 'Like deleted successfully'
+            'success' => 'Like deleted successfully'
         ], 200);
     }
 

@@ -30,7 +30,7 @@ class ElectionParticipantController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'Participant added successfully',
+            'success' => 'Participant added successfully',
             'data' => $electionParticipant,
         ], 201);
     }
@@ -43,7 +43,7 @@ class ElectionParticipantController extends Controller
             ->get();
 
         return response()->json([
-            'message' => 'Participant list',
+            'success' => 'Participant list',
             'data' => $electionParticipant,
         ], 200);
     }
@@ -67,7 +67,7 @@ class ElectionParticipantController extends Controller
         $electionParticipant->delete();
 
         return response()->json([
-            'message' => 'Participant deleted successfully',
+            'success' => 'Participant deleted successfully',
         ], 200);
     }
 
@@ -82,7 +82,7 @@ class ElectionParticipantController extends Controller
             ->get();
 
         return response()->json([
-            'message' => 'Participant list',
+            'success' => 'Participant list',
             'data' => $electionParticipant,
         ], 200);
     }
