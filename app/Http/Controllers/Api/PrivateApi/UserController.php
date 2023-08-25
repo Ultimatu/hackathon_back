@@ -890,7 +890,7 @@ class UserController extends Controller
     public function getFollowing(){
         $followerController = new FollowerController();
 
-        return $followerController->getFollowings(auth()->user()->id);
+        return $followerController->showFollowings();
 
     }
 

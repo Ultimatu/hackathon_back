@@ -70,9 +70,9 @@ class FollowerController extends Controller
     }
 
 
-    public function getFollowings(int $id_user)
+    public function getFollowings()
     {
-        $followings = Follower::where('id_user', $id_user)->get();
+        $followings = Follower::where('id_user', auth()->user()->id)->get();
 
         return response()->json([
             'success' => 'Liste des followings',
@@ -126,6 +126,20 @@ class FollowerController extends Controller
         return response()->json([
             'success' => 'Liste des followers',
             'followers' => $followers
+        ], 200);
+    }
+
+
+    //recuperer tout les candidats suivis par un utilisateur
+
+    public function showFollowings()
+    {
+        //select candidat followers with users datas
+        $followings = Follower::where('id_user', auth()->user()->id)->with('candidat')->get();
+
+        return response()->json([
+            'success' => 'Liste des followings',
+            'followings' => $followings
         ], 200);
     }
 
