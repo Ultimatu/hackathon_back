@@ -192,7 +192,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 
         //
-        Route::get('user/get-commune-posts', [PostController::class, 'getAllPostByCommune']);
+        Route::get('user/get-commune-posts/{commune}', [PostController::class, 'getAllPostByCommune']);
 
 
     });

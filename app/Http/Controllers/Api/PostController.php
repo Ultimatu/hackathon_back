@@ -167,9 +167,9 @@ class PostController extends Controller
     }
 
     //recuperer les publications des candidats qui sont dans la meme commune que l'utilisateur connecté
-    public function getAllPostByCommune()
+    public function getAllPostByCommune(string $commmune)
     {
-        $commmune = auth()->user()->commune;
+
 
         // tout les users, candidats et admins sont dans la meme table users avec un champ role_id qui indique le role de l'utilisateur,
         // candidat a un id_user  dans la table candidats et role_id = 2 dans la table users.. post a un id_candidat dans la table post ... donc on peut recuperer les posts des candidats qui sont dans la meme commune que l'utilisateur connecté en faisant une jointure entre les tables users, candidats et post
