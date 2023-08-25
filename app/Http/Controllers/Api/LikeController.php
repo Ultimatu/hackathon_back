@@ -39,7 +39,7 @@ class LikeController extends Controller
         $like->save();
 
         return response()->json([
-            'message' => 'Like added successfully'
+            'success' => 'Like added successfully'
         ], 200);
     }
 
