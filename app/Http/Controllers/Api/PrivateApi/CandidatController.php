@@ -94,10 +94,11 @@ class CandidatController extends Controller
     //get candidat by commune
     public function getCandidatByCommune(string $commune)
     {
+        //refaire la requette en ajoutant les données de l'utilisateur et son parti politique et ses followers
         $candidats = Candidat::join('users', 'candidats.user_id', '=', 'users.id')
             ->where('users.commune', $commune)
             ->select('candidats.*')
-            ->get();
+            ->with('user', 'partiPolitique', 'followers')->get();
 
         if ($candidats->count() > 0) {
             return response()->json([
