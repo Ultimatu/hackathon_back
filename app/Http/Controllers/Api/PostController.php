@@ -171,11 +171,19 @@ class PostController extends Controller
     {
         $commmune = auth()->user()->commune;
 
-        $posts = Post::whereHas('candidat', function ($query) use ($commmune) {
-            $query->where('commune', $commmune);
-        })->get();
+        // tout les users, candidats et admins sont dans la meme table users avec un champ role_id qui indique le role de l'utilisateur,
+        // candidat a un id_user  dans la table candidats et role_id = 2 dans la table users.. post a un id_candidat dans la table post ... donc on peut recuperer les posts des candidats qui sont dans la meme commune que l'utilisateur connecté en faisant une jointure entre les tables users, candidats et post
+
+        $posts = Post::join('candidats', 'posts.id_candidat', '=', 'candidats.id')
+            ->join('users', 'candidats.user_id', '=', 'users.id')
+            ->where('users.commune', $commmune)
+            ->select('posts.*')
+            ->get();
+
         if ($posts->count() > 0) {
-            return response($posts, 200);
+            return response()->json([
+                'posts' => $posts
+            ], 200);
         } else {
             return response()->json([
                 'message' => 'Pas de publications'
