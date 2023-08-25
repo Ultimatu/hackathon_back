@@ -119,6 +119,9 @@ Route::group(['prefix' => 'public'], function () {
     //search posts
     Route::get('posts/search/{val}', [PublicController::class, 'searchPosts'])->name('search-posts');
 
+    //get candidat by commune
+    Route::get('candidats/commune/{commune}', [PublicController::class, 'getCandidatsByCommune'])->name('candidats-by-commune');
+
 
 });
 

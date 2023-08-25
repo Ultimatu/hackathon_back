@@ -722,6 +722,31 @@ class PublicController extends Controller
 
 
 
+    //candidat by commune
+
+    /**
+     * @OA\Get(
+     *     path="/api/public/candidats/commune/{commune}",
+     *    tags={"Public API"},
+     *    summary="Récupérer les candidats d'une commune",
+     *   @OA\Parameter(
+     *        name="commune",
+     *      in="path",
+     *     description="Nom de la commune",
+     *   required=true,
+     *  @OA\Schema(type="string")
+     * ),
+     * @OA\Response(response="200", description="Candidats récupérés avec succès"),
+     * @OA\Response(response="404", description="Commune non trouvée"),
+     * )
+     */
+
+    public function getCandidatsByCommune($commune)
+    {
+        $candidatController = new CandidatController();
+
+        return $candidatController->getCandidatByCommune($commune);
+    }
 
 
 

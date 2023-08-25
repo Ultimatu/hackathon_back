@@ -92,6 +92,23 @@ class CandidatController extends Controller
         return $postcontroller->deletePost($id);
     }
 
+    //get candidat by commune
+    public function getCandidatByCommune(string $commune)
+    {
+        $candidats = Candidat::join('users', 'candidats.user_id', '=', 'users.id')
+            ->where('users.commune', $commune)
+            ->select('candidats.*')
+            ->get();
+
+        if ($candidats->count() > 0) {
+            return response()->json([
+                'data' => $candidats,
+                'message' => 'Liste des candidats récupérée avec succès'
+            ], 200);
+        } else {
+            return response()->json(['message' => 'Pas de candidats'], 404);
+        }
+    }
 
     //MEETS
 

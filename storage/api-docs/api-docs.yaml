@@ -554,6 +554,26 @@ paths:
       security:
         -
           bearerAuth: []
+  /api/private/user/get-commune-posts:
+    get:
+      tags:
+        - 'User Authenticated actions'
+      summary: "Récupérer tous les posts des d'une commune"
+      operationId: 157c7faafd18edf16516e4786637ac34
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Id du candidat'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'Liste des posts récupérée avec succès'
+        401:
+          description: 'Non autorisé'
   /api/private/candidat/add-post:
     post:
       tags:

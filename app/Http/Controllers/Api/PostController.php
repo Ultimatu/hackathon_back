@@ -166,13 +166,31 @@ class PostController extends Controller
         ], 200);
     }
 
-    //recuperer les publications des candidats qui sont dans la meme commune que l'utilisateur connecté
+    /**
+     * @OA\Get(
+     *     path="/api/private/user/get-commune-posts",
+     *     tags={"User Authenticated actions"},
+     *     summary="Récupérer tous les posts des d'une commune",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Id du candidat",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Liste des posts récupérée avec succès"),
+     *     @OA\Response(response="401", description="Non autorisé")
+     * )
+     */
+
     public function getAllPostByCommune(string $commmune)
     {
 
 
-        // tout les users, candidats et admins sont dans la meme table users avec un champ role_id qui indique le role de l'utilisateur,
-        // candidat a un id_user  dans la table candidats et role_id = 2 dans la table users.. post a un id_candidat dans la table post ... donc on peut recuperer les posts des candidats qui sont dans la meme commune que l'utilisateur connecté en faisant une jointure entre les tables users, candidats et post
+
 
         $posts = Post::join('candidats', 'posts.id_candidat', '=', 'candidats.id')
             ->join('users', 'candidats.user_id', '=', 'users.id')
