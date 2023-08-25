@@ -166,6 +166,23 @@ class PostController extends Controller
         ], 200);
     }
 
+    //recuperer les publications des candidats qui sont dans la meme commune que l'utilisateur connecté
+    public function getAllPostByCommune()
+    {
+        $commmune = auth()->user()->commune;
+
+        $posts = Post::whereHas('candidat', function ($query) use ($commmune) {
+            $query->where('commune', $commmune);
+        })->get();
+        if ($posts->count() > 0) {
+            return response($posts, 200);
+        } else {
+            return response()->json([
+                'message' => 'Pas de publications'
+            ], 404);
+        }
+    }
+
 
     public function searchPost(Request $request)
     {
@@ -247,10 +264,5 @@ class PostController extends Controller
             ], 404);
         }
     }
-
-
-
-
-
 
 }

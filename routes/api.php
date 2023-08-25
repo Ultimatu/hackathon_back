@@ -191,7 +191,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('user/get-following', [UserController::class, 'getFollowing']);
 
 
-
+        //
+        Route::get('user/get-commune-posts', [PostController::class, 'getAllPostByCommune']);
 
 
     });
