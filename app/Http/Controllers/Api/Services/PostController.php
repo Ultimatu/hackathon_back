@@ -171,11 +171,10 @@ class PostController extends Controller
      *     path="/api/public/commune-posts/{commune}",
      *     tags={"Public API"},
      *     summary="Récupérer tous les posts des d'une commune",
-     *     description="Récupérer tous les posts des d'une commune",
      *     operationId="getAllPostByCommune",
      *     @OA\Parameter(
      *     name="commune",
-     *     in="path"
+     *     in="path",
      *     description="Commune",
      *     required=true,
      *     @OA\Schema(
