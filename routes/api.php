@@ -117,8 +117,8 @@ Route::group(['prefix' => 'public'], function () {
     //get candidat by commune
     Route::get('candidats/commune/{commune}', [PublicController::class, 'getCandidatsByCommune'])->name('candidats-by-commune');
 
+    Route::get('commune-posts/{commune}', [PostController::class, 'getAllPostByCommune']);
 
-    Route::get('get-commune-posts/{commune}', [PostController::class, 'getAllPostByCommune']);
 
 
 

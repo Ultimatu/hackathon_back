@@ -168,8 +168,8 @@ class PostController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/public/get-commune-posts",
-     *     tags={"User Authenticated actions"},
+     *     path="/api/public/commune-posts",
+     *     tags={"Public API"},
      *     summary="Récupérer tous les posts des d'une commune",
      *     description="Récupérer tous les posts des d'une commune",
      *     operationId="getAllPostByCommune",
