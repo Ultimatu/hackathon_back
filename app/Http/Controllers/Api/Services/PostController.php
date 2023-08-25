@@ -175,7 +175,7 @@ class PostController extends Controller
      *     operationId="getAllPostByCommune",
      *     @OA\Parameter(
      *     name="commune",
-     *     in="path
+     *     in="path"
      *     description="Commune",
      *     required=true,
      *     @OA\Schema(
