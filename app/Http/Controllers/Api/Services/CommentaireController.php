@@ -60,7 +60,7 @@ class CommentaireController extends Controller
           else{
                 return response()->json([
                  'message' => 'Pas de commentaires'
-                ], 404);
+                ], 200);
           }
 
     }
