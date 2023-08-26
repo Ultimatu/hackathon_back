@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Services;
 
 use App\Http\Controllers\Controller;
-use App\Models\programmes;
+use App\Models\Programmes;
 use Illuminate\Http\Request;
 
 class ProgrammesController extends Controller
