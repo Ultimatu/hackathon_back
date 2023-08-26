@@ -54,7 +54,9 @@ class PostController extends Controller
     public function getAllPosts()
     {
 
-        $posts = Post::all()->with('candidat');
+        $posts = Post::all();
+        $posts->load('candidat');
+
         if ($posts->count() > 0 ){
             return response()->json([
                 'data' => $posts
@@ -252,7 +254,7 @@ class PostController extends Controller
         } else {
             return response()->json([
                 'message' => 'Pas de publications'
-            ], 200);    
+            ], 200);
         }
     }
 
