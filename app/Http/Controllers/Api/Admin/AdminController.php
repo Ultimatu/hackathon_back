@@ -38,6 +38,31 @@ class AdminController extends Controller
         ]);
     }
 
+
+    /**
+     * @OA\Get(
+     *    path="/api/admin/users/{id}",
+     *  tags={"Admin Actions"},
+     * summary="Récupérer un utilisateur",
+     * security={{"bearerAuth":{}}},
+     * @OA\Parameter(
+     *       name="id",
+     *        description="ID de l'utilisateur",
+     *       required=true,
+     *     in="path",
+     *     @OA\Schema(
+     *       type="integer",
+     *  ),
+     * ),
+     * @OA\Response(response="200", description="Succès - Utilisateur trouvé"),
+     * @OA\Response(response="400", description="Bad request - Utilisateur non trouvé")
+     *
+     *
+     *
+     * )
+     *
+     *
+     */
     public function getUser($id)
     {
         $user = User::find($id);
@@ -53,6 +78,29 @@ class AdminController extends Controller
             'data' => $user
         ]);
     }
+
+
+    /**
+     * @OA\Delete(
+     *  *    path="/api/admin/get-user/{id}",
+     *  tags={"Admin Actions"},
+     * summary="Supprimer un utilisateur",
+     * security={{"bearerAuth":{}}},
+     * @OA\Parameter(
+     *       name="id",
+     *        description="ID de l'utilisateur",
+     *       required=true,
+     *     in="path",
+     *     @OA\Schema(
+     *       type="integer",
+     *  ),
+     * ),
+     * @OA\Response(response="200", description="Succès - Utilisateur Supprimer"),
+     * @OA\Response(response="400", description="Bad request - Utilisateur non trouvé")
+     *
+     * )
+     *
+     */
 
     public function deleteUser($id)
     {
@@ -586,7 +634,7 @@ class AdminController extends Controller
             'email' => 'required|email',
             'phone' => 'required|string',
             'pt_id' => 'required|integer|exists:parti_politiques,id',
-            'photo_url' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'photo_url' => 'nullable|string|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
 
@@ -630,6 +678,14 @@ class AdminController extends Controller
 
             $addCandidatRequest['photo_url'] = $nameToFront;
         }
+        else if (is_string($addCandidatRequest['photo_url']) && $addCandidatRequest['photo_url'] != '') {
+            $nameToFront = $addCandidatRequest['photo_url'];
+        }
+        else{
+            $nameToFront = 'default_user.jpeg';
+        }
+
+        $userData['photo_url'] = $nameToFront;
 
         $newuser = User::create($userData);
 
@@ -749,7 +805,7 @@ class AdminController extends Controller
 
     public function deleteCandidat(int $id_user){
         $user = User::find($id_user);
-        $user->role_id = 1;
+        $user->role_id = 3;
         $user->save();
 
         $candidat = \App\Models\Candidat::where('user_id', $user->id)->delete();

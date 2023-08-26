@@ -10,7 +10,130 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/admin/users/{id}": {
+            "get": {
+                "tags": [
+                    "Admin Actions"
+                ],
+                "summary": "Récupérer un utilisateur",
+                "operationId": "76810072671a998e35597f70428c154e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'utilisateur",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succès - Utilisateur trouvé"
+                    },
+                    "400": {
+                        "description": "Bad request - Utilisateur non trouvé"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/get-user/{id}": {
+            "delete": {
+                "tags": [
+                    "Admin Actions"
+                ],
+                "summary": "Supprimer un utilisateur",
+                "operationId": "ed9d58449a17486c870c3dcbb3edbfa3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'utilisateur",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succès - Utilisateur Supprimer"
+                    },
+                    "400": {
+                        "description": "Bad request - Utilisateur non trouvé"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "not-defined-yet": {
+            "get": {
+                "tags": [
+                    "Candidat Authenticated Actions"
+                ],
+                "summary": "Récupérer  les  programmes d'un candidat",
+                "description": "Récupérer les  programmes d'un candidat",
+                "operationId": "7461c3a2db6a133a04477e68d63b5c62",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du candidat lié au programme",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Programme récupéré avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "Programme récupéré"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Programme"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Programme non trouvé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Programme non trouvé"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "put": {
                 "tags": [
                     "User Authenticated actions"
@@ -841,35 +964,6 @@
                 ]
             }
         },
-        "/api/private/user/get-commune-posts": {
-            "get": {
-                "tags": [
-                    "User Authenticated actions"
-                ],
-                "summary": "Récupérer tous les posts des d'une commune",
-                "operationId": "157c7faafd18edf16516e4786637ac34",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Id du candidat",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Liste des posts récupérée avec succès"
-                    },
-                    "401": {
-                        "description": "Non autorisé"
-                    }
-                }
-            }
-        },
         "/api/private/candidat/add-post": {
             "post": {
                 "tags": [
@@ -1352,6 +1446,23 @@
                 "responses": {
                     "200": {
                         "description": "Mot de passe reinitialise avec succes"
+                    },
+                    "404": {
+                        "description": "Utilisateur non trouve"
+                    }
+                }
+            }
+        },
+        "/api/private/user/get-my-datas": {
+            "get": {
+                "tags": [
+                    "User Authenticated actions"
+                ],
+                "summary": "Recuperer les donnees d'un utilisateur",
+                "operationId": "d3bf6351388534e762460ca72f787cc2",
+                "responses": {
+                    "200": {
+                        "description": "Donnees recuperees avec succes"
                     },
                     "404": {
                         "description": "Utilisateur non trouve"
@@ -2797,6 +2908,539 @@
                 }
             }
         },
+        "/api/public/candidats/commune/{commune}": {
+            "get": {
+                "tags": [
+                    "Public API"
+                ],
+                "summary": "Récupérer les candidats d'une commune",
+                "operationId": "0fc9d843fb1d866655bce68d0f4c6cf0",
+                "parameters": [
+                    {
+                        "name": "commune",
+                        "in": "path",
+                        "description": "Nom de la commune",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Candidats récupérés avec succès"
+                    },
+                    "404": {
+                        "description": "Commune non trouvée"
+                    }
+                }
+            }
+        },
+        "/api/public/commune-posts/{commune}": {
+            "get": {
+                "tags": [
+                    "Public API"
+                ],
+                "summary": "Récupérer tous les posts des d'une commune",
+                "operationId": "getAllPostByCommune",
+                "parameters": [
+                    {
+                        "name": "commune",
+                        "in": "path",
+                        "description": "Commune",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Liste des posts récupérée avec succès"
+                    },
+                    "401": {
+                        "description": "Non autorisé"
+                    }
+                }
+            }
+        },
+        "/api/private/candidat/add-programme": {
+            "post": {
+                "tags": [
+                    "Candidat Authenticated Actions"
+                ],
+                "summary": "Ajouter un programme",
+                "description": "Ajouter un programme",
+                "operationId": "04c6e44508caa6c83113a3f143285b74",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Programme"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Programme ajouté avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "Programme ajouté"
+                                        },
+                                        "programme": {
+                                            "$ref": "#/components/schemas/Programme"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Vous avez deja ajouté ce programme"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/public/programme/{val}": {
+            "get": {
+                "tags": [
+                    "Candidat Authenticated Actions"
+                ],
+                "summary": "Rechercher un programme",
+                "description": "Rechercher un programme",
+                "operationId": "b52d58eb13df43723440c455088c0982",
+                "parameters": [
+                    {
+                        "name": "val",
+                        "in": "path",
+                        "description": "valeur de la recherche du programme",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Programme récupéré avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "Programme récupéré"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Programme"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Programme non trouvé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Programme non trouvé"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/private/candidat/update-programme/{id}": {
+            "put": {
+                "tags": [
+                    "Candidat Authenticated Actions"
+                ],
+                "summary": "Modifier un programme",
+                "description": "Modifier un programme",
+                "operationId": "71d9ba4a8f3da64b6595871722775d3f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du programme",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Programme"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Programme modifié avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "Programme modifié"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Programme non trouvé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Programme non trouvé"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/private/candidat/delete-programme/{id}": {
+            "delete": {
+                "tags": [
+                    "Candidat Authenticated Actions"
+                ],
+                "summary": "Supprimer un programme",
+                "description": "Supprimer un programme",
+                "operationId": "24bcdae77f0805eb3d1d8da7acd512d1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du programme",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Programme supprimé avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "Programme supprimé"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Programme non trouvé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Programme non trouvé"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/private/candidat/my-programmes": {
+            "get": {
+                "tags": [
+                    "Candidat Authenticated Actions"
+                ],
+                "summary": "Récupérer tous les programmes d'un candidat",
+                "description": "Récupérer tous les programmes d'un candidat",
+                "operationId": "d7ed19a77e50729a27d898db21431c8d",
+                "responses": {
+                    "200": {
+                        "description": "Programme récupéré avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "Programme récupéré"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Programme"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Programme non trouvé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Programme non trouvé"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/private/user/programmes-not-reacted": {
+            "get": {
+                "tags": [
+                    "User Authenticated Actions"
+                ],
+                "summary": "Récupérer tous les programmes d'un candidat",
+                "description": "Récupérer tous les programmes d'un candidat",
+                "operationId": "be9e33143507814af3252180f3804f1b",
+                "parameters": [
+                    {
+                        "name": "id_candidat",
+                        "in": "path",
+                        "description": "ID du candidat lié au programme",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Programme récupéré avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "Programme récupéré"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Programme"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Programme non trouvé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Programme non trouvé"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/public/all-programmes/{id_candidat}": {
+            "get": {
+                "tags": [
+                    "Public API"
+                ],
+                "summary": "Récupérer tous les programmes d'un candidat",
+                "description": "Récupérer tous les programmes d'un candidat",
+                "operationId": "6b9451e4a40bf27b2ccb4ba42b2b326c",
+                "parameters": [
+                    {
+                        "name": "id_candidat",
+                        "in": "path",
+                        "description": "ID du candidat lié au programme",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Programme récupéré avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "Programme récupéré"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Programme"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Programme non trouvé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Programme non trouvé"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/private/user/add-programme-reaction": {
+            "post": {
+                "tags": [
+                    "User Authenticated Actions"
+                ],
+                "summary": "Add a reaction to a programme",
+                "description": "Add a reaction to a programme",
+                "operationId": "addProgrammeReaction",
+                "requestBody": {
+                    "description": "Programme reaction object that needs to be added to the store",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResultatProgramme"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Programme reaction added successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "Programme reaction added successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Message d'erreur pour les champs non valides",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Les données fournies sont invalides"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/auth/login": {
             "post": {
                 "tags": [
@@ -3375,6 +4019,43 @@
                 },
                 "type": "object"
             },
+            "Programme": {
+                "title": "Programme",
+                "description": "Modèle de programme",
+                "properties": {
+                    "id_candidat": {
+                        "description": "ID du candidat lié au programme",
+                        "type": "integer"
+                    },
+                    "titre": {
+                        "description": "Titre du programme",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Description du programme",
+                        "type": "string"
+                    },
+                    "url_media": {
+                        "description": "URL du média associé au programme",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Date et heure de création",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": "true",
+                        "nullable": true
+                    },
+                    "updated_at": {
+                        "description": "Date et heure de mise à jour",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": "true",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
             "ResultatSondage": {
                 "title": "ResultatSondage",
                 "description": "Modèle de résultat de sondage",
@@ -3431,6 +4112,39 @@
                     "rang": {
                         "description": "Rang du candidat dans les résultats",
                         "type": "integer"
+                    },
+                    "created_at": {
+                        "description": "Date et heure de création",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": "true",
+                        "nullable": true
+                    },
+                    "updated_at": {
+                        "description": "Date et heure de mise à jour",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": "true",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "ResultatProgramme": {
+                "title": "Resultat Programme",
+                "description": "Modèle de résultat de programme",
+                "properties": {
+                    "id_programme": {
+                        "description": "ID du programme associé au résultat",
+                        "type": "integer"
+                    },
+                    "id_user": {
+                        "description": "ID de l'utilisateur lié au résultat",
+                        "type": "integer"
+                    },
+                    "avis": {
+                        "description": "Avis de l'utilisateur sur le programme",
+                        "type": "string"
                     },
                     "created_at": {
                         "description": "Date et heure de création",

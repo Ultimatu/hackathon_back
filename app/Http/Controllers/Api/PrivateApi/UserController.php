@@ -37,6 +37,9 @@ class UserController extends Controller
 
     public function addPhoto(Request $request)
     {
+        $request->validate([
+            'photo_url' => 'required|image|mimes:jpeg,png,jpg,gif,svg|string'
+        ]);
         $id = auth()->user()->id;
         $user = User::find($id);
         if (!$user) {
@@ -45,16 +48,24 @@ class UserController extends Controller
             ], 404);
         }
 
+        //verifier si c'est un string
+        if (is_string($request->photo_url) && $request->photo_url != null) {
+            $user->photo_url = $request->photo_url;
+            $user->save();
+            return response()->json([
+                'success' => 'Photo added successfully'
+            ], 200);
+        }
 
-       //recuperer le fichier
+
         $file = $request->file('photo_url');
         if (!$file) {
             return response()->json([
-                'message' => 'Photo non trouvee'
+                'message' => 'Veuillez choisir une photo'
             ], 404);
         }
         if ($user->photo_url) {
-            Storage::delete('public/photos/' . $user->photo_url);
+            Storage::delete($user->photo_url);
         }
         //recuperer le nom du fichier
         $fileName = $file->getClientOriginalName();
@@ -75,7 +86,7 @@ class UserController extends Controller
 
 
         return response()->json([
-            'message' => 'Photo added successfully'
+            'success' => 'Photo added successfully'
         ], 200);
     }
 
@@ -131,7 +142,7 @@ class UserController extends Controller
         $user->save();
 
         return response()->json([
-            'message' => 'Utilisateur modifie avec succes'
+            'success' => 'Utilisateur modifie avec succes'
         ], 200);
     }
 
@@ -173,7 +184,7 @@ class UserController extends Controller
         $user->save();
 
         return response()->json([
-            'message' => 'Mot de passe modifie avec succes'
+            'success' => 'Mot de passe modifie avec succes'
         ], 200);
     }
 
@@ -231,7 +242,7 @@ class UserController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/private/user/get-user-datas",
+     *     path="/api/private/user/get-my-datas",
      *     tags={"User Authenticated actions"},
      *     summary="Recuperer les donnees d'un utilisateur",
      *     @OA\Response(response="200", description="Donnees recuperees avec succes"),

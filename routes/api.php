@@ -5,6 +5,8 @@ use App\Http\Controllers\Api\PrivateApi\CandidatController;
 use App\Http\Controllers\Api\PrivateApi\UserController;
 use App\Http\Controllers\Api\PublicApi\PublicController;
 use App\Http\Controllers\Api\Services\PostController;
+use App\Http\Controllers\Api\Services\ProgrammesController;
+use App\Http\Controllers\Api\Services\ResultatsProgrammesController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -119,6 +121,11 @@ Route::group(['prefix' => 'public'], function () {
 
     Route::get('commune-posts/{commune}', [PostController::class, 'getAllPostByCommune']);
 
+     //programme
+    Route::get('all-programmes/{id_candidat}', [ProgrammesController::class, 'getAllProgrammes']);
+
+    Route::get('programme/{val}', [ProgrammesController::class, 'searchProgrammes']);
+
 
 
 
@@ -195,8 +202,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('user/get-following', [UserController::class, 'getFollowing']);
 
 
-        //posts
+        //programme
 
+        Route::get('user/programmes-not-reacted/{id_candidat}', [ProgrammesController::class, 'getAllProgrammesNotReacted']);
+
+        Route::post('user/add-programme-reaction', [ResultatsProgrammesController::class, 'addProgrammeReaction']);
 
     });
 });
@@ -234,6 +244,16 @@ Route::middleware(['auth:sanctum', 'candidat'])->group(function () {
 
         Route::get('/count-my-followers', [CandidatController::class, 'countMyFollowers'])->name('countFollowers');
 
+        //programmes
+
+        Route::post('add-programme', [ProgrammesController::class, 'addProgramme']);
+
+        Route::put('update-programme/{id}', [ProgrammesController::class, 'updateProgramme']);
+
+        Route::delete('delete-programme/{id}', [ProgrammesController::class, 'destroy']);
+
+        Route::get('my-programmes', [ProgrammesController::class, 'getAllMyProgrammes']);
+
     });
 
 
@@ -244,7 +264,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::prefix('/admin')->group(function () {
         Route::get('/users', [AdminController::class, 'getAllUsers'])->name('users');
         Route::get('/users/{id}', [AdminController::class, 'getUser'])->name('user');
-        Route::delete('/users/{id}', [AdminController::class, 'deleteUser'])->name('deleteUser');
+        Route::delete('/get-user/{id}', [AdminController::class, 'deleteUser'])->name('deleteUser');
 
 
         //election

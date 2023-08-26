@@ -75,7 +75,7 @@ class AuthController extends Controller
         //revoquer les anciens tokens
         auth()->user()->tokens()->delete();
 
-        $token = auth()->user()->createToken('ApiToken')->plainTextToken;
+        $token = auth()->user()->createToken('auth_token')->plainTextToken;
         $user = auth()->user();
         return response()->json([
             'user' => $user,
@@ -106,7 +106,7 @@ class AuthController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      * @throws \Exception
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     * @throws 
+     * @throws
      */
 
     public function register(UserRequest $request)
@@ -123,7 +123,7 @@ class AuthController extends Controller
         $request = $request->validated();
 
         $request['password'] = bcrypt($request['password']);
-        /*if ($request->hasFile('photo_url')) {
+        if ($request->hasFile('photo_url')) {
             $file = $request['photo_url'];
             //recuperer le nom du fichier
             $fileName = $file->getClientOriginalName();
@@ -141,12 +141,12 @@ class AuthController extends Controller
             $nameToFront = 'storage/photos/' . $fileNameToStore;
 
             $request['photo_url'] = $nameToFront;
-        }*/
+        }
 
         $user = User::create($request);
 
 
-        $tokens = $user->createToken('ApiToken')->plainTextToken;
+        $tokens = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'user' => $user,

@@ -50,7 +50,7 @@ class Programmes extends Model
         return $this->belongsTo(Candidat::class, 'id_candidat');
     }
 
-    public function resultats()
+    public function resultatsProgrammes()
     {
         return $this->hasMany(ResultatsProgrammes::class, 'id_programme');
     }

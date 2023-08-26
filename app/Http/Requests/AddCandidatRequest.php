@@ -46,7 +46,7 @@ class AddCandidatRequest extends FormRequest
             'nom', 'required|string',
             'prenom', 'required|string',
             'bio', 'string',
-            'photo_url', 'image',
+            'photo_url', 'image|string',
             'commune', 'required|string',
             'phone', 'required|string|unique:users,phone',
             'email', 'required|email|unique:users,email',

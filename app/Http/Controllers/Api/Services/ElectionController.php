@@ -16,10 +16,10 @@ class ElectionController extends Controller
             'description' => 'required|string',
             'nom' => 'required|string',
             'duration' => 'required|string',
-            'image_url'=> ['image','mimes:jpeg,png,jpg,gif,svg', 'nullable'],
+            'image_url'=> 'string|image|mimes:jpeg,png,jpg,gif,svg',
             'type' => 'required|string', // 'presidentielle' ou 'legislative
             'status' => 'required|string', // 'en cours' ou 'terminée
-            'banner_url'=> ['image','mimes:jpeg,png,jpg,gif,svg', 'nullable'],
+            'banner_url'=> 'string|image|mimes:jpeg,png,jpg,gif,svg',
             'date_debut' => 'required|date',
             'date_fin' => 'required|date',
         ]);
@@ -106,9 +106,16 @@ class ElectionController extends Controller
         }
 
 
+
         $request->validate([
-            'banner_url'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|',
+            'banner_url'=> 'required|string|image|mimes:jpeg,png,jpg,gif,svg|',
         ]);
+        if (is_string($request->banner_url) && $request->banner_url != 'null') {
+
+            $election->banner_url = $request->banner_url;
+            $election->save();
+            return response()->json(['success' => 'Election modifiée avec succès'], 200);
+        }
 
         $file = $request->file('banner_url');
         $fileName = $file->getClientOriginalName();
@@ -134,9 +141,15 @@ class ElectionController extends Controller
 
 
         $request->validate([
-            'image_url' => 'required|image|mimes:jpeg,png,jpg,gif,svg|',
+            'image_url' => 'required|string|image|mimes:jpeg,png,jpg,gif,svg|',
         ]);
 
+        if (is_string($request->image_url) && $request->image_url != 'null') {
+
+            $election->image_url = $request->image_url;
+            $election->save();
+            return response()->json(['success' => 'Election modifiée avec succès'], 200);
+        }
         $file = $request->file('image_url');
         $fileName = $file->getClientOriginalName();
         $extension = $file->getClientOriginalExtension();
@@ -157,15 +170,17 @@ class ElectionController extends Controller
         if (!$election) {
             return response()->json(['message' => 'Election non trouvée'], 404);
         }
-        Storage::delete($election->image_url);
-        Storage::delete($election->banner_url);
+        if (file_exists($election->image_url) && $election->image_url != 'elections/default.jpg')
+            Storage::delete($election->image_url);
+        if (file_exists($election->banner_url) && $election->banner_url != 'elections/default.jpg')
+            Storage::delete($election->banner_url);
         $election->delete();
 
         return response()->json(['success' => 'Election supprimée avec succès'], 200);
     }
 
     public function getAllElections(){
-        $elections = Elections::all();
+        $elections = Elections::all()->with('candidat');
         if ($elections->count() > 0) {
             return response()->json([
                 'data' => $elections

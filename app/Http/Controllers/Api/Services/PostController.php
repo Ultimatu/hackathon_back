@@ -20,7 +20,7 @@ class PostController extends Controller
             'id_candidat' => 'required|integer|exists:candidats,id',
             'titre' => 'required|string',
             'description' => 'required|string',
-            'url_media' => 'nullable|mimes:jpeg,png,gif,mp4,mov,avi',
+            'url_media' => 'nullable|image|string|mimes:jpeg,png,gif,mp4,mov,avi',
         ]);
 
         if ($request->hasFile("url_media")){
@@ -30,6 +30,9 @@ class PostController extends Controller
             $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
             $file->move('storage/posts', $fileNameToStore);
             $nameToFront = 'storage/posts/' . $fileNameToStore;
+        }
+        else if ($request->input('url_media') != null && is_string($request->input('url_media'))){
+            $nameToFront = $request->input('url_media');
         }
         else{
             $nameToFront = 'storage/posts/posts';
@@ -51,7 +54,7 @@ class PostController extends Controller
     public function getAllPosts()
     {
 
-        $posts = Post::all();
+        $posts = Post::all()->with('candidat');
         if ($posts->count() > 0 ){
             return response()->json([
                 'data' => $posts
@@ -145,8 +148,15 @@ class PostController extends Controller
         }
 
         $request->validate([
-            'url_media' => 'required|mimes:jpeg,png,gif,mp4,mov,avi',
+            'url_media' => 'required|string|mimes:jpeg,png,gif,mp4,mov,avi',
         ]);
+        if (is_string($request->input('url_media')) && $request->input('url_media') != null){
+            $post->url_media = $request->input('url_media');
+            $post->save();
+            return response()->json([
+                'success' => 'Photo modifiée avec succès'
+            ], 200);
+        }
 
         $file = $request->file('url_media');
         $fileName = $file->getClientOriginalName();
@@ -189,8 +199,6 @@ class PostController extends Controller
 
     public function getAllPostByCommune(string $commune)
     {
-
-
 
 
         $posts = Post::join('candidats', 'posts.id_candidat', '=', 'candidats.id')

@@ -46,7 +46,7 @@ class PartiPolitiqueController extends Controller
         $request->validate([
             'nom' => 'required|string',
             'description' => 'required|string',
-            'logo' => ['nullable', 'mimes:jpeg,png,gif,mp4,mov,avi']
+            'logo' => 'nullable|image|string|mimes:jpeg,png,gif,mp4,mov,avi',
         ]);
 
         //verifier si le parti politique existe deja
@@ -64,6 +64,9 @@ class PartiPolitiqueController extends Controller
             $fileName = $fileName . '_' . time() . '.' . $extension;
             $file->move('storage/partisPolitiques', $fileName);
             $nameToFront = 'storage/partisPolitiques/' . $fileName;
+        }
+        else if (is_string($request->input('logo')) && $request->input('logo') != null){
+            $nameToFront = $request->input('logo');
         }
         else {
             $nameToFront = 'partisPolitiques/default.jpg';
