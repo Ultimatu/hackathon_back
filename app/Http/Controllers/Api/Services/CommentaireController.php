@@ -12,6 +12,8 @@ class CommentaireController extends Controller
 
     public function addCommentaire(Request $request)
     {
+        $id_user = auth()->user()->id;
+        $request['id_user'] = $id_user;
         $request->validate([
             'id_post' => 'required|integer|exists:posts,id',
             'id_user' => 'required|integer|exists:users,id',
