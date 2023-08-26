@@ -227,6 +227,34 @@ class UserController extends Controller
 
 
 
+    //getUserDatas
+
+    /**
+     * @OA\Get(
+     *     path="/api/private/user/get-user-datas",
+     *     tags={"User Authenticated actions"},
+     *     summary="Recuperer les donnees d'un utilisateur",
+     *     @OA\Response(response="200", description="Donnees recuperees avec succes"),
+     *     @OA\Response(response="404", description="Utilisateur non trouve")
+     * )
+     */
+    public function getUserDatas(){
+        $id = auth()->user()->id;
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json([
+                'message' => 'Utilisateur non trouve'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => 'Donnees recuperees avec succes',
+            'data' => $user
+        ], 200);
+    }
+
+
+
 
     //comments
 

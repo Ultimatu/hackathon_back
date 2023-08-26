@@ -136,6 +136,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         // Data
         Route::put('user/update-datas', [UserController::class, 'updateDatas']);
 
+        Route::get('user/get-my-datas', [UserController::class, 'getUserDatas']);
+
         // Password
         Route::put('user/update-password', [UserController::class, 'updatePassword']);
 
@@ -201,7 +203,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 
 /*
-  CANDIDAT Authenticated api's
+*  CANDIDAT Authenticated app's
 */
 
 Route::middleware(['auth:sanctum', 'candidat'])->group(function () {
