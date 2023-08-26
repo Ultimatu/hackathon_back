@@ -52,7 +52,7 @@ class CommentaireController extends Controller
 
     public function getPostCommentaires(int $id)
      {
-          $commentaires = Commentaire::where('id_post', $id)->get();
+          $commentaires = Commentaire::where('id_post', $id)->with('user')->get();
           if ($commentaires->count() > 0){
                 return response()->json([
                     'success' => 'Commentaires trouvés',
