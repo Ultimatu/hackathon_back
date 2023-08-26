@@ -235,7 +235,7 @@ class ProgrammesController extends Controller
             'id_candidat' => 'required|exists:candidats,id',
             'titre' => 'required|string',
             'description' => 'required|string',
-            'url_media' => 'nullable|string|image|mimes:jpeg,png,jpg,gif,svg|video|mimes:mp4,mov,ogg,qt'
+            'url_media' => 'nullable'
         ]);
         if ($request->hasFile('url_media')) {
             $file = $request->file('url_media');

@@ -19,7 +19,7 @@ class SondageController extends Controller
             'description'  => 'required|string',
             'date_debut' => 'nullable|datetime',
             'date_fin' => 'nullable|datetime',
-            'url_media' => ['image','mimes:jpeg,png,jpg,gif,svg', 'nullable'],
+            'url_media' => 'nullable',
             'id_type_sondage' => 'integer|exists:types_sondages,id|nullable',
             'commune' => 'required|string'
         ]);
@@ -60,7 +60,7 @@ class SondageController extends Controller
             'description'  => 'required|string',
             'date_debut' => 'nullable|datetime',
             'date_fin' => 'nullable|datetime',
-            'url_media' => ['image','mimes:jpeg,png,jpg,gif,svg', 'nullable'],
+            'url_media' => 'nullable',
             'id_type_sondage' => 'integer|exists:types_sondages,id|nullable',
             'commune' => 'required|string'
         ]);
@@ -85,7 +85,8 @@ class SondageController extends Controller
             $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
             $file->move('storage/sondages', $fileNameToStore);
             $nameToFront = 'storage/sondages/' . $fileNameToStore;
-            Storage::delete($sondage->url_media);
+           if ($sondage->url_media != 'sondages/default.jpg' && file_exists($sondage->url_media)){
+               unlink($sondage->url_media);
             $sondage->url_media = $nameToFront;
         }
 

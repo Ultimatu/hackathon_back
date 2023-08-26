@@ -46,7 +46,7 @@ class PartiPolitiqueController extends Controller
         $request->validate([
             'nom' => 'required|string',
             'description' => 'required|string',
-            'logo' => 'nullable|image|string|mimes:jpeg,png,gif,mp4,mov,avi',
+            'logo' => 'nullable',
         ]);
 
         //verifier si le parti politique existe deja
@@ -56,17 +56,16 @@ class PartiPolitiqueController extends Controller
                 'message' => 'Parti politique existe deja'
             ], 409);
         }
-
-        if ($request->hasFile('logo')){
+        if (is_string($request->input('logo')) && $request->input('logo') != null){
+            $nameToFront = $request->input('logo');
+        }
+        else if ($request->hasFile('logo')){
             $file = $request->file('logo');
             $fileName = $file->getClientOriginalName();
             $extension = $file->getClientOriginalExtension();
             $fileName = $fileName . '_' . time() . '.' . $extension;
             $file->move('storage/partisPolitiques', $fileName);
             $nameToFront = 'storage/partisPolitiques/' . $fileName;
-        }
-        else if (is_string($request->input('logo')) && $request->input('logo') != null){
-            $nameToFront = $request->input('logo');
         }
         else {
             $nameToFront = 'partisPolitiques/default.jpg';
@@ -131,7 +130,8 @@ class PartiPolitiqueController extends Controller
         $file->move('storage/partisPolitiques', $fileName);
         $nameToFront = 'storage/partisPolitiques/' . $fileName;
 
-        Storage::delete($partiPolitique->logo);
+        if (file_exists($partiPolitique->logo) && $partiPolitique->logo != 'partisPolitiques/default.jpg')
+            Storage::delete($partiPolitique->logo);
         $partiPolitique->logo = $nameToFront;
         $partiPolitique->save();
 
@@ -149,7 +149,8 @@ class PartiPolitiqueController extends Controller
                 'message' => 'Parti politique non trouvé'
             ], 404);
         }
-        Storage::delete($partiPolitique->logo);
+        if (file_exists($partiPolitique->logo) && $partiPolitique->logo != 'partisPolitiques/default.jpg')
+            Storage::delete($partiPolitique->logo);
 
         $partiPolitique->delete();
         return response()->json([

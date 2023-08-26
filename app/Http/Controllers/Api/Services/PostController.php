@@ -20,7 +20,7 @@ class PostController extends Controller
             'id_candidat' => 'required|integer|exists:candidats,id',
             'titre' => 'required|string',
             'description' => 'required|string',
-            'url_media' => 'nullable|image|string|mimes:jpeg,png,gif,mp4,mov,avi',
+            'url_media' => 'nullable',
         ]);
 
         if ($request->hasFile("url_media")){
@@ -150,7 +150,7 @@ class PostController extends Controller
         }
 
         $request->validate([
-            'url_media' => 'required|string|mimes:jpeg,png,gif,mp4,mov,avi',
+            'url_media' => 'required|string',
         ]);
         if (is_string($request->input('url_media')) && $request->input('url_media') != null){
             $post->url_media = $request->input('url_media');

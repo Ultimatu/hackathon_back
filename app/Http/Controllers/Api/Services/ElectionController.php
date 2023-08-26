@@ -16,10 +16,10 @@ class ElectionController extends Controller
             'description' => 'required|string',
             'nom' => 'required|string',
             'duration' => 'required|string',
-            'image_url'=> 'string|image|mimes:jpeg,png,jpg,gif,svg',
+            'image_url'=> 'nullable',
             'type' => 'required|string', // 'presidentielle' ou 'legislative
             'status' => 'required|string', // 'en cours' ou 'terminée
-            'banner_url'=> 'string|image|mimes:jpeg,png,jpg,gif,svg',
+            'banner_url'=> 'nullable',
             'date_debut' => 'required|date',
             'date_fin' => 'required|date',
         ]);
@@ -123,7 +123,8 @@ class ElectionController extends Controller
         $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
         $file->move('storage/elections', $fileNameToStore);
         $nameToFront = 'storage/elections/' . $fileNameToStore;
-        Storage::delete($election->banner_url);
+        if (file_exists($election->banner_url) && $election->banner_url != 'elections/default.jpg')
+            Storage::delete($election->banner_url);
         $election->banner_url = $nameToFront;
         $election->save();
 
@@ -141,7 +142,7 @@ class ElectionController extends Controller
 
 
         $request->validate([
-            'image_url' => 'required|string|image|mimes:jpeg,png,jpg,gif,svg|',
+            'image_url' => 'required',
         ]);
 
         if (is_string($request->image_url) && $request->image_url != 'null') {
@@ -156,7 +157,9 @@ class ElectionController extends Controller
         $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
         $file->move('storage/elections', $fileNameToStore);
         $nameToFront = 'storage/elections/' . $fileNameToStore;
-        Storage::delete($election->image_url);
+        if (file_exists($election->image_url) && $election->image_url != 'elections/default.jpg')
+            Storage::delete($election->image_url);
+
         $election->image_url = $nameToFront;
         $election->save();
 
