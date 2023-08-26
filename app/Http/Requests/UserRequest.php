@@ -28,12 +28,12 @@ class UserRequest extends FormRequest
             'password' => 'required|string',
             'role_id' => 'required|exists:roles,id',
             'phone' => 'required|string|unique:users,phone',
-            'commune'=>'required|string',
-            'numero_cni'=>'string|unique:users,numero_cni',
-            'adresse'=>'string',
-            'elector_card'=>'string|unique:users,elector_card',
-            'photo_url'=>'image|string',
-
+            'commune' => 'required|string',
+            'numero_cni' => 'string|unique:users,numero_cni',
+            'adresse' => 'string',
+            'elector_card' => 'string|unique:users,elector_card',
+            'photo_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|string',
         ];
-    }
+
+    }       
 }
