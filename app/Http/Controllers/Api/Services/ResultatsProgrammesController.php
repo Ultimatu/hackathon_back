@@ -12,7 +12,7 @@ class ResultatsProgrammesController extends Controller
     /**
      * @OA\Post(
      *    path="/api/private/user/add-programme-reaction",
-     *    tags={"User Authenticated Actions"},
+     *    tags={"User Authenticated actions"},
      *    summary="Add a reaction to a programme",
      *    description="Add a reaction to a programme",
      *    operationId="addProgrammeReaction",
