@@ -12,6 +12,7 @@ class CommentaireController extends Controller
 
     public function addCommentaire(Request $request)
     {
+        dd($request->all());
         $id_user = auth()->user()->id;
         $request['id_user'] = $id_user;
         $request->validate([
