@@ -27,7 +27,7 @@ class CommentaireController extends Controller
         $commentaire->save();
 
         return response()->json([
-            'message' => 'Commentaire added successfully'
+            'success' => 'Commentaire added successfully'
         ], 200);
     }
 
@@ -55,6 +55,7 @@ class CommentaireController extends Controller
           $commentaires = Commentaire::where('id_post', $id)->get();
           if ($commentaires->count() > 0){
                 return response()->json([
+                    'success' => 'Commentaires trouvés',
                  'data' => $commentaires
                 ], 200);
           }
@@ -95,7 +96,7 @@ class CommentaireController extends Controller
         }
         $commentaire->delete();
         return response()->json([
-            'message' => 'Commentaire supprimé avec succès'
+            'success' => 'Commentaire supprimé avec succès'
         ], 200);
     }
 
