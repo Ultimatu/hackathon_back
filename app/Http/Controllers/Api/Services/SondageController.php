@@ -87,6 +87,7 @@ class SondageController extends Controller
             $nameToFront = 'storage/sondages/' . $fileNameToStore;
            if ($sondage->url_media != 'sondages/default.jpg' && file_exists($sondage->url_media)){
                unlink($sondage->url_media);
+           }
             $sondage->url_media = $nameToFront;
         }
 
@@ -96,6 +97,7 @@ class SondageController extends Controller
             'success' => 'Sondage modifié avec succès'
         ], 200);
     }
+
 
 
 
