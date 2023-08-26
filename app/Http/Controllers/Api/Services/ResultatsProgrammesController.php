@@ -9,8 +9,6 @@ use Illuminate\Http\Request;
 class ResultatsProgrammesController extends Controller
 {
 
-
-
     /**
      * @OA\Post(
      *    path="/api/private/user/add-programme-reaction",

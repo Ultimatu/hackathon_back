@@ -12,7 +12,7 @@ class ProgrammesController extends Controller
     /**
      * @OA\Post(
      *   path="/api/private/candidat/add-programme",
-     *   tags={"Candidat Authenticated Actions"},
+     *   tags={"Candidat Authenticated actions"},
      *   summary="Ajouter un programme",
      *   description="Ajouter un programme",
      *   @OA\RequestBody(
@@ -85,7 +85,7 @@ class ProgrammesController extends Controller
     /**
      * @OA\Get(
      *     path="not-defined-yet",
-     *     tags={"Candidat Authenticated Actions"},
+     *     tags={"Candidat Authenticated actions"},
      *     summary="Récupérer  les  programmes d'un candidat",
      *     description="Récupérer les  programmes d'un candidat",
      *     @OA\Parameter(
@@ -135,7 +135,7 @@ class ProgrammesController extends Controller
     /**
      * @OA\Get(
      *     path="/api/public/programme/{val}",
-     *     tags={"Candidat Authenticated Actions"},
+     *     tags={"Candidat Authenticated actions"},
      *     summary="Rechercher un programme",
      *     description="Rechercher un programme",
      *     @OA\Parameter(
@@ -186,7 +186,7 @@ class ProgrammesController extends Controller
     /**
      * @OA\Put(
      *     path="/api/private/candidat/update-programme/{id}",
-     *     tags={"Candidat Authenticated Actions"},
+     *     tags={"Candidat Authenticated actions"},
      *     summary="Modifier un programme",
      *     description="Modifier un programme",
      *     @OA\Parameter(
@@ -265,7 +265,7 @@ class ProgrammesController extends Controller
     /**
      * @OA\Delete(
      *     path="/api/private/candidat/delete-programme/{id}",
-     *     tags={"Candidat Authenticated Actions"},
+     *     tags={"Candidat Authenticated actions"},
      *     summary="Supprimer un programme",
      *     description="Supprimer un programme",
      *     @OA\Parameter(
@@ -313,7 +313,7 @@ class ProgrammesController extends Controller
     /**
      * @OA\Get(
      *     path="/api/private/candidat/my-programmes",
-     *     tags={"Candidat Authenticated Actions"},
+     *     tags={"Candidat Authenticated actions"},
      *     summary="Récupérer tous les programmes d'un candidat",
      *     description="Récupérer tous les programmes d'un candidat",
      *
