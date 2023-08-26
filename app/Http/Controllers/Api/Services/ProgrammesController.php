@@ -355,7 +355,7 @@ class ProgrammesController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/private/user/programmes-not-reacted",
+     *     path="/api/private/user/programmes-not-reacted/{id_candidat}",
      *     tags={"User Authenticated actions"},
      *     summary="Récupérer tous les programmes d'un candidat",
      *     description="Récupérer tous les programmes d'un candidat",
