@@ -634,7 +634,7 @@ class AdminController extends Controller
             'email' => 'required|email',
             'phone' => 'required|string',
             'pt_id' => 'required|integer|exists:parti_politiques,id',
-            'photo_url' => 'nullable|string|image|mimes:jpeg,png,jpg,gif,svg',
+            'photo_url' => 'nullable|string',
         ]);
 
 
@@ -659,26 +659,7 @@ class AdminController extends Controller
 
             ], 400);
         }
-        if ($addCandidatRequest->hasFile('photo_url')) {
-            $file = $addCandidatRequest['photo_url'];
-            //recuperer le nom du fichier
-            $fileName = $file->getClientOriginalName();
-            //recuperer l'extension du fichier
-            $extension = $file->getClientOriginalExtension();
-
-            //generer un nom unique pour le fichier
-            $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
-
-            //deplacer le fichier vers le dossier de stockage
-
-            $file->move('storage/photos', $fileNameToStore);
-
-            //enregistrer le nom du fichier dans la base de donnees
-            $nameToFront = 'storage/photos/' . $fileNameToStore;
-
-            $addCandidatRequest['photo_url'] = $nameToFront;
-        }
-        else if (is_string($addCandidatRequest['photo_url']) && $addCandidatRequest['photo_url'] != '') {
+        if (is_string($addCandidatRequest['photo_url']) && $addCandidatRequest['photo_url'] != '') {
             $nameToFront = $addCandidatRequest['photo_url'];
         }
         else{
