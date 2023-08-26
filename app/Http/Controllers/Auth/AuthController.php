@@ -123,7 +123,7 @@ class AuthController extends Controller
         $request = $request->validated();
 
         $request['password'] = bcrypt($request['password']);
-        if ($request->hasFile('photo_url')) {
+        /*if ($request->hasFile('photo_url')) {
             $file = $request['photo_url'];
             //recuperer le nom du fichier
             $fileName = $file->getClientOriginalName();
@@ -141,7 +141,7 @@ class AuthController extends Controller
             $nameToFront = 'storage/photos/' . $fileNameToStore;
 
             $request['photo_url'] = $nameToFront;
-        }
+        }*/
 
         $user = User::create($request);
 
