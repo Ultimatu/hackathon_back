@@ -64,7 +64,7 @@ class PostController extends Controller
         else{
             return response()->json([
                 'message' => 'Pas de publications'
-            ], 404);
+            ], 200);
         }
 
     }
@@ -252,7 +252,7 @@ class PostController extends Controller
         } else {
             return response()->json([
                 'message' => 'Pas de publications'
-            ], 404);
+            ], 200);    
         }
     }
 
@@ -274,7 +274,7 @@ class PostController extends Controller
         } else {
             return response()->json([
                 'message' => 'Pas de publications'
-            ], 404);
+            ],  200);
         }
     }
 
@@ -296,7 +296,7 @@ class PostController extends Controller
         } else {
             return response()->json([
                 'message' => 'Pas de publications'
-            ], 404);
+            ], 200);
         }
     }
 
