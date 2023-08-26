@@ -75,7 +75,7 @@ class AuthController extends Controller
         //revoquer les anciens tokens
         auth()->user()->tokens()->delete();
 
-        $token = auth()->user()->createToken('auth_token')->plainTextToken;
+        $token = auth()->user()->createToken('ApiToken')->plainTextToken;
         $user = auth()->user();
         return response()->json([
             'user' => $user,
@@ -146,7 +146,7 @@ class AuthController extends Controller
         $user = User::create($request);
 
 
-        $tokens = $user->createToken('auth_token')->plainTextToken;
+        $tokens = $user->createToken('ApiToken')->plainTextToken;
 
         return response()->json([
             'user' => $user,
