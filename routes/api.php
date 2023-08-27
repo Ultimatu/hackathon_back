@@ -240,7 +240,7 @@ Route::middleware(['auth:sanctum', 'candidat'])->group(function () {
 
         //followers
 
-        Route::get('/get-my-followers', [CandidatController::class, 'getMyFollowers'])->name('allFollowers');
+        Route::get('candidat/get-my-followers', [CandidatController::class, 'getMyFollowers'])->name('allFollowers');
 
         //count followers
 
