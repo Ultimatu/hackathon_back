@@ -38,7 +38,6 @@ jobs:
       - name: Copy .env
         run: cp .env.example .env
 
-
       - name: Set up MySQL
         run: php artisan migrate:fresh --seed --no-interaction  --force -y
 
