@@ -401,11 +401,13 @@ class CandidatController extends Controller
     public function getMyFollowers()
     {
         $id_user = auth()->user()->id;
-
-        $candidat = Candidat::where('user_id', $id_user)->first();
-        return  $candidat->id;
-
-
+        if ($id_user) {
+            $candidat = Candidat::where('user_id', $id_user)->first();
+            $followercontroller = new FollowerController();
+            return $followercontroller->getFollowers($candidat->id);
+        } else {
+            return response()->json(['message' => 'Candidat non trouvé'], 404);
+        }
 
     }
 
