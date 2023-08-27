@@ -424,4 +424,6 @@ class CandidatController extends Controller
         $followercontroller = new FollowerController();
         return $followercontroller->countFollowers($candidat->id);
     }
+
+
 }

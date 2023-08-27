@@ -58,6 +58,38 @@ class FollowerController extends Controller
     }
 
 
+    /**
+     * @OA\Get(
+     *     path="/api/public/candidat-followers/{id_candidat}",
+     *     summary="Get followers of a candidat",
+     *     description="Get followers of a candidat",
+     *     operationId="getFollowers",
+     *     tags={"followers"},
+     *     @OA\Parameter(
+     *         name="id_candidat",
+     *         in="path",
+     *         description="id of candidat",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Follower")
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Candidat not found",
+     *     ),
+     * )
+     */
+
     public function getFollowers(int $id_candidat)
     {
         $followers = Follower::where('id_candidat', $id_candidat)->with('user')->get();

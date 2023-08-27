@@ -126,6 +126,8 @@ Route::group(['prefix' => 'public'], function () {
 
     Route::get('programme/{val}', [ProgrammesController::class, 'searchProgrammes']);
 
+    Route::get('/candidat-followers/{id_candidat}', [\App\Http\Controllers\Api\Services\FollowerController::class, 'getFollowers']);
+
 
 
 
