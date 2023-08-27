@@ -400,8 +400,9 @@ class CandidatController extends Controller
 
     public function getMyFollowers()
     {
-        $id_user = auth()->user()->id;
-        if ($id_user) {
+
+        if (auth()->check() && auth()->user()->role_id == 2) {
+            $id_user = auth()->user()->id;
             $candidat = Candidat::where('user_id', $id_user)->first();
             $followercontroller = new FollowerController();
             return $followercontroller->getFollowers($candidat->id);
