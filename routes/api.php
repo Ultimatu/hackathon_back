@@ -244,10 +244,9 @@ Route::middleware(['auth:sanctum', 'candidat'])->group(function () {
 
         //count followers
 
-        Route::get('/count-my-followers', [CandidatController::class, 'countMyFollowers'])->name('countFollowers');
+        Route::get('candidat/{id}/count-my-followers', [CandidatController::class, 'countMyFollowers'])->name('countFollowers');
 
         //programmes
-
         Route::post('add-programme', [ProgrammesController::class, 'addProgramme']);
 
         Route::put('update-programme/{id}', [ProgrammesController::class, 'updateProgramme']);
@@ -255,6 +254,8 @@ Route::middleware(['auth:sanctum', 'candidat'])->group(function () {
         Route::delete('delete-programme/{id}', [ProgrammesController::class, 'destroy']);
 
         Route::get('my-programmes', [ProgrammesController::class, 'getAllMyProgrammes']);
+
+        Route::get('/candidat/{id)/get-data', [CandidatController::class, 'getCandidat']);
 
     });
 

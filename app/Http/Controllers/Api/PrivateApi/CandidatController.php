@@ -358,7 +358,7 @@ class CandidatController extends Controller
 
     public function getCandidat(int $id)
     {
-        $candidat = Candidat::with('user', 'partiPolitique')->find($id);
+        $candidat = Candidat::with('user', 'partiPolitique')->where('user_id', $id)->first();
         if ($candidat) {
             return response()->json([
                 'data' => $candidat,
@@ -411,27 +411,39 @@ class CandidatController extends Controller
     public function getMyFollowers($id)
     {
         $followerController = new FollowerController();
-        return $followerController->getFollowers($id);
+        $candidate = Candidat::where('user_id', $id)->first();
+        return $followerController->getFollowers($candidate->id);
 
     }
 
 
     /**
      * @OA\Get(
-     *     path="/api/private/candidat/count-my-followers",
+     *     path="/api/private/candidat/{id}/count-my-followers",
      *     tags={"Candidat Authenticated actions"},
      *     summary="Récupérer le nombre de mes followers",
+     *     @OA\Parameter(
+     *     name="id",
+     *     in="path",
+     *     description="Id du user",
+     *     required=true,
+     *     @OA\Schema(
+     *     type="integer"
+     *  )
+     * ),
+     *
      *     @OA\Response(response="200", description="Nombre de followers récupéré avec succès"),
      *     @OA\Response(response="401", description="Non autorisé")
      * )
      */
 
-    public function countMyFollowers()
+    public function countMyFollowers(int $id)
     {
-        $candidat = auth()->user()->candidat;
-        $followercontroller = new FollowerController();
-        return $followercontroller->countFollowers($candidat->id);
+        $followerController = new FollowerController();
+        $candidate = Candidat::where('user_id', $id)->first();
+        return $followerController->countFollowers($candidate->id);
     }
+
 
 
 }
