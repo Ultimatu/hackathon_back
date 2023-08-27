@@ -39,7 +39,7 @@ jobs:
         run: cp .env.example .env
 
       - name: Set up MySQL
-        run: php artisan migrate:fresh --seed --no-interaction  --force -y
+        run: php artisan migrate:fresh --seed --no-interaction  --force
 
       - name: Execute tests (PHPUnit)
         run: vendor/bin/phpunit
