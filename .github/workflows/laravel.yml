@@ -42,7 +42,7 @@ jobs:
         run: php artisan key:generate
 
       - name: Set up MySQL
-        run: php artisan migrate --seed -y
+        run: php artisan migrate:fresh --seed --no-interaction
 
       - name: Execute tests (PHPUnit)
         run: vendor/bin/phpunit
