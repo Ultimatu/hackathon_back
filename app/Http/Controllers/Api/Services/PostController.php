@@ -54,11 +54,9 @@ class PostController extends Controller
     public function getAllPosts()
     {
 
-        //get all post and join with candidat and user
-        $posts = Post::join('candidats', 'posts.id_candidat', '=', 'candidats.id')
-            ->join('users', 'candidats.user_id', '=', 'users.id')
-            ->select('posts.*')
-            ->get();
+        $posts = Post::all();
+        $posts->load('candidat', 'candidat.user');
+
 
         if ($posts->count() > 0 ){
             return response()->json([
