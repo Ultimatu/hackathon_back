@@ -183,7 +183,9 @@ class ElectionController extends Controller
     }
 
     public function getAllElections(){
-        $elections = Elections::all()->with('candidat');
+        $elections = Elections::all();
+        $elections->load('candidats', 'candidats.user', 'candidats.parti_politique');
+
         if ($elections->count() > 0) {
             return response()->json([
                 'data' => $elections
