@@ -403,7 +403,7 @@ class CandidatController extends Controller
         $id_user = auth()->user()->id;
 
         $candidat = Candidat::where('user_id', $id_user)->first();
-        return  $candidat->id
+        return  $candidat->id;
 
 
 
