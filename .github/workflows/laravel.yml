@@ -39,10 +39,10 @@ jobs:
         run: cp .env.example .env
 
       - name: Generate key
-        run: php artisan key:generate --ansi --no-interaction --no-progress
+        run: php artisan key:generate --ansi --no-interaction -y
 
       - name: Set up MySQL
-        run: php artisan migrate:fresh --seed --no-interaction --no-progress --force
+        run: php artisan migrate:fresh --seed --no-interaction  --force -y
 
       - name: Execute tests (PHPUnit)
         run: vendor/bin/phpunit
