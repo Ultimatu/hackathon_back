@@ -390,25 +390,28 @@ class CandidatController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/private/candidat/get-my-followers",
+     *     path="/api/private/candidat{id}/get-my-followers",
      *     tags={"Candidat Authenticated actions"},
      *     summary="Récupérer mes followers",
+     *     @OA\Parameter(
+     *     name="id",
+     *     in="path",
+     *     description="Id du candidat",
+     *     required=true,
+     *     @OA\Schema(
+     *     type="integer"
+     *   )
+     * ),
+     *
      *     @OA\Response(response="200", description="Liste des followers récupérée avec succès"),
      *     @OA\Response(response="401", description="Non autorisé")
      * )
      */
 
-    public function getMyFollowers()
+    public function getMyFollowers($id)
     {
-
-        if (auth()->check() && auth()->user()->role_id == 2) {
-            $id_user = auth()->user()->id;
-            $candidat = Candidat::where('user_id', $id_user)->first();
-            $followercontroller = new FollowerController();
-            return $followercontroller->getFollowers($candidat->id);
-        } else {
-            return response()->json(['message' => 'Candidat non trouvé'], 404);
-        }
+        $followerController = new FollowerController();
+        return $followerController->getFollowers($id);
 
     }
 
