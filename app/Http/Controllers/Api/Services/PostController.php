@@ -15,7 +15,6 @@ class PostController extends Controller
         $id_user = auth()->user()->id;
         $id_candidat = Candidat::where('user_id', $id_user)->first()->id;
 
-        return $request;
         $request['id_candidat'] = $id_candidat;
         $request->validate([
             'id_candidat' => 'required|integer|exists:candidats,id',
