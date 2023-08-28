@@ -82,7 +82,7 @@ class ElectionController extends Controller
 
         $election = Elections::find($id);
         if (!$election) {
-            return response()->json(['message' => 'Election non trouvée'], 404);
+            return response()->json(['message' => 'Election non trouvée'], 200);
         }
 
         $election->description = $request->input('description');
@@ -102,7 +102,7 @@ class ElectionController extends Controller
 
         $election = Elections::find($id);
         if (!$election) {
-            return response()->json(['message' => 'Election non trouvée'], 404);
+            return response()->json(['message' => 'Election non trouvée'], 200);
         }
 
 
@@ -137,7 +137,7 @@ class ElectionController extends Controller
 
         $election = Elections::find($id);
         if (!$election) {
-            return response()->json(['message' => 'Election non trouvée'], 404);
+            return response()->json(['message' => 'Election non trouvée'], 200);
         }
 
 
@@ -171,7 +171,7 @@ class ElectionController extends Controller
 
         $election = Elections::find($id);
         if (!$election) {
-            return response()->json(['message' => 'Election non trouvée'], 404);
+            return response()->json(['message' => 'Election non trouvée'], 200);
         }
         if (file_exists($election->image_url) && $election->image_url != 'elections/default.jpg')
             Storage::delete($election->image_url);
@@ -193,7 +193,7 @@ class ElectionController extends Controller
         } else {
             return response()->json([
                 'message' => 'Pas d\'election programmée',
-            ], 404);
+            ], 200);
         }
     }
 
@@ -207,7 +207,7 @@ class ElectionController extends Controller
         } else {
             return response()->json([
                 'message' => 'Pas de elections avec cet  id'
-            ], 404);
+            ], 200);
         }
 
     }

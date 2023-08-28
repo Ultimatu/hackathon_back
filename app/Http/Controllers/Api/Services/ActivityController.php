@@ -36,7 +36,7 @@ class ActivityController extends Controller
         $activity = Activities::find($id);
 
         if (!$activity) {
-            return response()->json(['message' => 'Activity not found'], 404);
+            return response()->json(['message' => 'Activity not found'], 200);
         }
 
         $activity->update($request->all());
@@ -49,7 +49,7 @@ class ActivityController extends Controller
         $activity = Activities::find($id);
 
         if (!$activity) {
-            return response()->json(['message' => 'Activity not found'], 404);
+            return response()->json(['message' => 'Activity not found'], 200);
         }
 
         $activity->delete();
@@ -69,7 +69,7 @@ class ActivityController extends Controller
         } else {
             return response()->json([
                 'message' => 'Pas d\'activités'
-            ], 404);
+            ], 200);
         }
     }
 
@@ -84,7 +84,7 @@ class ActivityController extends Controller
         } else {
             return response()->json([
                 'message' => 'Pas d\'activités'
-            ], 404);
+            ], 200);
         }
     }
 
@@ -95,7 +95,7 @@ class ActivityController extends Controller
         if (!$activity) {
             return response()->json([
                 'message' => 'Activity not found'
-            ], 404);
+            ], 200);
         }
         return response()->json([
             'data' => $activity
