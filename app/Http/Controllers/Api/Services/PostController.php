@@ -209,10 +209,11 @@ class PostController extends Controller
             ->where('users.commune', $commune)
             ->select('posts.*')
             ->get();
+        $posts->load('candidat', 'candidat.user');
 
         if ($posts->count() > 0) {
             return response()->json([
-                'posts' => $posts
+                'data' => $posts
             ], 200);
         } else {
             return response()->json([
