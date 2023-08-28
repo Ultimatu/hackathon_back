@@ -228,7 +228,7 @@ Route::middleware(['auth:sanctum', 'candidat'])->group(function () {
 
         // Meets
         Route::post('candidat/add-meet', [CandidatController::class, 'addMeet']);
-        Route::get('candidat/{id}/get-meets', [CandidatController::class, 'getMeets']);
+        Route::get('candidat/get-meets', [CandidatController::class, 'getMeets']);
         Route::get('candidat/search-meets/{val}', [CandidatController::class, 'searchMeets']);
         Route::delete('candidat/{id}/delete-meet', [CandidatController::class, 'deleteMeet']);
 
@@ -237,7 +237,7 @@ Route::middleware(['auth:sanctum', 'candidat'])->group(function () {
         Route::post('candidat/add-activity', [CandidatController::class, 'addActivity']);
         Route::put('candidat/update-activity/{id}', [CandidatController::class, 'updateActivity']);
         Route::delete('candidat/{id}/delete-activity', [CandidatController::class, 'deleteActivity']);
-
+        Route::get('candidat/get-activities', [CandidatController::class, 'getActivities']);
         //followers
 
         Route::get('candidat/{id}/get-my-followers', [CandidatController::class, 'getMyFollowers'])->name('allFollowers');

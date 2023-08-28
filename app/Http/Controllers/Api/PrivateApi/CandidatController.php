@@ -61,8 +61,9 @@ class CandidatController extends Controller
 
     public function getPosts(int $id)
     {
+        $candidat = Candidat::where("user_id", $id)->get();
         $postcontroller = new PostController();
-        return $postcontroller->getAllPostByCandidat($id);
+        return $postcontroller->getAllPostByCandidat($candidat->$id);
     }
 
 
@@ -132,13 +133,16 @@ class CandidatController extends Controller
 
     public function addMeet(Request $request)
     {
+        $id_user = auth()->user()->id;
+        $id_candidate = Candidat::where('user_id', $id_user)->first()->id;
+        $request->merge(['id_candidat' => $id_candidate]);
         $meetcontroller = new MeetController();
         return $meetcontroller->addMeet($request);
     }
 
     /**
      * @OA\Get(
-     *     path="/api/private/candidat/{id}/get-meets",
+     *     path="/api/private/candidat/get-meets",
      *     tags={"Candidat Authenticated actions"},
      *     summary="Récupérer toutes les rencontres d'un candidat",
      *     @OA\Parameter(
@@ -158,10 +162,12 @@ class CandidatController extends Controller
 
 
 
-    public function getMeets(int $id)
+    public function getMeets()
     {
+        $id_user = auth()->user()->id;
+        $id_candidat = Candidat::where('user_id', $id_user)->first()->id;
         $meetcontroller = new MeetController();
-        return $meetcontroller->getMeets($id);
+        return $meetcontroller->getMeets($id_candidat);
     }
 
 
@@ -223,7 +229,7 @@ class CandidatController extends Controller
     //activities
     /**
      * @OA\Get(
-     *     path="/api/private/candidat/{id}/get-activities",
+     *     path="/api/private/candidat/get-activities",
      *     tags={"Candidat Authenticated actions"},
      *     summary="Récupérer toutes les activités d'un candidat",
      *     @OA\Parameter(
@@ -242,11 +248,14 @@ class CandidatController extends Controller
      */
 
 
-    public function getActivities(int $id)
+    public function getActivities()
     {
+        $id_user = auth()->user()->id;
+        $id_candidat = Candidat::where('user_id', $id_user)->first()->id;
+
         $activityController = new ActivityController();
 
-        return $activityController->getAllActivitiesByCandidate($id);
+        return $activityController->getAllActivitiesByCandidate($id_candidat);
     }
 
 
@@ -390,7 +399,7 @@ class CandidatController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/private/candidat{id}/get-my-followers",
+     *     path="/api/private/candidat/{id}/get-my-followers",
      *     tags={"Candidat Authenticated actions"},
      *     summary="Récupérer mes followers",
      *     @OA\Parameter(
