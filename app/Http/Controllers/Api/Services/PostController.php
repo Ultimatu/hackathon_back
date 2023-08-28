@@ -20,7 +20,7 @@ class PostController extends Controller
             'id_candidat' => 'required|integer|exists:candidats,id',
             'titre' => 'required|string',
             'description' => 'required|string',
-            'url_media' => 'nullable',
+            'url_media' => 'required|string',
         ]);
 
        if ($request->input('url_media') != null && is_string($request->input('url_media'))){
