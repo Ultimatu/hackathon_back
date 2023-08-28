@@ -15,6 +15,7 @@ class PostController extends Controller
         $id_user = auth()->user()->id;
         $id_candidat = Candidat::where('user_id', $id_user)->first()->id;
 
+        return $request;
         $request['id_candidat'] = $id_candidat;
         $request->validate([
             'id_candidat' => 'required|integer|exists:candidats,id',
@@ -23,15 +24,7 @@ class PostController extends Controller
             'url_media' => 'nullable',
         ]);
 
-        if ($request->hasFile("url_media")){
-            $file = $request->file('url_media');
-            $fileName = $file->getClientOriginalName();
-            $extension = $file->getClientOriginalExtension();
-            $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
-            $file->move('storage/posts', $fileNameToStore);
-            $nameToFront = 'storage/posts/' . $fileNameToStore;
-        }
-        else if ($request->input('url_media') != null && is_string($request->input('url_media'))){
+       if ($request->input('url_media') != null && is_string($request->input('url_media'))){
             $nameToFront = $request->input('url_media');
         }
         else{
@@ -129,10 +122,12 @@ class PostController extends Controller
         $request->validate([
             'titre' => 'required|string',
             'description' => 'required|string',
+             'url_media' => 'nullable|string',
         ]);
 
         $post->titre = $request->input('titre');
         $post->description = $request->input('description');
+        $post->url_media = $request->input('url_media');
 
         $post->save();
 
