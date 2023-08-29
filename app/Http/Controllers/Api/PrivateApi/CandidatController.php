@@ -63,7 +63,7 @@ class CandidatController extends Controller
     {
         $candidat = Candidat::where("user_id", $id)->get();
         $postcontroller = new PostController();
-        return $postcontroller->getAllPostByCandidat($candidat->$id);
+        return $postcontroller->getAllPostByCandidat($candidat->id);
     }
 
 
