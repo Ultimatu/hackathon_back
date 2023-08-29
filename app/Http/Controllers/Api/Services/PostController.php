@@ -241,7 +241,7 @@ class PostController extends Controller
 
     public function getAllPostByCandidat(int $id)
     {
-        $posts = Post::where('id_candidat', $id)->get();
+        $posts = Post::where('id_candidat', $id)->with('candidat', 'candidat.user')->get();
         if ($posts->count() > 0) {
 
             return response()->json([
