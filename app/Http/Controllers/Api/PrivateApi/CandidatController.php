@@ -39,6 +39,39 @@ class CandidatController extends Controller
     }
 
 
+
+    /**
+     * @OA\Put(
+     *     path="/api/private/candidat/update-post/{id}",
+     *     tags={"Candidat Authenticated actions"},
+     *     summary="Mettre à jour un post",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Id du post à mettre à jour",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/Post")
+     *     ),
+     *     @OA\Response(response="200", description="Post mis à jour avec succès"),
+     *     @OA\Response(response="401", description="Non autorisé")
+     * )
+     */
+
+     public function updatePost(Request $request, int $id)
+     {
+         $postcontroller = new PostController();
+         return $postcontroller->updatePost($id, $request);
+     }
+
+
     /**
      * @OA\Get(
      *     path="/api/private/candidat/{id}/get-posts",

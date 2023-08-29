@@ -223,6 +223,7 @@ Route::middleware(['auth:sanctum', 'candidat'])->group(function () {
     Route::group(['prefix' => 'private'], function () {
         // Posts
         Route::post('candidat/add-post', [CandidatController::class, 'addPost']);
+        Route::put('candidat/update-post/{id}', [CandidatController::class, 'updatePost']);
         Route::get('candidat/{id}/get-posts', [CandidatController::class, 'getPosts']);
         Route::delete('candidat/{id}/delete-post', [CandidatController::class, 'deletePost']);
 
