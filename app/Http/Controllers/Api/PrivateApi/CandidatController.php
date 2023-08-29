@@ -62,8 +62,12 @@ class CandidatController extends Controller
     public function getPosts(int $id)
     {
         $candidat = Candidat::where("user_id", $id)->get();
-        $postcontroller = new PostController();
-        return $postcontroller->getAllPostByCandidat($candidat->id);
+        if ($candidat->count() > 0) {
+            $postcontroller = new PostController();
+            return $postcontroller->getAllPostByCandidat($candidat->first()->id);
+        } else {
+            return response()->json(['message' => 'Candidat non trouvé'], 404);
+        }
     }
 
 
