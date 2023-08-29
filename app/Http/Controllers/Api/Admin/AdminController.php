@@ -213,6 +213,7 @@ class AdminController extends Controller
     /**
      * @OA\Put(
      *     path="/api/admin/election/{id}/update-banner",
+     *     deprecated=true,
      *     tags={"Admin Actions"},
      *     summary="Update banner",
      *     security={{"bearerAuth":{}}},
@@ -251,6 +252,7 @@ class AdminController extends Controller
      *     path="/api/admin/election/{id}/update-logo",
      *     tags={"Admin Actions"},
      *     summary="Update banner",
+     *     deprecated=true,
      *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *        name="id",

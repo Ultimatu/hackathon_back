@@ -23,7 +23,8 @@ class ElectionController extends Controller
             'date_debut' => 'required|date',
             'date_fin' => 'required|date',
         ]);
-
+        $request['image_url']??= 'elections/default.jpg';
+        $request['banner_url']??= 'elections/default.jpg';
         $election = new Elections();
 
         $election->description = $request->input('description');
@@ -33,35 +34,8 @@ class ElectionController extends Controller
         $election->type = $request->input('type');
         $election->date_debut = $request->input('date_debut');
         $election->date_fin = $request->input('date_fin');
-
-
-
-        if ($request->hasFile('image_url')) {
-            $file = $request->file('image_url');
-            $fileName = $file->getClientOriginalName();
-            $extension = $file->getClientOriginalExtension();
-            $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
-            $file->move('storage/elections', $fileNameToStore);
-            $nameToFront = 'storage/elections/' . $fileNameToStore;
-            $election->image_url = $nameToFront;
-        }
-        else{
-            $election->image_url = 'elections/default.jpg';
-        }
-
-        if ($request->hasFile('banner_url')) {
-            $file = $request->file('banner_url');
-            $fileName = $file->getClientOriginalName();
-            $extension = $file->getClientOriginalExtension();
-            $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
-            $file->move('storage/elections', $fileNameToStore);
-            $nameToFront = 'storage/elections/' . $fileNameToStore;
-            $election->banner_url = $nameToFront;
-        }
-        else{
-            $election->banner_url = 'elections/default.jpg';
-        }
-
+        $election->image_url = $request->input('image_url');
+        $election->banner_url = $request->input('banner_url');
         $election->save();
 
         return response()->json(['success' => 'Election ajoutée avec succès'], 200);
@@ -77,6 +51,8 @@ class ElectionController extends Controller
             'duration' => 'required|string',
             'date_debut' => 'required|date',
             'date_fin' => 'required|date',
+            "image_url" => "nullable",
+            "banner_url" => "nullable",
         ]);
 
 
@@ -91,13 +67,16 @@ class ElectionController extends Controller
         $election->duration = $request->input('duration');
         $election->date_debut = $request->input('date_debut');
         $election->date_fin = $request->input('date_fin');
+        $election->status = $request->input('status');
+        $election->image_url = $request->input('image_url');
+        $election->banner_url = $request->input('banner_url');
 
         $election->save();
 
         return response()->json(['success' => 'Election modifiée avec succès'], 200);
     }
 
-
+    /*
     public function updateBanner(int $id, Request $request){
 
         $election = Elections::find($id);
@@ -142,7 +121,7 @@ class ElectionController extends Controller
 
 
         $request->validate([
-            'image_url' => 'required',
+            'image_url' => 'required|string',
         ]);
 
         if (is_string($request->image_url) && $request->image_url != 'null') {
@@ -164,7 +143,7 @@ class ElectionController extends Controller
         $election->save();
 
         return response()->json(['success' => 'Election modifiée avec succès'], 200);
-    }
+    } */
 
 
     public function delete(int $id){
@@ -184,7 +163,7 @@ class ElectionController extends Controller
 
     public function getAllElections(){
         $elections = Elections::all();
-        $elections->load('candidats', 'candidats.user', 'candidats.parti_politique');
+        $elections->load('participants', 'participants.candidat', 'participants.candidat.user', 'participants.candidat.parti_politique');
 
         if ($elections->count() > 0) {
             return response()->json([

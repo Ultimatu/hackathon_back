@@ -39,7 +39,7 @@ class ElectionParticipantController extends Controller
     public function getPartcipants(int $id){
 
         $electionParticipant = ElectionParticipant::where('id_election', $id)
-            ->with('candidat')
+            ->with('candidat', 'candidat.user', 'candidat.parti_politique')
             ->get();
 
         return response()->json([

@@ -280,12 +280,14 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         //delete
         Route::delete('/delete-election/{id}', [AdminController::class, 'deleteElection'])->name('deleteElection');
 
+
+        /*
         //updateBanner
         Route::put('/election/{id}/update-banner', [AdminController::class, 'updateBanner'])->name('updateElectionBanner');
 
         //updateLogo
         Route::put('/election/{id}/update-logo', [AdminController::class, 'updateLogo'])->name('updateLogo');
-
+        */
 
         //sondage
 
