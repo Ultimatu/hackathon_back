@@ -28,7 +28,7 @@ class SendToUserMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.newsletter',
+            view: 'mails.newsletter',
         );
     }
 
