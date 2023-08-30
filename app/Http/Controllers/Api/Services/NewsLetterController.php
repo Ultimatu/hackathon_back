@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Services;
 use App\Http\Controllers\Controller;
 use App\Models\Newsletter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class NewsLetterController extends Controller
 {
@@ -19,6 +20,8 @@ class NewsLetterController extends Controller
             'email'=>$request->email,
             'is_active'=>true,
         ]);
+        $message = "Bienvenue à la newsletter";
+        Mail::to($request->email)->send(new \App\Mail\SendToUserMail());
 
         //essaie d'envoyer un mail à l'utilisateur
         $to = $request->email;
