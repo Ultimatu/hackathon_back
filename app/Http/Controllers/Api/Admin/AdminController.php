@@ -20,6 +20,21 @@ class AdminController extends Controller
     {
         $this->middleware('auth:sanctum');
     }
+
+
+    /**
+     * @OA\Get(
+     *    path="/api/admin/users/",
+     *  tags={"Admin Actions"},
+     * summary="Récupérer tous les utilisateurs",
+     * security={{"bearerAuth":{}}},
+     *
+     * @OA\Response(response="200", description="Succès - Utilisateur trouvé"),
+     * @OA\Response(response="400", description="Bad request - Utilisateur non trouvé")
+     *
+     * )
+     *
+     */
     public function getAllUsers()
     {
 
@@ -34,7 +49,7 @@ class AdminController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'list de tout les utilisateurs paginé par 10',
-            'data' => User::paginate(10)
+            'data' => User::all()
         ]);
     }
 

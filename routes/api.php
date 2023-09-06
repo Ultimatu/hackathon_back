@@ -271,6 +271,8 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::delete('/get-user/{id}', [AdminController::class, 'deleteUser'])->name('deleteUser');
 
 
+        Route::get('/electeurs', [AuthController::class, "getElecteurs"])->name('electors');
+
         //election
         //add
         Route::post('/add-election', [AdminController::class, 'addElection'])->name('addElection');

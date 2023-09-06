@@ -23,22 +23,8 @@ class NewsLetterController extends Controller
         $message = "Bienvenue à la newsletter";
         Mail::to($request->email)->send(new \App\Mail\SendToUserMail());
 
-        //essaie d'envoyer un mail à l'utilisateur
-        $to = $request->email;
-        $subject = "Bienvenue à la newsletter";
-        $txt = "Bienvenue à la newsletter";
-        try {
-           mail($to,$subject,$txt);
-
-            $fake = null;
-        } catch (\Throwable $th) {
-           $fake = $th;
-        }
-
         return response()->json([
             'success'=>'Votre email a été ajouté à la newsletter',
-            'reponse'=>$fake
-
         ],201);
     }
 

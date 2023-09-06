@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Models\Candidat;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -202,4 +203,30 @@ class AuthController extends Controller
             ]
         ]);
     }
+
+
+
+
+    /**
+     * @OA\Get(
+     *    path="/api/admin/electors/",
+     *  tags={"Admin Actions"},
+     * summary="Récupérer tous les electeurs",
+     * security={{"bearerAuth":{}}},
+     *
+     * @OA\Response(response="200", description="Succès - Utilisateur trouvé"),
+     * @OA\Response(response="400", description="Bad request - Utilisateur non trouvé")
+     *
+     * )
+     *
+    */
+    public function getElecteurs(){
+        $users = User::where("role_id", 3)->get();
+
+        return response()->json([
+            "users" =>$users,
+        ], 200);
+    }
+
+
 }

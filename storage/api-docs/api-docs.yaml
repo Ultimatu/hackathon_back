@@ -7,6 +7,20 @@ info:
     url: 'https://lesinnovateurs.me'
   version: 1.0.0
 paths:
+  /api/admin/users/:
+    get:
+      tags:
+        - 'Admin Actions'
+      summary: 'Récupérer tous les utilisateurs'
+      operationId: fe0f1e1f1debae97228ea1a275bb9ab1
+      responses:
+        200:
+          description: 'Succès - Utilisateur trouvé'
+        400:
+          description: 'Bad request - Utilisateur non trouvé'
+      security:
+        -
+          bearerAuth: []
   '/api/admin/users/{id}':
     get:
       tags:
@@ -54,7 +68,7 @@ paths:
   not-defined-yet:
     get:
       tags:
-        - 'Candidat Authenticated Actions'
+        - 'Candidat Authenticated actions'
       summary: "Récupérer  les  programmes d'un candidat"
       description: "Récupérer les  programmes d'un candidat"
       operationId: 7461c3a2db6a133a04477e68d63b5c62
@@ -242,6 +256,7 @@ paths:
           description: 'Banner updated successfully'
         400:
           description: 'Bad request'
+      deprecated: true
       security:
         -
           bearerAuth: []
@@ -275,6 +290,7 @@ paths:
           description: 'logo updated successfully'
         400:
           description: 'Bad request'
+      deprecated: true
       security:
         -
           bearerAuth: []
@@ -653,6 +669,32 @@ paths:
           description: 'Post ajouté avec succès'
         401:
           description: 'Non autorisé'
+  '/api/private/candidat/update-post/{id}':
+    put:
+      tags:
+        - 'Candidat Authenticated actions'
+      summary: 'Mettre à jour un post'
+      operationId: fcbbdfdba98199469fdd08dadbe2851d
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Id du post à mettre à jour'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        200:
+          description: 'Post mis à jour avec succès'
+        401:
+          description: 'Non autorisé'
   '/api/private/candidat/{id}/get-posts':
     get:
       tags:
@@ -710,12 +752,12 @@ paths:
           description: 'Rencontre ajoutée avec succès'
         401:
           description: 'Non autorisé'
-  '/api/private/candidat/{id}/get-meets':
+  /api/private/candidat/get-meets:
     get:
       tags:
         - 'Candidat Authenticated actions'
       summary: "Récupérer toutes les rencontres d'un candidat"
-      operationId: 0c2b0bfea2090815ff7d34b17b3e9645
+      operationId: aba53f20ea34dbc917454e77d14fac04
       parameters:
         -
           name: id
@@ -769,12 +811,12 @@ paths:
           description: 'Rencontre supprimée avec succès'
         401:
           description: 'Non autorisé'
-  '/api/private/candidat/{id}/get-activities':
+  /api/private/candidat/get-activities:
     get:
       tags:
         - 'Candidat Authenticated actions'
       summary: "Récupérer toutes les activités d'un candidat"
-      operationId: 7f19cba271b959dd3c32d864916fe70f
+      operationId: 31363cbff15ecd67ba3c33c9daa151f0
       parameters:
         -
           name: id
@@ -852,23 +894,39 @@ paths:
           description: 'Activité supprimée avec succès'
         401:
           description: 'Non autorisé'
-  /api/private/candidat/get-my-followers:
+  '/api/private/candidat/{id}/get-my-followers':
     get:
       tags:
         - 'Candidat Authenticated actions'
       summary: 'Récupérer mes followers'
-      operationId: 0bf4c381d55d87141808a9dd1782777e
+      operationId: 92e93c30f74435b4f6aea8ae7c958fbd
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Id du candidat'
+          required: true
+          schema:
+            type: integer
       responses:
         200:
           description: 'Liste des followers récupérée avec succès'
         401:
           description: 'Non autorisé'
-  /api/private/candidat/count-my-followers:
+  '/api/private/candidat/{id}/count-my-followers':
     get:
       tags:
         - 'Candidat Authenticated actions'
       summary: 'Récupérer le nombre de mes followers'
-      operationId: 80d1cc5cd23d2cbbade79ccfc8f11b1a
+      operationId: 9c318559a149cbda8b7f6d2324b3530a
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Id du user'
+          required: true
+          schema:
+            type: integer
       responses:
         200:
           description: 'Nombre de followers récupéré avec succès'
@@ -1952,6 +2010,33 @@ paths:
           description: 'Candidats récupérés avec succès'
         404:
           description: 'Commune non trouvée'
+  '/api/public/candidat-followers/{id_candidat}':
+    get:
+      tags:
+        - followers
+      summary: 'Get followers of a candidat'
+      description: 'Get followers of a candidat'
+      operationId: getFollowers
+      parameters:
+        -
+          name: id_candidat
+          in: path
+          description: 'id of candidat'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Follower'
+        404:
+          description: 'Candidat not found'
   '/api/public/commune-posts/{commune}':
     get:
       tags:
@@ -1974,7 +2059,7 @@ paths:
   /api/private/candidat/add-programme:
     post:
       tags:
-        - 'Candidat Authenticated Actions'
+        - 'Candidat Authenticated actions'
       summary: 'Ajouter un programme'
       description: 'Ajouter un programme'
       operationId: 04c6e44508caa6c83113a3f143285b74
@@ -2010,7 +2095,7 @@ paths:
   '/api/public/programme/{val}':
     get:
       tags:
-        - 'Candidat Authenticated Actions'
+        - 'Candidat Authenticated actions'
       summary: 'Rechercher un programme'
       description: 'Rechercher un programme'
       operationId: b52d58eb13df43723440c455088c0982
@@ -2049,7 +2134,7 @@ paths:
   '/api/private/candidat/update-programme/{id}':
     put:
       tags:
-        - 'Candidat Authenticated Actions'
+        - 'Candidat Authenticated actions'
       summary: 'Modifier un programme'
       description: 'Modifier un programme'
       operationId: 71d9ba4a8f3da64b6595871722775d3f
@@ -2092,7 +2177,7 @@ paths:
   '/api/private/candidat/delete-programme/{id}':
     delete:
       tags:
-        - 'Candidat Authenticated Actions'
+        - 'Candidat Authenticated actions'
       summary: 'Supprimer un programme'
       description: 'Supprimer un programme'
       operationId: 24bcdae77f0805eb3d1d8da7acd512d1
@@ -2129,7 +2214,7 @@ paths:
   /api/private/candidat/my-programmes:
     get:
       tags:
-        - 'Candidat Authenticated Actions'
+        - 'Candidat Authenticated actions'
       summary: "Récupérer tous les programmes d'un candidat"
       description: "Récupérer tous les programmes d'un candidat"
       operationId: d7ed19a77e50729a27d898db21431c8d
@@ -2156,13 +2241,13 @@ paths:
                     type: string
                     example: 'Programme non trouvé'
                 type: object
-  /api/private/user/programmes-not-reacted:
+  '/api/private/user/programmes-not-reacted/{id_candidat}':
     get:
       tags:
-        - 'User Authenticated Actions'
+        - 'User Authenticated actions'
       summary: "Récupérer tous les programmes d'un candidat"
       description: "Récupérer tous les programmes d'un candidat"
-      operationId: be9e33143507814af3252180f3804f1b
+      operationId: 9b58ae5fdaaa1e4f46db439d2d15ba38
       parameters:
         -
           name: id_candidat
@@ -2237,7 +2322,7 @@ paths:
   /api/private/user/add-programme-reaction:
     post:
       tags:
-        - 'User Authenticated Actions'
+        - 'User Authenticated actions'
       summary: 'Add a reaction to a programme'
       description: 'Add a reaction to a programme'
       operationId: addProgrammeReaction
@@ -2348,6 +2433,20 @@ paths:
           description: 'Token refreshed'
         401:
           description: Unauthorized
+  /api/admin/electors/:
+    get:
+      tags:
+        - 'Admin Actions'
+      summary: 'Récupérer tous les electeurs'
+      operationId: ab3a2cad6045a89262a0c40353377dd4
+      responses:
+        200:
+          description: 'Succès - Utilisateur trouvé'
+        400:
+          description: 'Bad request - Utilisateur non trouvé'
+      security:
+        -
+          bearerAuth: []
 components:
   schemas:
     CandidatRequest:
