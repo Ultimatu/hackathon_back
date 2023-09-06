@@ -209,7 +209,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Get(
-     *    path="/api/admin/electors/",
+     *    path="/api/admin/electors",
      *  tags={"Admin Actions"},
      * summary="Récupérer tous les electeurs",
      * security={{"bearerAuth":{}}},

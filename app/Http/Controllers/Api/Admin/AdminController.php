@@ -24,7 +24,7 @@ class AdminController extends Controller
 
     /**
      * @OA\Get(
-     *    path="/api/admin/users/",
+     *    path="/api/admin/users",
      *  tags={"Admin Actions"},
      * summary="Récupérer tous les utilisateurs",
      * security={{"bearerAuth":{}}},

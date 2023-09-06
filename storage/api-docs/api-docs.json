@@ -10,13 +10,13 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/admin/users/": {
+        "/api/admin/users": {
             "get": {
                 "tags": [
                     "Admin Actions"
                 ],
                 "summary": "Récupérer tous les utilisateurs",
-                "operationId": "fe0f1e1f1debae97228ea1a275bb9ab1",
+                "operationId": "edcbcc81a7a89153bbe787c033c1e7b1",
                 "responses": {
                     "200": {
                         "description": "Succès - Utilisateur trouvé"
