@@ -127,6 +127,29 @@ class ResultatSondageController extends Controller
     }
 
 
+
+    /**
+     * @OA\Get(
+     *   path="/api/admin/sondage-resultats/{id_sondage}",
+     *  tags={"Admin Actions"},
+     * summary="Récupérer les résultats d'un sondage",
+     * security={{"bearerAuth":{}}},
+     * @OA\Parameter(
+     *    name="id_sondage",
+     *   required=true,
+     *   in="path",
+     *  description="ID du sondage",
+     * @OA\Schema(
+     *     type="integer",
+     *    format="int64"
+     *  )
+     * ),
+     *
+     * @OA\Response(response="200", description="Succès - Résultats du sondage"),
+     * @OA\Response(response="400", description="Bad request - Sondage non trouvé")
+     *
+     *
+     */
     public function maxVotes(Request $request){
         $request->validate([
             'id_sondage'=>'required|integer|exists:sondages,id',
@@ -139,7 +162,7 @@ class ResultatSondageController extends Controller
         $non = 0;
 
         foreach ($resultatSondage as $resultat){
-            if ($resultat->choix == 1){
+            if ($resultat->choix == true){
                 $oui++;
             }else{
                 $non++;
@@ -148,7 +171,8 @@ class ResultatSondageController extends Controller
 
         $resultat = response()->json([
             'oui'=>$oui,
-            'non'=>$non
+            'non'=>$non,
+            'resultats'=>$resultatSondage,
         ], 201);
 
         return $resultat;

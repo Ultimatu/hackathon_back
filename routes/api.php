@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\PrivateApi\UserController;
 use App\Http\Controllers\Api\PublicApi\PublicController;
 use App\Http\Controllers\Api\Services\PostController;
 use App\Http\Controllers\Api\Services\ProgrammesController;
+use App\Http\Controllers\Api\Services\ResultatSondageController;
 use App\Http\Controllers\Api\Services\ResultatsProgrammesController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -210,6 +211,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         Route::post('user/add-programme-reaction', [ResultatsProgrammesController::class, 'addProgrammeReaction']);
 
+        Route::get('user/most-reacted-programmes', [ResultatsProgrammesController::class, 'getMostLikedProgrammes'])->name('mostLikedProgrammes');
+
     });
 });
 
@@ -255,6 +258,9 @@ Route::middleware(['auth:sanctum', 'candidat'])->group(function () {
         Route::delete('candidat/delete-programme/{id}', [ProgrammesController::class, 'destroy']);
 
         Route::get('candidat/my-programmes', [ProgrammesController::class, 'getAllMyProgrammes']);
+
+        Route::get('programme/{id}/interactions', [ResultatsProgrammesController::class, 'getInteraction'])->name('programmeInteractions');
+
 
         Route::get('candidat/{id)/get-data', [CandidatController::class, 'getCandidat']);
 
@@ -305,6 +311,10 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 
         //all
         Route::get('/sondages', [AdminController::class, 'getAllSondages'])->name('allSondages');
+
+        Route::get("sondage-resultats/{id}", [ResultatSondageController::class, 'maxVotes'])->name('sondageResultats');
+
+
 
         //election participants
 
@@ -359,6 +369,9 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 
 
         Route::delete('/delete-type-sondage/{id}', [AdminController::class, 'deleteTypeSondage'])->name('deleteTypeSondage');
+
+
+        Route::get('/most-liked-candidats', [LikeController::class, 'getMostLikedCandidates'])->name('mostLikedCandidats');
 
 
 
