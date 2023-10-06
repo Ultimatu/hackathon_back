@@ -29,7 +29,7 @@ class AuthController extends Controller
      *     ),
      *     @OA\Server(
      *         description="Environnement de production",
-     *         url="https://lesinnovateurs.me/api/documentation"
+     *         url=""
      *     ),
      * @OA\SecurityScheme(
      *    type="http",
